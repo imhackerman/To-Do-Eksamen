@@ -12,3 +12,6 @@ dbMethods.getAllTasks = function(){
     let sql = "SELECT * FROM tasks";
     return pool.query(sql);
 }
+
+
+module.exports = dbMethods;

@@ -1,5 +1,6 @@
 const express = require('express');
 const { Pool } = require('pg');
+const db = require('./modules/db.js')
 const server = express();
 const PORT = process.env.PORT || 8080;
 server.set('port', PORT);
@@ -9,8 +10,14 @@ server.use(express.static("public"));
 server.use(express.json());
 
 // ENDPOINTS --------------------
-server.get("/", function(req, res, next) {
-    res.status(200).send("Helo from GET").end();
+server.get("/tasklist", async function(req, res, next) {
+    try {
+		let data = await db.getAllTasks();
+        console.log(data)
+		res.status(200).json(data.rows).end();
+	} catch (err) {
+		next(err);
+	}
 });
 
 server.post("/tasklist", async function(req, res, next) {
