@@ -1,0 +1,24 @@
+{
+  "name": "to-do-eksamen",
+  "version": "1.0.0",
+  "description": "Dette er To do app koden vår i apputvikling, MM200. Medemmer: Edvin, Marina, Elena og Ranin. \r Vi skal alle pushe inn kode, med tilhørende kommentar.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imhackerman/To-Do-Eksamen.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imhackerman/To-Do-Eksamen/issues"
+  },
+  "homepage": "https://github.com/imhackerman/To-Do-Eksamen#readme"
+}
