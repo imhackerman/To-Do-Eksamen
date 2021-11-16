@@ -15,12 +15,28 @@
             let url = "/";
 
     
-        }
+        
 
         let cfg = {
             method: "POST",
             headers: {"content-type": "application/json"},
+            body: JSON.stringfy(updata)
         }
+
+        try {
+            let response = await fetch (url, cfg);
+            let data = await response.text();
+            console.log(data); 
+        }
+
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    sendRequest (); 
+
+
     </script>
 </body>
 </html>
