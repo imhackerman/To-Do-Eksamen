@@ -23,7 +23,15 @@ server.post("/tasklist", async function(req, res, next) {
     try {
         let result = await Pool.query(sql, values);
 
-        if (result.rows.length > 0) {}
+        if (result.rows.length > 0) {
+            res.status(200).json({msg: "the task was succesfully created"}).end();
+        }
+        else {
+            throw "The task could not be created";
+        }
+    }
+    catch(err) {
+        res.status(500).json({error: err}).end();
     }
 });
 
