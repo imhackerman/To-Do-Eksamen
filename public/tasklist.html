@@ -1,0 +1,48 @@
+<!----------------html elements---------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+<script>
+    let container = document.getElementById('container');
+
+    async function listTaskList() {
+
+        let url ="/tasklist";
+
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data)
+
+            if (response.status != 200) {
+                throw data.error;
+        }
+        for (let value of data) {
+            
+            let date = new Date(value.date); 
+
+            let html = `<p>${value.task}</p>`;
+            html += `<p>${date.toLocaleDateString()}</p><hr>`
+        
+            let div = document.createElement("div");
+            div.innerHTML = html;
+            container.appendChild(div);
+        }
+    }
+    catch(error) {
+        console.log(error);
+    }
+}
+
+listTaskList();
+</script>
+    
+</body>
+</html>
