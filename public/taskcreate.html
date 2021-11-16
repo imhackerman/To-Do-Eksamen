@@ -16,17 +16,17 @@
         
         let inpHeading = document.getElementById('inpHeading');
         let inpTasktext = document.getElementById('inpTaskText');
-        
-        async function sendRequest () {
+        let btnCreate = document.getElementById('btnCreate');
+        let txtResult = document.getElementById('txtResult');
 
-            let url = "/tasklist";
+        btnCreate.addEventListener('click', async function(evt) {
 
-            let updata = {
+           let url = "/tasklist"; 
+           let updata = {
                 heading: inpHeading.value,
                 tasktext: inpTasktext.value
             }
         
-
         let cfg = {
             method: "POST",
             headers: {"content-type": "application/json"},
