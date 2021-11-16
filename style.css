@@ -1,3 +1,36 @@
 * {
-    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: -o-linear-gradient(pink, green);
+    font-size:"Courgette";
+    min-height: 200vh; //farge blandingen i midten
+}
+
+header {
+    font-size: 1.3rem;
+    color: green;
+
+}
+
+form input, form button {
+    padding: 0.5;
+    border:navajowhite;
+    font-size: 1.5rem;
+    color: ..;
+
+}
+
+form button {
+    color: green;
+    background-color: white;
+    cursor: pointer;
+}
+
+form button :hover {
+    background: green;
+    color: white; 
 }
