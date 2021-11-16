@@ -13,14 +13,23 @@
         async function sendRequest () {
 
             let url = "/";
-
-    
-        }
+        
 
         let cfg = {
             method: "POST",
             headers: {"content-type": "application/json"},
+            body: JSON.stringify(xxx)
         }
+
+        try {
+            let response = await fetch(url, cfg);
+            let data = await response.text();
+            console.log(data); // hello from post?
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }
     </script>
 </body>
 </html>
