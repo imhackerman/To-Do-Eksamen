@@ -16,6 +16,9 @@ server.post("/", function(req, res, next) {
     res.status(200).send("Hello from POST").end();
 });
 
+server.delete("/", function(req, res, next) {
+    res.status(200).send("Hello from DELETE").end()
+})
 
 
 server.listen(server.get('port'), function () {
