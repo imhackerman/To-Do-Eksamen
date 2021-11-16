@@ -13,13 +13,35 @@
     let container = document.getElementById('container');
 
     async function listTaskList() {
-        let response = await fetch(url);
-        let data = await respone.json();
 
-        if (response.status != 200) {
-            throw data.error;
+        let url ="/todolist?";
+
+        try {
+            let response = await fetch(url);
+            let data = await respone.json();
+
+            if (response.status != 200) {
+                throw data.error;
+        }
+        for (let value of data) {
+            
+            let date = new Date(value.date); 
+
+            let html = "<h2>" + value.heading + "</h2>";
+            html += "<p>" + date.toLocalDateString() + "</p>";
+            html += "<p>" + value.blogtext + "</p><hr>";
+        
+            let div = document.createElement("div");
+            div.innerHTML = html;
+            container.appendChild(div);
         }
     }
+    catch(error) {
+        console.log(error);
+    }
+}
+
+listTaskList();
 </script>
     
 </body>
