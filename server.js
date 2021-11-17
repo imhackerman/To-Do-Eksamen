@@ -13,7 +13,6 @@ server.use(express.json());
 server.get("/tasklist", async function(req, res, next) {
     try {
 		let data = await db.getAllTasks();
-        console.log(data)
 		res.status(200).json(data.rows).end();
 	} catch (err) {
 		next(err);
@@ -42,8 +41,23 @@ server.post("/tasklist", async function(req, res, next) {
     }
 });
 
-server.delete("/", function(req, res, next) {
-    res.status(200).send("Hello from DELETE").end()
+server.delete("/tasklist", async function(req, res, next) {
+    // method for DELETING from database 
+    let updata = req.body;
+    
+    try{
+        let data = await db.deleteTask(updata.id);
+
+        if(data.rows.length>0){
+            res.status(200).json({msg: "the task was deleted"}).end();
+        }
+        else{
+            throw "the task was not deleted";
+        }
+    }catch(err){
+        next(err);
+    }
+    
 })
 
 

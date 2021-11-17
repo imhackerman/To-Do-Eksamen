@@ -19,12 +19,14 @@
         try {
             let response = await fetch(url);
             let data = await response.json();
-            console.log(data)
 
             if (response.status != 200) {
                 throw data.error;
-        }
-        for (let value of data) {
+            }
+
+            container.innerHTML = "";
+
+        for (let value of data) {   
             
             let date = new Date(value.date); 
 
@@ -36,8 +38,7 @@
             container.appendChild(div);
 
             let deletebutton = document.createElement("button");
-            div.innerHTML = html;
-            container.appendChild(div);
+            deletebutton.innerHTML = 'Delete'
 
             deletebutton.addEventListener("click", function (evt) {
                 deleteTask(value.id);
@@ -51,33 +52,41 @@
     }
 }
 
-listTaskList();
 
-async function deleteTask(tasklistId) {
 
-    let url ="/tasklist";
+    async function deleteTask(tasklistId) {
 
-    let updata= {
-        id: taskId
-    }
+        let url ="/tasklist";
 
-    let cfg = {
-        method: "DELETE",
-        headers: {"content-type":"application/json"},
-        body: JSON.stringify(updata)
-    }
-
-    try {
-        let response = await fetch(url, cfg);
-        let data = await response.json();
-
-        if (response.status != 200) {
-            throw data.error;
+        let updata= {
+            id: tasklistId
         }
-        
-        listtasklist(); // refreshes the lists
+
+        let cfg = {
+            method: "DELETE",
+            headers: {"content-type":"application/json"},
+            body: JSON.stringify(updata)
+        }
+
+        try {
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+            
+            listTaskList(); // refreshes the lists
+
+
+        }catch(error){
+            console.log(error)
+        }
     }
-}
+
+    listTaskList();
+
+
 </script>
     
 </body>
