@@ -24,8 +24,8 @@ server.post("/tasklist", async function(req, res, next) {
     
     let userid = 1; // Must be changed when we implement more users than 1.
 
-    let sql = 'INSERT INTO tasklist (id, date, heading, blogtext, userid) VALUES(DEFAULT, DEFAULT, $1, $2, $3) returning *';
-    let values = [updata.heading, updata.tasktext, userid];
+    let sql = 'INSERT INTO tasklist (id, date, userid, task) VALUES(DEFAULT, DEFAULT, $1, $2) returning *';
+    let values = [userid, updata.task];
 
     try {
         let result = await Pool.query(sql, values);
