@@ -25,7 +25,7 @@ server.post("/tasklist", async function(req, res, next) {
     let userid = 1;
 
     try {
-        let data = await db.createTask(userid, updata.tasktext);
+        let data = await db.createTask(userid, updata.tasktext, updata.heading);
 
         if (data.rows.length > 0) {
             res.status(200).json({msg: "the task was succesfully created"}).end();
