@@ -21,15 +21,13 @@ server.get("/tasklist", async function(req, res, next) {
 
 server.post("/tasklist", async function(req, res, next) {
     
-    let userid = 1; // Must be changed when we implement more users than 1.
-
-    let sql = 'INSERT INTO tasklist (id, date, userid, task) VALUES(DEFAULT, DEFAULT, $1, $2) returning *';
-    let values = [userid, updata.task];
+    let updata = req.body;
+    let userid = 1;
 
     try {
-        let result = await Pool.query(sql, values);
+        let data = await db.createTask(userid, updata.tasktext);
 
-        if (result.rows.length > 0) {
+        if (data.rows.length > 0) {
             res.status(200).json({msg: "the task was succesfully created"}).end();
         }
         else {

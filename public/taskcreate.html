@@ -15,7 +15,7 @@
     <script>
         
         let inpHeading = document.getElementById('inpHeading');
-        let inpTasktext = document.getElementById('inpTaskText');
+        let inpTasktext = document.getElementById('inpTasktext');
         let btnCreate = document.getElementById('btnCreate');
         let txtResult = document.getElementById('txtResult');
 
@@ -37,13 +37,12 @@
         try {
             let response = await fetch(url, cfg);
             let data = await response.json();
-            console.log(data); // hello from post?
 
             if (response.status != 200) {
                 throw data.error;
-            }
-        
-            txtResult.innerHTML = data.msg;
+            }else{
+                txtResult.innerHTML = data.msg;
+            }    
         }
         catch(error) {
             console.log(error);
