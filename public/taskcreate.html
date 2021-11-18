@@ -22,27 +22,34 @@
         btnCreate.addEventListener('click', async function(evt) {
 
            let url = "/tasklist"; 
+
            let updata = {
                 heading: inpHeading.value,
-                tasktext: inpTasktext.value,
-                body: JSON.stringify(updata)
+                tasktext: inpTasktext.value   
             }
         
         let cfg = {
             method: "POST",
             headers: {"content-type": "application/json"},
-            body: JSON.stringify(xxx)
+            body: JSON.stringify(updata)
         }
 
         try {
             let response = await fetch(url, cfg);
-            let data = await response.text();
+            let data = await response.json();
             console.log(data); // hello from post?
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+        
+            txtResult.innerHTML = data.msg;
         }
         catch(error) {
             console.log(error);
+            txtResult.innerHTML = "something went wrong - check the console window";
         }
-    }
+    });
     </script>
 </body>
 </html>
