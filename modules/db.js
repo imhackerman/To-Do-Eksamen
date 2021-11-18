@@ -19,5 +19,11 @@ dbMethods.deleteTask = function(id){
     return pool.query(sql, values);
 }
 
+dbMethods.createTask = function(userid, tasktext, header){
+    let sql = "INSERT INTO tasks (id, date, userid, task, header) VALUES(DEFAULT, DEFAULT, $1, $2, $3) RETURNING *";
+    let values = [userid, tasktext, header];
+    return pool.query(sql, values);
+}
+
 
 module.exports = dbMethods;
