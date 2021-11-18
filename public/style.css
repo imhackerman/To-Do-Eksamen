@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(pink, green);
+    min-height: 200vh; /*farge blandingen i midten*/
+}
+
+header {
+    font-size: 1.3rem;
+    color: rgb(90, 180, 90);
+    font-family: "Courgette"; 
+
+
+}
+
+header, form, .footer{
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+form input, form button {
+    color: green;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+form button :hover {
+    
+}
