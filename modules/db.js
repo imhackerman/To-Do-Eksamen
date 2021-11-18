@@ -13,5 +13,11 @@ dbMethods.getAllTasks = function(){
     return pool.query(sql);
 }
 
+dbMethods.deleteTask = function(id){
+    let sql = "DELETE FROM tasks WHERE id = $1 RETURNING *";
+    let values = [id];
+    return pool.query(sql, values);
+}
+
 
 module.exports = dbMethods;
