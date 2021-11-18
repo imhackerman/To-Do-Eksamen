@@ -28,10 +28,10 @@ server.post("/tasklist", async function(req, res, next) {
         let data = await db.createTask(userid, updata.tasktext, updata.heading);
 
         if (data.rows.length > 0) {
-            res.status(200).json({msg: "the task was succesfully created"}).end();
+            res.status(200).json({msg: "Gjøremålet er lagt til i to do listen!"}).end();
         }
         else {
-            throw "The task could not be created";
+            throw "Gjøremålet kunne ikke bli lagt til!";
         }
     }
     catch(err) {
@@ -47,10 +47,10 @@ server.delete("/tasklist", async function(req, res, next) {
         let data = await db.deleteTask(updata.id);
 
         if(data.rows.length>0){
-            res.status(200).json({msg: "the task was deleted"}).end();
+            res.status(200).json({msg: "Gjøremålet er blitt slettet!"}).end();
         }
         else{
-            throw "the task was not deleted";
+            throw "Gjøremålet kunne ikke bli slettet!";
         }
     }catch(err){
         next(err);
