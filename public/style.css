@@ -1,6 +1,5 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 1px;
     box-sizing: border-box;
 }
 
@@ -26,11 +25,19 @@ header, form, .footer{
 }
 
 form input, form button {
-    color: green;
+    color: rgb(88, 167, 88);
     cursor: pointer;
     font-size: 1.2rem;
 }
 
-form button :hover {
-    
+
+
+.box {
+    height: 500px;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
+    border: 0.5px solid white;
+    border-radius: 10px;
+
 }
