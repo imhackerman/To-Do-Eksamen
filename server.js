@@ -1,4 +1,6 @@
 const express = require('express');
+const { Pool } = require('pg');
+const db = require('./modules/db.js')
 const server = express();
 const PORT = process.env.PORT || 8080;
 server.set('port', PORT);
@@ -8,12 +10,36 @@ server.use(express.static("public"));
 server.use(express.json());
 
 // ENDPOINTS --------------------
-server.get("/", function(req, res, next) {
-    res.status(200).send("Helo from GET").end();
+server.get("/tasklist", async function(req, res, next) {
+    try {
+		let data = await db.getAllTasks();
+        console.log(data)
+		res.status(200).json(data.rows).end();
+	} catch (err) {
+		next(err);
+	}
 });
 
-server.post("/", function(req, res, next) {
-    res.status(200).send("Hello from POST").end();
+server.post("/tasklist", async function(req, res, next) {
+    
+    let userid = 1; // Must be changed when we implement more users than 1.
+
+    let sql = 'INSERT INTO tasklist (id, date, heading, blogtext, userid) VALUES(DEFAULT, DEFAULT, $1, $2, $3) returning *';
+    let values = [updata.heading, updata.tasktext, userid];
+
+    try {
+        let result = await Pool.query(sql, values);
+
+        if (result.rows.length > 0) {
+            res.status(200).json({msg: "the task was succesfully created"}).end();
+        }
+        else {
+            throw "The task could not be created";
+        }
+    }
+    catch(err) {
+        res.status(500).json({error: err}).end();
+    }
 });
 
 server.delete("/", function(req, res, next) {
