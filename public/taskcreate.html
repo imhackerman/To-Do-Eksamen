@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>client</title>
+<<<<<<< HEAD
 </head>
 <body>
     <a href="/tasklist.html">Gå til todo liste</a> <br>
@@ -12,33 +13,55 @@
     <textarea id="inpTasktext" cols="80" rows="10"></textarea><br>
     <button id="btnCreate">Create taaaaask</button><br>
     <h3 id="txtResult">Reeeeesult....</h3>
+=======
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet"
+    />
+    <!--henter fonten-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!--Henter pluss ikonet-->
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <input id="inpHeading" type="text" placeholder="Task name" /><br />
+    <textarea id="inpTasktext" cols="80" rows="5" placeholder="Description"></textarea><br />
+    <button id="btnCreate"type="submit"><i class="fa fa-plus-square"></i>
+    </button><br />
+    <h3 id="txtResult">Result....</h3>
+>>>>>>> f7e7662036cccec99914acca3090f4f4d4b2f319
 
     <script>
-        
-        let inpHeading = document.getElementById('inpHeading');
-        let inpTasktext = document.getElementById('inpTasktext');
-        let btnCreate = document.getElementById('btnCreate');
-        let txtResult = document.getElementById('txtResult');
+      let inpHeading = document.getElementById("inpHeading");
+      let inpTasktext = document.getElementById("inpTasktext");
+      let btnCreate = document.getElementById("btnCreate");
+      let txtResult = document.getElementById("txtResult");
 
-        btnCreate.addEventListener('click', async function(evt) {
+      btnCreate.addEventListener("click", async function (evt) {
+        let url = "/tasklist";
 
-           let url = "/tasklist"; 
+        let updata = {
+          heading: inpHeading.value,
+          tasktext: inpTasktext.value,
+        };
 
-           let updata = {
-                heading: inpHeading.value,
-                tasktext: inpTasktext.value   
-            }
-        
         let cfg = {
-            method: "POST",
-            headers: {"content-type": "application/json"},
-            body: JSON.stringify(updata)
-        }
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(updata),
+        };
 
         try {
-            let response = await fetch(url, cfg);
-            let data = await response.json();
+          let response = await fetch(url, cfg);
+          let data = await response.json();
 
+<<<<<<< HEAD
             if (response.status != 200) {
                 throw data.error;
             }else{
@@ -48,8 +71,19 @@
         catch(error) {
             console.log(error);
             txtResult.innerHTML = "Noe gikk galt - sjekk konsollvinduet";
+=======
+          if (response.status != 200) {
+            throw data.error;
+          } else {
+            txtResult.innerHTML = data.msg;
+          }
+        } catch (error) {
+          console.log(error);
+          txtResult.innerHTML =
+            "something went wrong - check the console window";
+>>>>>>> f7e7662036cccec99914acca3090f4f4d4b2f319
         }
-    });
+      });
     </script>
-</body>
+  </body>
 </html>
