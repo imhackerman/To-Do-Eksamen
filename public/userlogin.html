@@ -1,0 +1,47 @@
+<h1> ToDo App Login</h1>
+<input id="inputUsername" type="text" placeholder="Username" />
+<input id="inputPassword" type="text" placeholder="Password" /><br /><br />
+
+<button id="btnLogin">Login</button><br />
+
+<!------------- JavaScript --------------->
+<script>
+  let inputUsername = document.getElementById("inputUsername");
+  let inputPassword = document.getElementById("inputPassword");
+  let btnLogin = document.getElementById("btnLogin");
+  let txtResult = document.getElementById("txtResult");
+
+  btnLogin.addEventListener("click", async function (evt) {
+    let url = "/users/login";
+    let credString = createCredentialString(
+      inputUsername.value,
+      inputPassword.value
+    );
+
+    let cfg = {
+      method: "POST",
+      headers: { authorization: credString },
+    };
+
+    try {
+      let response = await fetch(url, cfg);
+      let data = await response.json();
+
+      if (response.status != 200) {
+        throw data.error;
+      }
+
+      txtResult.innerHTML = data.msg;
+      localStorage.setItem("token", data.token);
+    } catch (error) {
+      console.log(error);
+      txtResult.innerHTML = "Something went wrong";
+    }
+  });
+
+  function createCredentialString(username, password) {
+    let combinedStr = username + ":" + password;
+    let b64Str = btoa(combinedStr);
+    return "basic" + b64Str;
+  }
+</script>
