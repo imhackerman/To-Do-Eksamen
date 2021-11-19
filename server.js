@@ -10,6 +10,29 @@ server.use(express.static("public"));
 server.use(express.json());
 
 // ENDPOINTS --------------------
+
+server.get("/lists", async function(req, res, next){
+    try {
+        let data = await db.getAllTasklists();
+        res.status(200).json(data.rows).end();
+    }catch(err){
+        next(err);
+    }
+})
+
+server.get("/tasks/:id", async function(req, res, next){
+
+    let id = req.params.id;
+
+    try {
+        let data = await db.getTasksFromList(id);
+        res.status(200).send(data.rows).end();
+    }catch(err){
+        console.log(err)
+    }
+})
+
+
 server.get("/tasklist", async function(req, res, next) {
     try {
 		let data = await db.getAllTasks();
@@ -58,6 +81,10 @@ server.delete("/tasklist", async function(req, res, next) {
     
 })
 
+
+server.post("/tasklist", async function(req, res, next){
+
+})
 
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));

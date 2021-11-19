@@ -8,6 +8,18 @@ const pool = new pg.Pool({
 
 let dbMethods = {};
 
+dbMethods.getAllTasklists = function(){
+    let sql = "SELECT title, userid FROM tasklists"
+    return pool.query(sql);
+}
+
+dbMethods.getTasksFromList = function(id){
+    let sql = "SELECT * FROM tasks WHERE listid = $1";
+    let values = [id];
+    return pool.query(sql, values);
+
+}
+
 dbMethods.getAllTasks = function(){
     let sql = "SELECT * FROM tasks";
     return pool.query(sql);
@@ -23,6 +35,10 @@ dbMethods.createTask = function(userid, tasktext, header){
     let sql = "INSERT INTO tasks (id, date, userid, task, header) VALUES(DEFAULT, DEFAULT, $1, $2, $3) RETURNING *";
     let values = [userid, tasktext, header];
     return pool.query(sql, values);
+}
+
+dbMethods.createTasklist = function(userid, title){
+
 }
 
 
