@@ -10,94 +10,87 @@
 <body>
     <a href="/taskcreate.html">Opprett et gjøremål!</a>
     <div id="container"></div>
-    <div id= "taskcontainer"></div>
+ 
 <script>
     let container = document.getElementById('container');
-    let taskcontainer = document.getElementById("taskcontainer")
-
-    async function listTasks(listid) {
-
-        let url =`/tasks/:${listid}`;
-        console.log(url)
-
-        try {
-            let response = await fetch(url);
-            let data = await response.json();
-
-            if (response.status != 200) {
-                throw data.error;
-            }
-
-            taskcontainer.innerHTML = "";
-
-        for (let value of data) {   
-            
-            let date = new Date(value.date); 
-
-            let html = `<p>${value.task}</p>`;
-            html += `<p>${date.toLocaleDateString()}</p><hr>`
-        
-            let div = document.createElement("div");
-            div.innerHTML = html;
-            container.appendChild(div);
-
-            let deletebutton = document.createElement("button");
-            deletebutton.innerHTML = 'Delete'
-
-            deletebutton.addEventListener("click", function (evt) {
-                deleteTask(value.id);
-            });
-
-            div.insertBefore(deletebutton, div.lastElementChild);
-        }
-    }
-    catch(error) {
-        console.log(error);
-    }
-}
 
 
-    async function listTaskList2(){
+    async function listTaskList(){
         
         let url = "/lists"
+        let taskurl = "/tasklist"
 
         try {
-            let response = await fetch(url);
-            let data = await response.json();
-            console.log(data)
+            let listresponse = await fetch(url);
+            let listdata = await listresponse.json();
 
-            if (response.status != 200) {
-                throw data.error;
+            if (listresponse.status != 200) {
+                throw listdata.error;
             }
 
+            let taskresponse = await fetch(taskurl)
+            let taskdata = await taskresponse.json();
 
-        for (let value of data) {   
+            if(taskresponse.status != 200){
+                throw taskresponse.error;
+            }
+              
+
+        for (let value of listdata) {   
 
             let html = `<p>${value.title}</p><hr>`;
-            //let list =  listTasks(value.listid);
-            //console.log(list)
-        
             let div = document.createElement("div");
             div.innerHTML = html;
             container.appendChild(div);
 
-            let deletebutton = document.createElement("button");
-            deletebutton.innerHTML = 'Delete'
+            for(let task of taskdata){
 
-            deletebutton.addEventListener("click", function (evt) {
-            });
+                if(value.listid == task.listid){
+                    let taskhtml = '<p>' + task.task + '</p>'
 
-            div.insertBefore(deletebutton, div.lastElementChild);
+                    let taskdiv = document.createElement('div');
+                    taskdiv.innerHTML = taskhtml;
+                    container.appendChild(taskdiv)
+                }
+                
+
+            }
+
+
         }
+
     }
     catch(error) {
         console.log(error);
+        }
+    }
+    
+/*
+    async function listTasks(listid) {
+
+        let url ="/tasklist";
+        let list = [];
+
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+    
+            if(response.status != 200){
+                throw data.error;
+            }
+
+           for(let value of data){
+               if(value.listid == listid){
+                console.log(value.task)
+               }
+           }
+
+        }catch(err){
+            console.log(err)
+        }
     }
 
-
-    }
-
-
+    
     async function deleteTask(tasklistId) {
 
         let url ="/tasklist";
@@ -127,12 +120,11 @@
             console.log(error)
         }
     }
+*/
+   
+    listTaskList()
 
-    //listTaskList();
-
-    listTaskList2()
-
-    listTasks(0)
+ 
 
 
 </script>

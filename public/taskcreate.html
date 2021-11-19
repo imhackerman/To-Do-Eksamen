@@ -70,17 +70,6 @@
           let response = await fetch(url, cfg);
           let data = await response.json();
 
-<<<<<<< HEAD
-            if (response.status != 200) {
-                throw data.error;
-            }else{
-                txtResult.innerHTML = data.msg;
-            }    
-        }
-        catch(error) {
-            console.log(error);
-            txtResult.innerHTML = "Noe gikk galt - sjekk konsollvinduet";
-=======
           if (response.status != 200) {
             throw data.error;
           } else {
@@ -90,7 +79,6 @@
           console.log(error);
           txtResult.innerHTML =
             "something went wrong - check the console window";
->>>>>>> f7e7662036cccec99914acca3090f4f4d4b2f319
         }
       });
     </script>

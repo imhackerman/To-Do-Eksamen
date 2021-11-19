@@ -13,10 +13,9 @@ dbMethods.getAllTasklists = function(){
     return pool.query(sql);
 }
 
-dbMethods.getTasksFromList = function(id){
-    let sql = "SELECT * FROM tasks WHERE listid = $1";
-    let values = [id];
-    return pool.query(sql, values);
+dbMethods.getTasksFromList = function(){
+    let sql = "SELECT * FROM tasks";
+    return pool.query(sql);
 
 }
 
@@ -31,9 +30,9 @@ dbMethods.deleteTask = function(id){
     return pool.query(sql, values);
 }
 
-dbMethods.createTask = function(userid, tasktext, header){
-    let sql = "INSERT INTO tasks (id, date, userid, task, header) VALUES(DEFAULT, DEFAULT, $1, $2, $3) RETURNING *";
-    let values = [userid, tasktext, header];
+dbMethods.createTask = function(userid, tasktext, header, listid){
+    let sql = "INSERT INTO tasks (id, date, userid, task, header, listid) VALUES(DEFAULT, DEFAULT, $1, $2, $3, $4) RETURNING *";
+    let values = [userid, tasktext, header, listid];
     return pool.query(sql, values);
 }
 
