@@ -82,6 +82,13 @@ server.delete("/tasklist", async function(req, res, next) {
     
 })
 
+//General error handling --------------------------------
+server.use(function (err, req, res, next) {
+    res.status(500).json({
+        error:'Noe gikk galt på serveren!',
+        descr: err
+    }).end();
+});
 
 server.post("/tasklist", async function(req, res, next){
 
