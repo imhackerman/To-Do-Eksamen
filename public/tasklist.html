@@ -10,12 +10,15 @@
 <body>
     <a href="/taskcreate.html">Opprett et gjøremål!</a>
     <div id="container"></div>
+    <div id= "taskcontainer"></div>
 <script>
     let container = document.getElementById('container');
+    let taskcontainer = document.getElementById("taskcontainer")
 
-    async function listTaskList() {
+    async function listTasks(listid) {
 
-        let url ="/tasklist";
+        let url =`/tasks/:${listid}`;
+        console.log(url)
 
         try {
             let response = await fetch(url);
@@ -25,7 +28,7 @@
                 throw data.error;
             }
 
-            container.innerHTML = "";
+            taskcontainer.innerHTML = "";
 
         for (let value of data) {   
             
@@ -53,6 +56,46 @@
     }
 }
 
+
+    async function listTaskList2(){
+        
+        let url = "/lists"
+
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+            console.log(data)
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+
+
+        for (let value of data) {   
+
+            let html = `<p>${value.title}</p><hr>`;
+            //let list =  listTasks(value.listid);
+            //console.log(list)
+        
+            let div = document.createElement("div");
+            div.innerHTML = html;
+            container.appendChild(div);
+
+            let deletebutton = document.createElement("button");
+            deletebutton.innerHTML = 'Delete'
+
+            deletebutton.addEventListener("click", function (evt) {
+            });
+
+            div.insertBefore(deletebutton, div.lastElementChild);
+        }
+    }
+    catch(error) {
+        console.log(error);
+    }
+
+
+    }
 
 
     async function deleteTask(tasklistId) {
@@ -85,7 +128,11 @@
         }
     }
 
-    listTaskList();
+    //listTaskList();
+
+    listTaskList2()
+
+    listTasks(0)
 
 
 </script>
