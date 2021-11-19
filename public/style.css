@@ -15,7 +15,7 @@ body {
 
 header {
     font-size: 1.3rem;
-    color: rgb(90, 180, 90);
+    color: rgb(0, 0, 0);
     font-family: "Courgette"; 
     display: grid;
     justify-items: center;
