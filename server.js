@@ -58,7 +58,7 @@ server.post("/tasklist", async function(req, res, next) {
         }
     }
     catch(err) {
-        res.status(500).json({error: err}).end();
+        next(err);
     }
 });
 
@@ -75,7 +75,8 @@ server.delete("/tasklist", async function(req, res, next) {
         else{
             throw "Gjøremålet kunne ikke bli slettet!";
         }
-    }catch(err){
+    }
+    catch(err) {
         next(err);
     }
     
