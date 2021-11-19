@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./style.css" />
     <!--henter fonten-->
     <link
       rel="stylesheet"
@@ -18,14 +19,15 @@
     />
     <!--Henter pluss ikonet-->
 
-    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="midtstill">
     <input id="inpHeading" type="text" placeholder="Task name" /><br />
     <textarea id="inpTasktext" cols="80" rows="5" placeholder="Description"></textarea><br />
     <button id="btnCreate"type="submit"><i class="fa fa-plus-square"></i>
     </button><br />
     <h3 id="txtResult">Result....</h3>
+    </div>
 
     <script>
       let inpHeading = document.getElementById("inpHeading");

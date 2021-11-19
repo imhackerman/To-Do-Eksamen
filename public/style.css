@@ -1,28 +1,37 @@
 * {
-    margin: 1px;
+   margin: 2px;
     box-sizing: border-box;
 }
+
+
 
 body {
     background-image: linear-gradient(pink, green);
     min-height: 200vh; /*farge blandingen i midten*/
+    margin: 50px;
+    
 }
+
 
 header {
     font-size: 1.3rem;
     color: rgb(90, 180, 90);
     font-family: "Courgette"; 
-
-
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    
 }
 
 header, form, .footer{
   min-height: 20vh;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
 
 }
+
+
 
 form input, form button {
     color: rgb(88, 167, 88);
@@ -30,7 +39,17 @@ form input, form button {
     font-size: 1.2rem;
 }
 
+input {
+    display: block;
+   
+}
 
+.midtstill {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    
+}
 
 .box {
     height: 500px;
