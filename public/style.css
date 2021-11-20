@@ -44,22 +44,13 @@ input {
    
 }
 
-.midtstill {
+.midtstill, .container {
     display: grid;
     justify-items: center;
     align-items: center;
     
 }
 
-.box {
-    height: 500px;
-    width: 400px;
-    padding: 20px;
-    margin: auto;
-    border: 0.5px solid white;
-    border-radius: 10px;
-
-}
 
 .btnHome {
     
