@@ -77,6 +77,23 @@ router.delete("/task", async function(req, res, next) {
     
 });
 
+router.delete("/tasklist", async function(req, res, next){
+    
+    let updata = req.body;
+
+    try{
+        let data = await db.deleteList(updata.listid);
+
+        if(data.rows.length>0){
+            res.status(200).json({msg: "Listen er blitt slettet!"}).end();
+        }else{
+            throw "Listen ble ikke slettet"
+        }
+    }catch(err){
+        next(err)
+    }
+})
+
 
 router.post("/tasklist", async function(req, res, next){
 
