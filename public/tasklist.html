@@ -51,6 +51,15 @@
                     let taskdiv = document.createElement('div');
                     taskdiv.innerHTML = taskhtml;
                     container.appendChild(taskdiv)
+
+
+                    let deleteTaskButton = document.createElement('button')
+                    deleteTaskButton.innerHTML = 'Delete'
+                    deleteTaskButton.addEventListener('click', function(evt){
+                        deleteTask(task.id);
+                    })
+
+                    taskdiv.insertBefore(deleteTaskButton, taskdiv.lastElementChild);
                 }
                 
 
@@ -64,40 +73,16 @@
         console.log(error);
         }
     }
-    
-/*
-    async function listTasks(listid) {
 
-        let url ="/tasklist";
-        let list = [];
-
-        try{
-            let response = await fetch(url);
-            let data = await response.json();
-    
-            if(response.status != 200){
-                throw data.error;
-            }
-
-           for(let value of data){
-               if(value.listid == listid){
-                console.log(value.task)
-               }
-           }
-
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    
-    async function deleteTask(tasklistId) {
+    async function deleteTask(taskId) {
 
         let url ="/tasklist";
 
         let updata= {
-            id: tasklistId
+            id: taskId
         }
+
+        console.log(updata)
 
         let cfg = {
             method: "DELETE",
@@ -114,14 +99,11 @@
             }
             
             listTaskList(); // refreshes the lists
-
-
         }catch(error){
             console.log(error)
         }
     }
-*/
-   
+
     listTaskList()
 
  
