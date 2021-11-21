@@ -57,7 +57,7 @@ router.post("/tasklist", async function(req, res, next) {
     }
 });
 
-router.delete("/tasklist", async function(req, res, next) {
+router.delete("/task", async function(req, res, next) {
     // method for DELETING from database 
     let updata = req.body;
     
