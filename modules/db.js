@@ -31,7 +31,7 @@ dbMethods.deleteTask = function(id){
 }
 
 dbMethods.deleteList = function(id){
-    let sql = "DELETE FROM tasklists WHERE listid = $1 RETURNING *";
+    let sql = "DELETE FROM tasklists WHERE id = $1 RETURNING *";
     let values = [id];
     return pool.query(sql, values);
 }

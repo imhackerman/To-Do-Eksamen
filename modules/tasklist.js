@@ -101,7 +101,7 @@ router.delete("/tasklist", async function(req, res, next){
     let updata = req.body;
 
     try{
-        let data = await db.deleteList(updata.listid);
+        let data = await db.deleteList(updata.id);
 
         if(data.rows.length>0){
             res.status(200).json({msg: "Listen er blitt slettet!"}).end();
