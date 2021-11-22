@@ -78,10 +78,16 @@
       btnCreate.addEventListener("click", async function (evt) {
         let url = "/task";
 
+        let listidFromLocalStorage = localStorage.getItem('list')
+        console.log(listidFromLocalStorage)
+
         let updata = {
           heading: inpHeading.value,
           tasktext: inpTasktext.value,
+          listid: listidFromLocalStorage
         };
+
+        console.log(updata)
 
         let cfg = {
           method: "POST",
