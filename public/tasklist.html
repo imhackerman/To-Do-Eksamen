@@ -54,9 +54,12 @@
         
             container.innerHTML = "";
 
-        for (let value of listdata) {   
+            console.log(listdata)
 
-            let html = `<p>${value.title}</p>`;
+        for (let list of listdata) { 
+        
+
+            let html = `<p>${list.title}</p>`;
             let div = document.createElement("div");
             div.innerHTML = html;
             container.appendChild(div);
@@ -72,7 +75,7 @@
 
             for(let task of taskdata){
 
-                if(value.listid == task.listid){
+                if(list.id == task.listid){
                     let taskhtml = '<p>' + task.task + '</p>'
 
                     let taskdiv = document.createElement('div');

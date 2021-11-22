@@ -26,7 +26,7 @@ router.get("/tasks/:id", async function(req, res, next){
 });
 
 
-router.get("/tasklist", async function(req, res, next) {
+router.get("/task", async function(req, res, next) {
     try {
 		let data = await db.getAllTasks();
 		res.status(200).json(data.rows).end();

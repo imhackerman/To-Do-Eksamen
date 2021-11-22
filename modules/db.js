@@ -9,7 +9,7 @@ const pool = new pg.Pool({
 let dbMethods = {};
 
 dbMethods.getAllTasklists = function(){
-    let sql = "SELECT title, listid FROM tasklists"
+    let sql = "SELECT id, title, listid FROM tasklists"
     return pool.query(sql);
 }
 
