@@ -38,11 +38,10 @@ router.get("/task", async function(req, res, next) {
 router.post("/lists", async function(req, res, next){
 
     let updata = req.body;
-    let listid = 1;
     let userid = 1;
     
     try{
-        let data = await db.createTasklist(listid, updata.title, userid);
+        let data = await db.createTasklist(updata.title, userid);
 
         if (data.rows.length > 0){
             res.status(200).json({msg: "Listen er opprettet"}).end();
