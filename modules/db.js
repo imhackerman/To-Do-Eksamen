@@ -30,6 +30,12 @@ dbMethods.deleteTask = function(id){
     return pool.query(sql, values);
 }
 
+dbMethods.deleteList = function(id){
+    let sql = "DELETE FROM tasklists WHERE listid = $1 RETURNING *";
+    let values = [id];
+    return pool.query(sql, values);
+}
+
 dbMethods.createTask = function(userid, tasktext, header, listid){
     let sql = "INSERT INTO tasks (id, date, userid, task, header, listid) VALUES(DEFAULT, DEFAULT, $1, $2, $3, $4) RETURNING *";
     let values = [userid, tasktext, header, listid];
