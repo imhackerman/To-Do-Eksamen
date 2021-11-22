@@ -36,7 +36,8 @@
 
   </head>
   <body>
-    <form action="/action_page.php" method="get">
+    <form action="/action_page.php" method="get" >
+      <SELECT listid FROM tasks></SELECT>
       <label for="browser">Velg hvilken kategori du vil sette to do oppgave inn i:</label>
       <input list="browsers" name="browser" id="browser">
       <datalist id="browsers">
@@ -49,7 +50,7 @@
       <input type="submit">
     </form>
     
-    <p><strong>Note:</strong> The datalist tag is not supported in Safari 12.0 (or earlier).</p>
+    <p><strong>NB!:</strong> The datalist tag is not supported in Safari 12.0 (or earlier).</p>
   
 
     <input id="inpHeading" type="text" placeholder="Navn på gjøremål" /><br />
