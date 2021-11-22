@@ -34,7 +34,7 @@
     let createListBtn = document.getElementById('createList');
 
     createListBtn.addEventListener('click', async function(evt){
-
+        window.location.href = '/listcreate.html'
     })
 
 
@@ -76,7 +76,7 @@
             let deleteListButton = document.createElement('button');
             deleteListButton.innerHTML = 'Slett liste';
             deleteListButton.addEventListener('click', function(evt){
-                deleteList(value.listid)
+                deleteList(list.id)
             })
 
             div.appendChild(deleteListButton)
