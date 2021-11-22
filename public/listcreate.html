@@ -8,10 +8,47 @@
 </head>
 <body>
 
+    <input id="inpListTitle" type="text" placeholder="Navn på ny liste" /><br />
+    <button id="btnCreate"type="submit">Legg til liste<i class="fa fa-plus"></i>
+    </button><br />
+    <h3 id="txtResult">Result....</h3>
+    
     
     <script>
 
+        let inpListTitle = document.getElementById("inpListTitle");
+        let btnCreate = document.getElementById("btnCreate");
+        let txtResult = document.getElementById("txtResult");
 
+
+        btnCreate.addEventListener('click', async function(evt){
+            
+            let url = '/lists';
+
+            let updata = {
+                title: inpListTitle.value
+            }
+
+            let cfg = {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(updata),
+                };
+
+                try{
+                    let response = await fetch(url, cfg);
+                    let data = await response.json();
+
+                    if (response.status != 200) {
+                        throw data.error;
+                    } else {
+                        txtResult.innerHTML = data.msg;
+                    }
+                } catch(error){
+                    txtResult.innerHTML = "something went wrong - check the console window"
+                }
+        })
+      
 
     </script>
     

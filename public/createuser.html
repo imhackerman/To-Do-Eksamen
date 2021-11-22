@@ -86,4 +86,22 @@
         return;
     }
 
-  })
+    let hash = authUtils.createHash(cred.password);
+
+    try {
+        let data = await db.ceateUser(cred.username, hash.value, hash.salt);
+
+        if (data.rows.length > 0) {
+            res.status(200).json({msg: "the user was created succefully"}).end();
+        }
+
+        else {
+            throw "the user couldnt be created"
+        }
+    }
+
+    catch(err) {
+        next(err);
+    }
+
+  });

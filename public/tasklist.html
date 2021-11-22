@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Document</title>
 
     <link rel="stylesheet" href="style.css">
@@ -13,17 +14,49 @@
     <div class= "midtstill">
     <a href="/taskcreate.html">Opprett et gjøremål!</a>
       
+=======
+    <title>Tasklist</title>
+</head>
+<body>
+    <link rel= "stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+  rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    
+    <a class="arrowBtn" href="taskcreate.html">
+        <i class="fas fa-arrow-left" ></i>
+    </a>
+
+<header class= "midtstill">
+<h1> Tasklist</h1>
+
+    <a href="/taskcreate.html">Opprett et gjøremål!</a>
+    <button id = 'createList'>Legg til ny liste</button>
+>>>>>>> 5190db5992e1ef01a9466326284a8b84f165e8a8
     <div id="container"></div>
   </div> 
  
 <script>
+
+    let createListBtn = document.getElementById('createList');
+
+    createListBtn.addEventListener('click', async function(evt){
+        window.location.href = '/listcreate.html'
+    })
+
+
     let container = document.getElementById('container');
 
 
     async function listTaskList(){
         
         let url = "/lists"
-        let taskurl = "/tasklist"
+        let taskurl = "/task"
 
         try {
             let listresponse = await fetch(url);
@@ -42,9 +75,12 @@
         
             container.innerHTML = "";
 
-        for (let value of listdata) {   
+            console.log(listdata)
 
-            let html = `<p>${value.title}</p>`;
+        for (let list of listdata) { 
+        
+
+            let html = `<p>${list.title}</p>`;
             let div = document.createElement("div");
             div.innerHTML = html;
             container.appendChild(div);
@@ -52,15 +88,25 @@
             let deleteListButton = document.createElement('button');
             deleteListButton.innerHTML = 'Slett liste';
             deleteListButton.addEventListener('click', function(evt){
-                deleteList(value.listid)
+                deleteList(list.id)
             })
 
             div.appendChild(deleteListButton)
 
+            let createNewTask = document.createElement('button');
+            createNewTask.innerHTML = 'Nytt gjøremål'
+            createNewTask.addEventListener('click', async function(evt){
+
+                localStorage.setItem('list', list.id)
+                window.location.href = '/taskcreate.html'
+            })
+
+            div.appendChild(createNewTask)
+
 
             for(let task of taskdata){
 
-                if(value.listid == task.listid){
+                if(list.id == task.listid){
                     let taskhtml = '<p>' + task.task + '</p>'
 
                     let taskdiv = document.createElement('div');
@@ -151,6 +197,8 @@
         }
     }
     
+ 
+
 
     listTaskList()
 

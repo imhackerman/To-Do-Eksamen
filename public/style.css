@@ -57,3 +57,10 @@ input {
     font-size: large;
 
 }
+
+.arrowBtn {
+
+    font-size:30px;
+    color: black;
+    cursor: pointer;
+}
