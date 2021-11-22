@@ -26,9 +26,18 @@
 <h1> Tasklist</h1>
 
     <a href="/taskcreate.html">Opprett et gjøremål!</a>
+    <button id = 'createList'>Legg til ny liste</button>
     <div id="container"></div>
  
 <script>
+
+    let createListBtn = document.getElementById('createList');
+
+    createListBtn.addEventListener('click', async function(evt){
+
+    })
+
+
     let container = document.getElementById('container');
 
 
@@ -71,6 +80,16 @@
             })
 
             div.appendChild(deleteListButton)
+
+            let createNewTask = document.createElement('button');
+            createNewTask.innerHTML = 'Nytt gjøremål'
+            createNewTask.addEventListener('click', async function(evt){
+
+                localStorage.setItem('List', list.id)
+                window.location.href = '/taskcreate.html'
+            })
+
+            div.appendChild(createNewTask)
 
 
             for(let task of taskdata){
@@ -159,6 +178,8 @@
         }
     }
     
+ 
+
 
     listTaskList()
 
