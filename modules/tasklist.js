@@ -35,11 +35,11 @@ router.get("/task", async function(req, res, next) {
 	}
 });
 
-router.post("/tasklist", async function(req, res, next){
+router.post("/lists", async function(req, res, next){
 
     let updata = req.body;
     let listid = 1;
-
+    
     try{
         let data = await db.createTasklist(listid, updata.title);
 
