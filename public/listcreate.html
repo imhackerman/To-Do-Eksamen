@@ -16,17 +16,17 @@
     
     <script>
 
-        let inpTasktext = document.getElementById("inpListTitle");
+        let inpListTitle = document.getElementById("inpListTitle");
         let btnCreate = document.getElementById("btnCreate");
         let txtResult = document.getElementById("txtResult");
 
 
         btnCreate.addEventListener('click', async function(evt){
             
-            let url = '/tasklist';
+            let url = '/lists';
 
             let updata = {
-                title: inpTasktext.value
+                title: inpListTitle.value
             }
 
             let cfg = {
