@@ -35,7 +35,7 @@ router.get("/tasklist", async function(req, res, next) {
 	}
 });
 
-router.post("/tasklist", async function(req, res, next) {
+router.post("/task", async function(req, res, next) {
     
     let updata = req.body;
     let userid = 1;
