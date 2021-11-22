@@ -10,12 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class= "midtstill">
-    <a href="/taskcreate.html">Opprett et gjøremål!</a>
-      
-    <title>Tasklist</title>
-</head>
-<body>
     <link rel= "stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,7 +27,7 @@
 <header class= "midtstill">
 <h1> Tasklist</h1>
 
-    <a href="/taskcreate.html">Opprett et gjøremål!</a>
+    <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <button id = 'createList'>Legg til ny liste</button>
     <div id="container"></div>
   </div> 
@@ -112,7 +106,7 @@
 
 
                     let deleteTaskButton = document.createElement('button')
-                    deleteTaskButton.innerHTML = 'Delete'
+                    deleteTaskButton.innerHTML = 'Slett'
                     deleteTaskButton.addEventListener('click', function(evt){
                         deleteTask(task.id);
                     })
