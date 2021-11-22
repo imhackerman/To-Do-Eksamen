@@ -35,6 +35,25 @@ router.get("/task", async function(req, res, next) {
 	}
 });
 
+router.post("/tasklist", async function(req, res, next){
+
+    let updata = req.body;
+    let listid = 1;
+
+    try{
+        let data = await db.createTasklist(listid, updata.title);
+
+        if (data.rows.length > 0){
+            res.status(200).json({msg: "Listen er opprettet"}).end();
+        } else{
+            throw 'Kunne ikke opprette listen'
+        }
+    }catch(err){
+        next(err)
+    }
+
+})
+
 router.post("/task", async function(req, res, next) {
     
     let updata = req.body;
