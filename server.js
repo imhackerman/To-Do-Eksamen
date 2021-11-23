@@ -6,12 +6,27 @@ const PORT = process.env.PORT || 8080;
 server.set('port', PORT);
 
 const tasklist = require("./modules/tasklist.js");
+const users = require("./modules/users.js")
+
+/*
+const authUtils = require('./modules/auth_utils.js')
+
+let hash = authUtils.createHash('kongolav');
+console.log(hash);
+
+let token = authUtils.createToken('testuser', 1);
+console.log(token);
+
+let payload = authUtils.verifyToken(token);
+console.log(payload);
+*/
 
 // MIDDLEWARE ----------------------------
 server.use(express.static("public"));
 server.use(express.json());
 
 server.use(tasklist);
+server.use(users);
 
 //General error handling --------------------------------
 server.use(function (err, req, res, next) {

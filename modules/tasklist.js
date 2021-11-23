@@ -1,4 +1,5 @@
 const express = require('express');
+const { decodecred } = require('./auth_utils.js');
 const db = require('./db.js');
 const router = express.Router();
 
@@ -113,8 +114,5 @@ router.delete("/tasklist", async function(req, res, next){
 })
 
 
-router.post("/tasklist", async function(req, res, next){
-
-});
 
 module.exports = router; 
