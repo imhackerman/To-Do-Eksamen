@@ -1,17 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="tasklist.html"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<!----------------html elements---------------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <link rel= "stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+  rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    
+    <a class="arrowBtn" href="taskcreate.html">
+        <i class="fas fa-arrow-left" ></i>
+    </a>
+
+<header class= "midtstill">
+<h1> Tasklist</h1>
+
+    <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
+    <button id = 'createList'>Legg til ny liste</button>
+    <div id="container"></div>
+    </div> 
+<h2>Two Equal Columns</h2>
+
 <div class="row">
-    <div class="column"></div>
-    <div class="column"></div>
+  <div class="column1" style="background-color:#aaa;">
+    
+    <h2>Column 1</h2>
+    <p>Some text..</p>
+    <div class="container"></div>
   </div>
-
+  <div class="column2" style="background-color:#bbb;">
+    <h2>Column 2</h2>
+    <p>Some text..</p>
+  </div>
+</div>
 <script>
-
-
-
+    let html = '<p>test</p>'
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    container.appendChild(html);
 </script>
 
 </body>
