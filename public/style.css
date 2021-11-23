@@ -63,7 +63,29 @@ input {
     font-size:30px;
     color: black;
     cursor: pointer;
+
 }
+
+.share-btn {
+  display: inline-block;
+  color: black;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 30px;
+  
+}
+
+.share-btn:focus,
+.share-btn:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.share-btn:active {
+  color: #e2e2e2;
+}
+
 
 * {
     box-sizing: border-box;
