@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
 
-const secret = 'testpassword';
+const secret = 'test';
 
 let utils = {};
 
@@ -43,8 +43,8 @@ utils.createToken = function(username, userId){
 
     let openPart = `${b64Part1}.${b64Part2}`;
 
-    let secret = 'testpassword';
-    let sign = crypto.createHmac('SHA256', secret).updata(openPart).digest('base64');
+    let secret = 'test';
+    let sign = crypto.createHmac('SHA256', secret).update(openPart).digest('base64');
 
     return ` ${openPart}.${sign}`
 }
@@ -55,19 +55,24 @@ utils.verifyToken = function(token){
     let openPart = `${tokenArr[0]}.${tokenArr[1]}`;
     let signToCheck = tokenArr[2];
 
-    let secret = 'testpassword';
+    let secret = 'test';
     let sign = crypto.createHmac('SHA256', secret).update(openPart).digest('base64');
 
     if(signToCheck != sign){
         return false;
     }
 
-    let expireTime = payload.iat + 24 * 60 *60 * 1000;
+    let payloadTxt = Buffer.from(tokenArr[1], 'base64').toString('ascii');
+    let payload = JSON.parse(payloadTxt);
+
+    
+    let expireTime = payload.iat + 24 * 60 * 60 * 1000;
     if(expireTime < Date.now()){
         return false;
     }
+    
 
-    return true;
+    return payload;
 }
 
 
