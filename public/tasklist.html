@@ -22,16 +22,19 @@
     
     <a class="arrowBtn" href="taskcreate.html">
         <i class="fas fa-arrow-left" ></i>
-    </a>
+    </a><br>
+
+    <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a>
 
 <header class= "midtstill">
 <h1> Tasklist</h1>
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <button id = 'createList'>Legg til ny liste</button>
-    <div id="container"></div>
+    <div class="div">
+    <div id="container" ></div>
   </div> 
- 
+                <!------- JAVSCRIPT ------->
 <script>
 
     let createListBtn = document.getElementById('createList');
@@ -73,6 +76,7 @@
 
             let html = `<p>${list.title}</p>`;
             let div = document.createElement("div");
+            div.className = 'styleListDiv'
             div.innerHTML = html;
             container.appendChild(div);
 
@@ -102,7 +106,7 @@
 
                     let taskdiv = document.createElement('div');
                     taskdiv.innerHTML = taskhtml;
-                    container.appendChild(taskdiv)
+                    div.appendChild(taskdiv)
 
 
                     let deleteTaskButton = document.createElement('button')
@@ -184,7 +188,7 @@
     }
     
  
-
+    
 
     listTaskList()
 

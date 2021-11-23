@@ -63,16 +63,59 @@ input {
     font-size:30px;
     color: black;
     cursor: pointer;
+
 }
 
-.column {
+.share-btn {
+  display: inline-block;
+  color: black;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 30px;
+  
+}
+
+.share-btn:focus,
+.share-btn:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.share-btn:active {
+  color: #e2e2e2;
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create two equal columns that floats next to each other */
+  .div {
+    border-style: dotted;
+    color:rgb(0, 0, 0);
     float: left;
+    width: 500px;
+    padding: 100px;
+    /*height: 300px;  Should be removed. Only for demonstration */
+  }
+
+  .column2 {
+    float: right;
     width: 50%;
+    padding: 100px;
+    height: 300px; /* Should be removed. Only for demonstration */
   }
   
   /* Clear floats after the columns */
-  .row:after {
+  .column3 {
+    float: right;
     content: "";
     display: table;
     clear: both;
+  }
+
+  .styleListDiv {
+    border-style: solid;
   }
