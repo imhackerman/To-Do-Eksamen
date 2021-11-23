@@ -76,6 +76,7 @@
 
             let html = `<p>${list.title}</p>`;
             let div = document.createElement("div");
+            div.className = 'styleListDiv'
             div.innerHTML = html;
             container.appendChild(div);
 
@@ -105,7 +106,7 @@
 
                     let taskdiv = document.createElement('div');
                     taskdiv.innerHTML = taskhtml;
-                    container.appendChild(taskdiv)
+                    div.appendChild(taskdiv)
 
 
                     let deleteTaskButton = document.createElement('button')
