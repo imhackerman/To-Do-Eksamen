@@ -25,3 +25,6 @@ router.post('/users', async function(req, res, next){
 router.delete('/users', async function(req, res, next){
     res.status(200).send('DELETE /users').end();
 })
+
+
+module.exports = router;
