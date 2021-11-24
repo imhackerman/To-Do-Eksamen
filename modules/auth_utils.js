@@ -16,8 +16,7 @@ utils.decodeCred = function(credString){
     cred.username = asciiString.replace(/:.*/, '');
 
     cred.password = asciiString.replace(cred.username + ':', '');
-
-
+    
     return cred;
 }
 
