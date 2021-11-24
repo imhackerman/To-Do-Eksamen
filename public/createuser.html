@@ -30,42 +30,55 @@
 
     <button id="btnCreate">Create user</button><br>
     <h3 id="txtResult">Result</h3>
+    </header>
 
     <!------------- JavaScript --------------->
 <script>
-  let inputUsername = document.getElementById("inputUsername");
-  let inputPassword = document.getElementById("inpPassword");
-  let btnCreate = document.getElementById("btnCreate");
-  let txtResult = document.getElementById("txtResult");
+    let inputUsername = document.getElementById("inpUsername");
+    let inputPassword = document.getElementById("inpPassword");
+    let btnCreate = document.getElementById("btnCreate");
+    let txtResult = document.getElementById("txtResult");
 
 
-  btnCreate.addEventListener("click", async function(evt) {
+    btnCreate.addEventListener("click", async function(evt) {
 
-    let url = "/users";
-    let credString = createCredentialString(inputPassword.value, inputPassword.value);
+        console.log(inputUsername.value)
+        console.log(inputPassword.value)
 
-    let cfg = {
-        medthod: "POST", 
-        headers: {"authorization":credString}
-    }
-
-    try {
-        let response = await fetch(url, ctg); 
-        let data = await response.json();
-
-        if (response.status != 200) {
-            throw data.error;
+        if(inputUsername.value.includes(':')){
+            throw 'Brukernavn kan ikke inneholde ":"'
         }
 
-        txtResult.innerHTML = data.msg;
 
-    }
-    catch(error) {
-        console.log(error);
-        txtResult.innerHTML = "Somthing went wrong - check the console window";
-    }
+        let url = "/users";
+        let credString = createCredentialString(inputPassword.value, inputPassword.value);
 
-  }); 
+        console.log(credString)
+
+        let cfg = {
+            medthod: "POST", 
+            headers: {"authorization":credString}
+        }   
+
+        console.log(cfg)
+
+        try {
+            let response = await fetch(url, cfg); 
+            let data = await response.json();
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+
+            txtResult.innerHTML = data.msg;
+
+        }
+        catch(error) {
+            console.log(error);
+            txtResult.innerHTML = "Somthing went wrong - check the console window";
+        }
+
+    }); 
 
   //------------------------------------
   function createCredentialString(username, password) {
@@ -74,34 +87,7 @@
       return "basic" + b64Str;
   }
 
+    </script>
+  </body>
+</html>
 
-  // --- create new user -----------------
-  router.post("/users", async function(req, res, next){
-
-    let credString = req.headers.authorization;
-    let cred =authUtils.decodeCred(credString);
-
-    if (cred.username == "" || cred.password == "") {
-        res.status(401).json ({error: "no username or passord"}).end();
-        return;
-    }
-
-    let hash = authUtils.createHash(cred.password);
-
-    try {
-        let data = await db.ceateUser(cred.username, hash.value, hash.salt);
-
-        if (data.rows.length > 0) {
-            res.status(200).json({msg: "the user was created succefully"}).end();
-        }
-
-        else {
-            throw "the user couldnt be created"
-        }
-    }
-
-    catch(err) {
-        next(err);
-    }
-
-  });

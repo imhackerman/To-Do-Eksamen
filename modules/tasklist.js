@@ -62,7 +62,7 @@ router.post("/task", async function(req, res, next) {
 
 
     try {
-        let data = await db.createTask(userid, updata.tasktext, updata.heading, updata.listid);
+        let data = await db.createTask(userid, updata.tasktext, updata.listid);
 
         if (data.rows.length > 0) {
             res.status(200).json({msg: "Gjøremålet er lagt til i to do listen!"}).end();

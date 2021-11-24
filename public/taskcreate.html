@@ -65,12 +65,12 @@
 
     <h3 id="txtResult">Result....</h3>
 
+
     
  </header>
 
     <script>
       let kategori = document.getElementById("kategori");
-      let inpHeading = document.getElementById("inpHeading");
       let inpTasktext = document.getElementById("inpTasktext");
       let btnCreate = document.getElementById("btnCreate");
       let txtResult = document.getElementById("txtResult");
@@ -82,12 +82,9 @@
         console.log(listidFromLocalStorage)
 
         let updata = {
-          heading: inpHeading.value,
           tasktext: inpTasktext.value,
           listid: listidFromLocalStorage
         };
-
-        console.log(updata)
 
         let cfg = {
           method: "POST",
