@@ -146,5 +146,28 @@ p {
                                  "mn ct ct"
                                  "ft ft ft"; */
         }
-       
 
+
+        /* MOBILE OVERFLATER */ 
+        @media only screen and (max-width: 700px) {
+        
+            .styleListDiv {
+                border-style: solid;
+                justify-content: space-evenly;
+                padding: -20px;
+                margin: 0px;
+                
+             
+                height: fit-content;
+                
+                
+              }
+              #container {
+            
+                height: 100%;
+                grid-template-columns: auto;
+                grid-template-rows: auto;
+                margin-left: 0px;
+        }
+       
+    }
