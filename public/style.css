@@ -111,3 +111,47 @@ p {
   
 }
 
+
+/*
+    <style>
+        * {
+            margin: 0px;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-size: 20pt;
+        }
+    
+        body {
+            background-color: azure;
+        }
+    
+        #container>div {
+            border: 1px solid #000;
+            background-color: aliceblue;
+        }
+
+        #container {
+            
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr;
+            grid-template-rows: 80px 1fr 80px;
+            grid-template-areas: "hd hd hd"
+                                 "mn ct ct"
+                                 "ft ft ft";
+        }
+
+        .header {
+            grid-area: hd;
+        }
+        .menu {
+            grid-area: mn;
+        }
+        .content {
+            grid-area: ct;
+        }
+        .footer {
+            grid-area: ft;
+        } 
+
+*/
