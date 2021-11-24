@@ -36,9 +36,9 @@ dbMethods.deleteList = function(id){
     return pool.query(sql, values);
 }
 
-dbMethods.createTask = function(userid, tasktext, header, listid){
-    let sql = "INSERT INTO tasks (id, date, userid, task, header, listid) VALUES(DEFAULT, DEFAULT, $1, $2, $3, $4) RETURNING *";
-    let values = [userid, tasktext, header, listid];
+dbMethods.createTask = function(userid, tasktext, listid){
+    let sql = "INSERT INTO tasks (id, date, userid, task, listid) VALUES(DEFAULT, DEFAULT, $1, $2, $3) RETURNING *";
+    let values = [userid, tasktext, listid];
     return pool.query(sql, values);
 }
 
