@@ -93,7 +93,7 @@ input {
     color:rgb(0, 0, 0);
     float: left;
     width: 100%;
-    padding: 100px;
+    padding: 10px;
     /*height: 300px;  Should be removed. Only for demonstration */
   }
 
@@ -102,7 +102,7 @@ input {
   .styleListDiv {
     border-style: solid;
     justify-content: space-evenly;
-    grid-template-columns: auto;
+    grid-template-columns:auto;
     display: inline-block;
   }
 
