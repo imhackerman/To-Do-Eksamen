@@ -44,7 +44,14 @@ router.post("/users", async function(req, res, next){
 
 
 router.get('/users', async function(req, res, next){
-    res.status(200).send('GET /users').end();
+
+    try{
+        let data = await db.getAllUsers();
+        res.status(200).send('GET /users').end();
+    } catch(err){
+        next(err)
+    }
+ 
 })
 
 

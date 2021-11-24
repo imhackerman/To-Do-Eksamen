@@ -7,7 +7,8 @@
 
 body {
     background-image: linear-gradient(pink, green);
-    min-height: 200vh; /*farge blandingen i midten*/
+    /*min-height: 200vh; /*farge blandingen i midten*/
+    height: 1000px;
     margin: 50px;
     
 }
@@ -94,6 +95,7 @@ input {
     float: left;
     width: 100%;
     padding: 100px;
+    overflow: scroll;
     /*height: 300px;  Should be removed. Only for demonstration */
   }
 
@@ -102,12 +104,47 @@ input {
   .styleListDiv {
     border-style: solid;
     justify-content: space-evenly;
-    grid-template-columns: auto;
+    grid-template-columns:auto;
     display: inline-block;
+    height: fit-content;
+    padding: 20px;
+    
   }
+
+h2 {
+    color:rgb(183, 18, 195);
+    justify-items: center;
+    align-items: center;
+}
 
 p {
     color: rgb(0, 0, 0);
+    justify-items: center;
+    align-items: center;
   
 }
+
+
+        body {
+            background-color: rgb(21, 211, 211);
+        }
+    
+        #container>div {
+            border: 1px solid #000;
+            background-color: aliceblue;
+
+         
+        }
+
+        #container {
+            
+            height: 100%;
+            display: grid;
+            grid-template-columns: 300px 300px 300px;
+            grid-template-rows: auto auto auto;
+            /*grid-template-areas: "hd hd hd"
+                                 "mn ct ct"
+                                 "ft ft ft"; */
+        }
+       
 
