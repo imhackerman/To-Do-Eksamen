@@ -86,10 +86,6 @@ input {
   color: #e2e2e2;
 }
 
-
-* {
-    box-sizing: border-box;
-  }
   
   /* Create two equal columns that floats next to each other */
   .div {
@@ -105,7 +101,7 @@ input {
 
   .styleListDiv {
     border-style: solid;
-    justify-content: space-between;
+    justify-content: space-evenly;
     grid-template-columns: auto;
     display: inline-block;
   }
