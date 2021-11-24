@@ -107,8 +107,8 @@ input {
     grid-template-columns:auto;
     display: inline-block;
     height: fit-content;
-    padding: 5px;
-    margin: 10px;
+    /*padding: 5px;
+    margin: 10px;*/
   }
 
 p {
