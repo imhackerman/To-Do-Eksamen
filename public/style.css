@@ -96,7 +96,7 @@ input {
     border-style: dotted;
     color:rgb(0, 0, 0);
     float: left;
-    width: 500px;
+    width: 100%;
     padding: 100px;
     /*height: 300px;  Should be removed. Only for demonstration */
   }
@@ -118,9 +118,13 @@ input {
 
   .styleListDiv {
     border-style: solid;
+    justify-content: space-between;
+    grid-template-columns: auto;
+    display: inline-block;
   }
 
 p {
     color: rgb(0, 0, 0);
-  text-transform: lowercase;
+  
 }
+
