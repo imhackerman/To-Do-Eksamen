@@ -52,7 +52,7 @@ dbMethods.createTasklist = function(title, userid){
 
 //----------------------------------------
 dbMethods.getAllUsers = function() {
-    let sql = "SELECT id, username FROM users";
+    let sql = "SELECT * FROM users";
     return pool.query(sql); //return the promise 
 
 }
@@ -66,7 +66,7 @@ dbMethods.getUser = function(username) {
 //--------------------------------------------
 
 dbMethods.createUser = function(username, password, salt) {
-    let sql = "INSERT INTO users (id, username, password, salt) VALUES(DEFAULT, $1, $2, $3) returning *";
+    let sql = "INSERT INTO users (id, username, password, salt) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
     let values = [username, password, salt];
     return pool.query(sql, values);
 }

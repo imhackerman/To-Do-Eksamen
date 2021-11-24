@@ -42,18 +42,12 @@
 
     btnCreate.addEventListener("click", async function(evt) {
 
-        console.log(inputUsername.value)
-        console.log(inputPassword.value)
-
         if(inputUsername.value.includes(':')){
             throw 'Brukernavn kan ikke inneholde ":"'
         }
 
-
         let url = "/users";
-        let credString = createCredentialString(inputPassword.value, inputPassword.value);
-
-        console.log(credString)
+        let credString = createCredentialString(inputUsername.value, inputPassword.value);
 
         let cfg = {
             medthod: "POST", 
@@ -64,7 +58,9 @@
 
         try {
             let response = await fetch(url, cfg); 
+            console.log(response)
             let data = await response.json();
+            console.log(data)
 
             if (response.status != 200) {
                 throw data.error;
