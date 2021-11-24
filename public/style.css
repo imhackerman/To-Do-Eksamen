@@ -8,7 +8,7 @@
 body {
     background-image: linear-gradient(pink, green);
     /*min-height: 200vh; /*farge blandingen i midten*/
-    height: 2fr;
+    height: 1000px;
     margin: 50px;
     
 }
