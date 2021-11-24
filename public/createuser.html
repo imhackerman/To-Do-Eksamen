@@ -31,41 +31,59 @@
     <button id="btnCreate">Create user</button><br>
     <h3 id="txtResult">Result</h3>
 
+    <button id = 'test'>test</button>
+
     <!------------- JavaScript --------------->
 <script>
-  let inputUsername = document.getElementById("inputUsername");
-  let inputPassword = document.getElementById("inpPassword");
-  let btnCreate = document.getElementById("btnCreate");
-  let txtResult = document.getElementById("txtResult");
+    let inputUsername = document.getElementById("inputUsername");
+    let inputPassword = document.getElementById("inpPassword");
+    let btnCreate = document.getElementById("btnCreate");
+    let txtResult = document.getElementById("txtResult");
+
+    let testBtn = document.getElementById('test')
+
+    testBtn.addEventListener('click', function(){
+        console.log('you pressed the test button')
+    })
+ 
 
 
-  btnCreate.addEventListener("click", async function(evt) {
+    btnCreate.addEventListener("click", async function(evt) {
 
-    let url = "/users";
-    let credString = createCredentialString(inputPassword.value, inputPassword.value);
+        console.log('test')
 
-    let cfg = {
-        medthod: "POST", 
-        headers: {"authorization":credString}
-    }
-
-    try {
-        let response = await fetch(url, ctg); 
-        let data = await response.json();
-
-        if (response.status != 200) {
-            throw data.error;
+        if(inputUsername.value.includes(':')){
+            throw 'Brukernavn kan ikke inneholde ":"'
         }
 
-        txtResult.innerHTML = data.msg;
 
-    }
-    catch(error) {
-        console.log(error);
-        txtResult.innerHTML = "Somthing went wrong - check the console window";
-    }
+        let url = "/users";
+        let credString = createCredentialString(inputPassword.value, inputPassword.value);
 
-  }); 
+   
+
+        let cfg = {
+            medthod: "POST", 
+            headers: {"authorization":credString}
+        }   
+
+        try {
+            let response = await fetch(url, ctg); 
+            let data = await response.json();
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+
+            txtResult.innerHTML = data.msg;
+
+        }
+        catch(error) {
+            console.log(error);
+            txtResult.innerHTML = "Somthing went wrong - check the console window";
+        }
+
+    }); 
 
   //------------------------------------
   function createCredentialString(username, password) {
