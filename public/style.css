@@ -122,6 +122,9 @@ p {
     color: rgb(0, 0, 0);
     justify-items: center;
     align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: large;
   
 }
 
