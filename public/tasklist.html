@@ -18,6 +18,7 @@
   href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
   rel="stylesheet"/>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   <script src="share.js"></script>
 
     
     <a class="arrowBtn" href="taskcreate.html">
@@ -25,12 +26,15 @@
     </a><br>
 
     <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a>
+        
+
 
 <header class= "midtstill">
 <h1> Tasklist</h1>
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <div class="createList">
+        <a href="#" id="downloadLink">Download List</a>
         <button id = 'createList'>Legg til ny liste</button>
     </div>
 
@@ -122,6 +126,7 @@
                     })
 
                     taskdiv.appendChild(deleteTaskButton)
+    
                 }
             }
         }
