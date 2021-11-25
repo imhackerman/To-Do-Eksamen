@@ -15,11 +15,16 @@ router.post("/users/login", async function(req, res, next){
 
 router.post("/users", async function(req, res, next){
 
-    let credString = req.headers.authorization;
+    let credString = req.headers.authorization; 
     let cred = authUtils.decodeCred(credString);
 
+
+    //HER ER EN FEIL MED credString
+    // cannot read property 'replace' of undefined (auth_utils linje 12)
+
+
     if (cred.username == "" || cred.password == "") {
-        res.status(401).json({error: "no username or passord"}).end();
+        res.status(401).json({error: "no username or password"}).end();
         return;
     }
 
@@ -33,7 +38,7 @@ router.post("/users", async function(req, res, next){
         }
 
         else {
-            throw "the user couldnt be created"
+            throw "the user could not be created"
         }
     }
 

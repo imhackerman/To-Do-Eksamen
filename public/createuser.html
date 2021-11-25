@@ -39,26 +39,29 @@
     let btnCreate = document.getElementById("btnCreate");
     let txtResult = document.getElementById("txtResult");
 
-
     btnCreate.addEventListener("click", async function(evt) {
 
         if(inputUsername.value.includes(':')){
             throw 'Brukernavn kan ikke inneholde ":"'
         }
 
+        let username = inputUsername.value;
+        let password = inputPassword.value;
+
         let url = "/users";
-        let credString = createCredentialString(inputUsername.value, inputPassword.value);
+        let credString = createCredentialString(username, password);
+
+
 
         let cfg = {
-            medthod: "POST", 
+            method: "POST", 
             headers: {"authorization":credString}
         }   
 
-        console.log(cfg)
+        console.log(cfg.headers.authorization)
 
         try {
             let response = await fetch(url, cfg); 
-            console.log(response)
             let data = await response.json();
             console.log(data)
 
@@ -79,9 +82,11 @@
   //------------------------------------
   function createCredentialString(username, password) {
       let combinedStr = username + ":" + password;
+      console.log(combinedStr)
       let b64Str = btoa(combinedStr);
       return "basic" + b64Str;
   }
+
 
     </script>
   </body>

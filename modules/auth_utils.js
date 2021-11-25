@@ -9,7 +9,7 @@ utils.decodeCred = function(credString){
 
     let cred = {};
     
-    let b64String = credString.replace('basic ', '');
+    let b64String = credString.replace('basic', '');
 
     let asciiString = Buffer.from(b64String, 'base64').toString('ascii');
 
@@ -72,6 +72,18 @@ utils.verifyToken = function(token){
     
 
     return payload;
+}
+
+
+utils.verifyPassword = function(passwordFromUser, hashFromDB, saltFromDB){
+
+    hash = crypto.scryptSync(passwordFromUser, saltFromDB, 64).toString('hex');
+
+    if(hash == hashFromDB){
+        return true;
+    }
+
+    return false;
 }
 
 
