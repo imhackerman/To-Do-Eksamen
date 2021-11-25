@@ -2,6 +2,7 @@ const express = require('express');
 const { decodecred } = require('./auth_utils.js');
 const db = require('./db.js');
 const router = express.Router();
+const protect = require('./auth.js')
 
 // endpoints ----------------------
 
@@ -27,7 +28,11 @@ router.get("/tasks/:id", async function(req, res, next){
 });
 
 
-router.get("/task", async function(req, res, next) {
+router.get("/task", protect, async function(req, res, next) {
+
+    console.log(res.locals.username);
+    console.log(res.locals.userid);
+
     try {
 		let data = await db.getAllTasks();
 		res.status(200).json(data.rows).end();
@@ -39,7 +44,7 @@ router.get("/task", async function(req, res, next) {
 router.post("/lists", async function(req, res, next){
 
     let updata = req.body;
-    let userid = 1;
+    let userid = req.locals.userid;
     
     try{
         let data = await db.createTasklist(updata.title, userid);
@@ -58,7 +63,7 @@ router.post("/lists", async function(req, res, next){
 router.post("/task", async function(req, res, next) {
     
     let updata = req.body;
-    let userid = 1;
+    let userid = req.locals.userid;
 
 
     try {

@@ -20,12 +20,10 @@ if (!payload) {
 }
 
 res.locals.userid = payload.userid;
-res.locals,username = payload.user;
+res.locals.username = payload.user;
 
 next();
 
 }
 
-
-//-------- export the function ------------
 module.exports = protect;

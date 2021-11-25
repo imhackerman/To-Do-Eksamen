@@ -18,6 +18,7 @@
 
 <button id="btnLogin">Login</button>
 <button id="btnLogin">Opprett bruker</button>
+<h3 id="txtResult">Result</h3>
 </header> 
 
 <!------------- JavaScript --------------->
@@ -29,14 +30,11 @@
 
   btnLogin.addEventListener("click", async function (evt) {
     let url = "/users/login";
-    let credString = createCredentialString(
-      inputUsername.value,
-      inputPassword.value
-    );
+    let credString = createCredentialString(inputUsername.value, inputPassword.value);
 
     let cfg = {
       method: "POST",
-      headers: { authorization: credString },
+      headers: {'authorization': credString}
     };
 
     try {
@@ -49,6 +47,8 @@
 
       txtResult.innerHTML = data.msg;
       localStorage.setItem("token", data.token);
+
+
     } catch (error) {
       console.log(error);
       txtResult.innerHTML = "Something went wrong";

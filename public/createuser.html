@@ -42,7 +42,8 @@
     btnCreate.addEventListener("click", async function(evt) {
 
         if(inputUsername.value.includes(':')){
-            throw 'Brukernavn kan ikke inneholde ":"'
+          txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
+          return;
         }
 
         let username = inputUsername.value;

@@ -3,14 +3,47 @@ const db = require('./db.js');
 const authUtils = require('./auth_utils.js');
 const router = express.Router();
 
+router.post('/users/login', async function(req, res, next){
 
-router.post("/users/login", async function(req, res, next){
+    let credentials = req.headers.authorization;
+    let cred = authUtils.decodeCred(credentials);
 
-    credstring = req.headers.authorization;
-    let cred = decodeCred(credstring);
+    if(cred.username == '' || cred.password == ''){
+        res.status(401).json({error: 'No username or password'}).end();
+        return;
+    }
 
-    res.status(200).send('POST users/login').end();
-});
+    try {
+        let data = await db.getUser(cred.username);
+        if(data.rows.length > 0){
+
+            let userid = data.rows[0].id;
+            let username = data.rows[0].username;
+            let hash = data.rows[0].password;
+            let salt = data.rows[0].salt;
+
+
+            let passwordVeryfied = authUtils.verifyPassword(cred.password, hash, salt);
+
+            if(!passwordVeryfied){
+                res.status(403).json({msg:'The password is not correct'}).end();
+                return;
+            }
+
+            let tok = authUtils.createToken(username, userid)
+            
+            res.status(200).json({
+                msg: 'The login was successful',
+                token: tok
+            }).end();
+            return;
+        }
+    } catch (error) {
+        console.log(error)
+    }
+    res.status(200).send('Hello from post - /users/login').end();
+})
+
 
 
 router.post("/users", async function(req, res, next){
