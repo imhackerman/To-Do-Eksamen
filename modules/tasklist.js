@@ -60,10 +60,10 @@ router.post("/lists", async function(req, res, next){
 
 })
 
-router.post("/task", async function(req, res, next) {
+router.post("/task", protect, async function(req, res, next) {
     
     let updata = req.body;
-    let userid = req.locals.userid;
+    let userid = res.locals.userid;
 
 
     try {
