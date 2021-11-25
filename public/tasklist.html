@@ -30,10 +30,14 @@
 <h1> Tasklist</h1>
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
-    <button id = 'createList'>Legg til ny liste</button>
+    <div class="createList">
+        <button id = 'createList'>Legg til ny liste</button>
+    </div>
+
     <div class="div">
-    <div id="container" ></div>
+        <div id="container" ></div>
   </div> 
+
                 <!------- JAVSCRIPT ------->
 <script>
 
@@ -81,7 +85,8 @@
             container.appendChild(div);
 
             let deleteListButton = document.createElement('button');
-            deleteListButton.innerHTML = 'Slett liste';
+            deleteListButton.innerHTML = '-';
+            deleteListButton.className = 'deleteListButton';
             deleteListButton.addEventListener('click', function(evt){
                 deleteList(list.id)
             })
@@ -89,7 +94,8 @@
             div.appendChild(deleteListButton)
 
             let createNewTask = document.createElement('button');
-            createNewTask.innerHTML = 'Nytt gjøremål'
+            createNewTask.innerHTML = '+'
+            createNewTask.className = 'createTaskButton';
             createNewTask.addEventListener('click', async function(evt){
 
                 localStorage.setItem('list', list.id)

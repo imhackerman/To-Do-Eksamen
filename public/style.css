@@ -8,7 +8,7 @@
 body {
     background-image: linear-gradient(pink, green);
     /*min-height: 200vh; /*farge blandingen i midten*/
-    height: 1000px;
+    height: auto;
     margin: 50px;
     
 }
@@ -178,3 +178,58 @@ p {
         }
        
     }
+
+     /* MOBILE OVERFLATER */ 
+     @media only screen and (max-width: 1100px) {
+        
+        .styleListDiv {
+            border-style: solid;
+            justify-content: center;
+            justify-items: center;
+            padding: 5px;
+            margin: 5px;
+            
+         
+            height: fit-content;
+            
+            
+          }
+          #container {
+            display: grid;
+            height: 100%;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+            margin-left: -50px;
+            margin-top: -50px;
+            
+    }
+    
+   
+}
+
+
+  div.createList {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .createTaskButton {
+    background-color: rgb(255, 255, 255);
+    font-size: large;
+    cursor: pointer;
+  }
+
+  .deleteListButton {
+
+    background-color: rgb(255, 255, 255);
+    font-size: large;
+    cursor: pointer; 
+  }
+
+  
