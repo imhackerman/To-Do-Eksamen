@@ -15,7 +15,7 @@ router.post("/users/login", async function(req, res, next){
 
 router.post("/users", async function(req, res, next){
 
-    let credString = req.headers.authorization;
+    let credString = req.headers.authorization; 
     let cred = authUtils.decodeCred(credString);
 
 
@@ -38,7 +38,7 @@ router.post("/users", async function(req, res, next){
         }
 
         else {
-            throw "the user couldnt be created"
+            throw "the user could not be created"
         }
     }
 
