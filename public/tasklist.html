@@ -21,11 +21,11 @@
 
     
     <a class="arrowBtn" href="taskcreate.html">
-        <i class="fas fa-arrow-left" ></i>
+        <i class="fas fa-arrow-left" id="arrow"></i>
     </a><br>
 
     <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a>
-
+  
 <header class= "midtstill">
 <h1> Tasklist</h1>
 
@@ -78,14 +78,14 @@
         for (let list of listdata) { 
         
 
-            let html = `<h2>${list.title}</h2><br>`;
+            let html = `<h2>${list.title}</h2>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
             container.appendChild(div);
 
             let deleteListButton = document.createElement('button');
-            deleteListButton.innerHTML = '-';
+            deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
             deleteListButton.className = 'deleteListButton';
             deleteListButton.addEventListener('click', function(evt){
                 deleteList(list.id)
@@ -94,7 +94,7 @@
             div.appendChild(deleteListButton)
 
             let createNewTask = document.createElement('button');
-            createNewTask.innerHTML = '+'
+            createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
             createNewTask.className = 'createTaskButton';
             createNewTask.addEventListener('click', async function(evt){
 
@@ -108,7 +108,7 @@
             for(let task of taskdata){
 
                 if(list.id == task.listid){
-                    let taskhtml = '<p>' + task.task + '</p><hr>'
+                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>'+ task.task + '</p><hr>'
 
                     let taskdiv = document.createElement('div');
                     taskdiv.innerHTML = taskhtml;
