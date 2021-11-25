@@ -56,15 +56,21 @@
         let url = "/lists"
         let taskurl = "/task"
 
+        let token = localStorage.getItem('token');
+        let cfg = {
+            method: 'GET',
+            headers: {'authorization': token}
+        }
+
         try {
-            let listresponse = await fetch(url);
+            let listresponse = await fetch(url, cfg);
             let listdata = await listresponse.json();
 
             if (listresponse.status != 200) {
                 throw listdata.error;
             }
 
-            let taskresponse = await fetch(taskurl)
+            let taskresponse = await fetch(taskurl, cfg)
             let taskdata = await taskresponse.json();
 
             if(taskresponse.status != 200){
@@ -77,8 +83,13 @@
 
         for (let list of listdata) { 
         
+<<<<<<< Updated upstream
 
             let html = `<h2>${list.title}</h2>`;
+=======
+            
+            let html = `<h2>${list.title}</h2><br>`;
+>>>>>>> Stashed changes
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
