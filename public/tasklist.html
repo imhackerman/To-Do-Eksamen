@@ -106,57 +106,61 @@
 
         for (let list of listdata) { 
         
-            
-            let html = `<h2>${list.title}</h2>`;
-            console.log(list.userid)
-            html += `<p>${await listUser(list.userid)}</p>`;
-            let div = document.createElement("div");
-            div.className = 'styleListDiv'
-            div.innerHTML = html;
-            container.appendChild(div);
+            if(list.visibility == 'public'){ //eller list.userid == token?
 
-            let deleteListButton = document.createElement('button');
-            deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-            deleteListButton.className = 'deleteListButton';
-            deleteListButton.addEventListener('click', function(evt){
-                deleteList(list.id)
-            })
+                let html = `<h2>${list.title}</h2>`;
+                console.log(list.userid)
+                html += `<p>${await listUser(list.userid)}</p>`;
+                let div = document.createElement("div");
+                div.className = 'styleListDiv'
+                div.innerHTML = html;
+                container.appendChild(div);
 
-            div.appendChild(deleteListButton)
+                let deleteListButton = document.createElement('button');
+                deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                deleteListButton.className = 'deleteListButton';
+                deleteListButton.addEventListener('click', function(evt){
+                    deleteList(list.id)
+                })
 
-            let createNewTask = document.createElement('button');
-            createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
-            createNewTask.className = 'createTaskButton';
-            createNewTask.addEventListener('click', async function(evt){
+                div.appendChild(deleteListButton)
 
-                localStorage.setItem('list', list.id)
-                window.location.href = '/taskcreate.html'
-            })
+                let createNewTask = document.createElement('button');
+                createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
+                createNewTask.className = 'createTaskButton';
+                createNewTask.addEventListener('click', async function(evt){
 
-            div.appendChild(createNewTask)
+                    localStorage.setItem('list', list.id)
+                    window.location.href = '/taskcreate.html'
+                })
 
-
-            for(let task of taskdata){
-
-                if(list.id == task.listid){
-                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
-
-                    let taskdiv = document.createElement('div');
-                    taskdiv.classList.add("taskDiv");
-                    taskdiv.innerHTML = taskhtml;
-                    div.appendChild(taskdiv)
+                div.appendChild(createNewTask)
 
 
-                    let deleteTaskButton = document.createElement('button')
-                    deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
-                    deleteTaskButton.className = 'checkTaskButton';
-                    deleteTaskButton.addEventListener('click', function(evt){
-                        deleteTask(task.id);
-                    })
+                for(let task of taskdata){
 
-                    taskdiv.appendChild(deleteTaskButton)
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
+
+
+                        let deleteTaskButton = document.createElement('button')
+                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                        deleteTaskButton.className = 'checkTaskButton';
+                        deleteTaskButton.addEventListener('click', function(evt){
+                            deleteTask(task.id);
+                        })
+
+                        taskdiv.appendChild(deleteTaskButton)
+                    }
                 }
+
             }
+            
         }
     }
     

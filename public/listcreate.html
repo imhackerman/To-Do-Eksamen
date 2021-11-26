@@ -35,6 +35,8 @@
     <input id="inpListTitle" type="text" placeholder="Navn på ny liste" /><br />
     <button id="btnCreate"type="submit">Legg til liste<i class="fa fa-plus"></i>
     </button><br />
+    <p>Listen skal være privat</p>
+    <input type="checkbox" id="visibility">
     <h3 id="txtResult">Resultat....</h3>
     
     
@@ -42,20 +44,31 @@
 
         let inpListTitle = document.getElementById("inpListTitle");
         let btnCreate = document.getElementById("btnCreate");
+        let visibilityCheck = document.getElementById('visibility');
         let txtResult = document.getElementById("txtResult");
 
 
         btnCreate.addEventListener('click', async function(evt){
             
+            let visibility = 'public';
+            if(visibilityCheck.checked == true){
+                visibility = 'private'
+            }
+
+            console.log(visibility)
+
+
             let url = '/lists';
             let token = localStorage.getItem('token')
 
 
             let updata = {
                 title: inpListTitle.value,
+                visibility: visibility
 
             }
 
+            console.log(updata)
             
 
             let cfg = {
