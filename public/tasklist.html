@@ -31,8 +31,8 @@
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <div class="createList">
-        <button id = 'createList'>Legg til ny liste</button>
-    </div>
+        <button class = 'createList' id="createList">Legg til ny liste</button>
+    </div><br>
 
     <div class="div">
         <div id="container" ></div>
@@ -84,7 +84,7 @@
         for (let list of listdata) { 
         
             
-            let html = `<h2>${list.title}</h2><br>`;
+            let html = `<h2>${list.title}</h2>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
@@ -114,15 +114,17 @@
             for(let task of taskdata){
 
                 if(list.id == task.listid){
-                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>'+ task.task + '</p><hr>'
+                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>'+ task.task + '</p>'
 
                     let taskdiv = document.createElement('div');
+                    taskdiv.classList.add("taskDiv");
                     taskdiv.innerHTML = taskhtml;
                     div.appendChild(taskdiv)
 
 
                     let deleteTaskButton = document.createElement('button')
-                    deleteTaskButton.innerHTML = 'Slett'
+                    deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                    deleteTaskButton.className = 'checkTaskButton';
                     deleteTaskButton.addEventListener('click', function(evt){
                         deleteTask(task.id);
                     })

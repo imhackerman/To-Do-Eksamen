@@ -208,19 +208,21 @@ p {
 }
 
 
-  div.createList {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
+  .createList {
+    background-color: #ffffff; /* Green */
+    border-style: dotted;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
     display: inline-block;
     font-size: 16px;
+    font-style: italic;
+    border:rgb(0, 0, 0);
   }
 
   .createTaskButton {
     background-color: rgb(255, 255, 255);
+    color: rgb(5, 187, 5);
     font-size: large;
     cursor: pointer;
     border: none;
@@ -233,6 +235,7 @@ p {
   .deleteListButton {
 
     background-color: rgb(255, 255, 255);
+    color: red;
     font-size: large;
     cursor: pointer;
     border: none; 
@@ -240,6 +243,25 @@ p {
     
   }
 
+  .checkTaskButton {
+    background-color: rgb(255, 255, 255);
+    color: rgb(5, 187, 5);
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 10px;
+    justify-self: right;
+
+
+  }
+
   .fas fa-dot-circle {
       size: small;
+  }
+
+  .taskDiv {
+      border-bottom: solid 1px black;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+
   }
