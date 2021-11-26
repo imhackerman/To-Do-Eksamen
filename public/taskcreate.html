@@ -38,7 +38,10 @@
   <body>
 
 
-
+    <form action="/action_page.php" method="get" >
+      <SELECT userid FROM users></SELECT>
+      <label for="users">Velg hvilken kategori du vil sette to do oppgave inn i:</label>
+      <input list="users" name="users" id="users">
     
     <form action="/action_page.php" method="get" >
       <SELECT listid FROM tasks></SELECT>
