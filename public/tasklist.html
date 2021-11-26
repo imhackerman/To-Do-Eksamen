@@ -109,7 +109,7 @@
             
             let html = `<h2>${list.title}</h2>`;
             console.log(list.userid)
-            html += `<p>${await listUser(list.userid)}</p>`;
+            html += `<p>eier: ${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
