@@ -115,7 +115,7 @@
             for(let task of taskdata){
 
                 if(list.id == task.listid){
-                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>'+ task.task + '</p>'
+                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
 
                     let taskdiv = document.createElement('div');
                     taskdiv.classList.add("taskDiv");

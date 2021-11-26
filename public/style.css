@@ -8,7 +8,7 @@
 body {
     background-image: linear-gradient(pink, green);
     /*min-height: 200vh; /*farge blandingen i midten*/
-    height: auto;
+    height: 1200px;
     margin: 50px;
     
 }
@@ -94,7 +94,7 @@ input {
     color:rgb(0, 0, 0);
     float: left;
     width: 100%;
-    padding: 1000px;
+    padding: 100px;
     overflow: scroll;
     /*height: 300px;  Should be removed. Only for demonstration */
   }
@@ -117,6 +117,7 @@ h2 {
     color:rgb(54, 54, 54);
     justify-items: center;
     align-items: center;
+    font-size: large;
 }
 
 p {
