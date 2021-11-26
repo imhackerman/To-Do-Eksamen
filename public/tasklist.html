@@ -31,8 +31,8 @@
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <div class="createList">
-        <button id = 'createList'>Legg til ny liste</button>
-    </div>
+        <button class = 'createList' id="createList">Legg til ny liste</button>
+    </div><br>
 
     <div class="div">
         <div id="container" ></div>
@@ -50,6 +50,27 @@
 
     let container = document.getElementById('container');
 
+    async function listUser(userid){
+        let url = '/users'
+
+        let users = [];
+
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+            if (response.status != 200) {
+                throw listdata.error;
+            }
+
+            for(let value of data){
+                if(value.id == userid){
+                    return value.username
+                }
+            }
+        } catch(err){
+            console.log(err)
+        }
+    }
 
     async function listTaskList(){
         
@@ -57,6 +78,7 @@
         let taskurl = "/task"
 
         let token = localStorage.getItem('token');
+
         let cfg = {
             method: 'GET',
             headers: {'authorization': token}
@@ -84,7 +106,9 @@
         for (let list of listdata) { 
         
             
-            let html = `<h2>${list.title}</h2><br>`;
+            let html = `<h2>${list.title}</h2>`;
+            console.log(list.userid)
+            html += `<p>${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
@@ -114,15 +138,17 @@
             for(let task of taskdata){
 
                 if(list.id == task.listid){
-                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>'+ task.task + '</p><hr>'
+                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
 
                     let taskdiv = document.createElement('div');
+                    taskdiv.classList.add("taskDiv");
                     taskdiv.innerHTML = taskhtml;
                     div.appendChild(taskdiv)
 
 
                     let deleteTaskButton = document.createElement('button')
-                    deleteTaskButton.innerHTML = 'Slett'
+                    deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                    deleteTaskButton.className = 'checkTaskButton';
                     deleteTaskButton.addEventListener('click', function(evt){
                         deleteTask(task.id);
                     })
@@ -139,9 +165,11 @@
         }
     }
 
-        async function deleteTask(taskId) {
+        
+    async function deleteTask(taskId) {
 
         let url ="/task";
+        let token = localStorage.getItem('token');
 
         let updata= {
             id: taskId
@@ -151,7 +179,8 @@
 
         let cfg = {
             method: "DELETE",
-            headers: {"content-type":"application/json"},
+            headers: {"content-type":"application/json",
+                        'authorization': token},
             body: JSON.stringify(updata)
         }
 
@@ -169,19 +198,23 @@
         }
     }
 
-        async function deleteList(id){
+    async function deleteList(listId){
 
         let url = '/tasklist'
+        let token = localStorage.getItem('token');
 
         let updata = {
-            id: id
+            id: listId
         }
+
+        //sjekke dette 
 
         console.log(updata);
 
         let cfg = {
             method: "DELETE",
-            headers: {"content-type":"application/json"},
+            headers: {"content-type":"application/json",
+                        'authorization': token},
             body: JSON.stringify(updata)
         }
 
