@@ -8,7 +8,7 @@
 body {
     background-image: linear-gradient(pink, green);
     /*min-height: 200vh; /*farge blandingen i midten*/
-    height: 1200px;
+    height: auto;
     margin: 50px;
     
 }
@@ -108,7 +108,6 @@ input {
     display: inline-block;
     height: fit-content;
     padding: 20px;
-    border-radius: 10px;
     
     
   }
@@ -117,7 +116,6 @@ h2 {
     color:rgb(54, 54, 54);
     justify-items: center;
     align-items: center;
-    font-size: large;
 }
 
 p {
@@ -153,7 +151,7 @@ p {
                                  "ft ft ft"; */
         }
 
-/* ------------- DIFFERENT SCREENSIZES----------------*/ 
+
         /* MOBILE OVERFLATER */ 
         @media only screen and (max-width: 700px) {
         
@@ -163,7 +161,7 @@ p {
                 justify-items: center;
                 padding: 5px;
                 margin: 5px;
-                border-radius: 10px;
+                
              
                 height: fit-content;
                 
@@ -190,7 +188,7 @@ p {
             justify-items: center;
             padding: 5px;
             margin: 5px;
-            border-radius: 10px;
+            
          
             height: fit-content;
             
@@ -209,22 +207,20 @@ p {
    
 }
 
-/* --------------- BUTTONS ---------------- */
-  .createList {
-    background-color: #ffffff; /* Green */
-    border-style: dotted;
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
+
+  div.createList {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    font-style: italic;
-    border:rgb(0, 0, 0);
   }
 
   .createTaskButton {
     background-color: rgb(255, 255, 255);
-    color: rgb(5, 187, 5);
     font-size: large;
     cursor: pointer;
     border: none;
@@ -237,7 +233,6 @@ p {
   .deleteListButton {
 
     background-color: rgb(255, 255, 255);
-    color: red;
     font-size: large;
     cursor: pointer;
     border: none; 
@@ -245,25 +240,6 @@ p {
     
   }
 
-  .checkTaskButton {
-    background-color: rgb(255, 255, 255);
-    color: rgb(5, 187, 5);
-    font-size: large;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 10px;
-    justify-self: right;
-
-
-  }
-
   .fas fa-dot-circle {
       size: small;
-  }
- /* ----------------- Divs inside tasklists --------------------------*/
-  .taskDiv {
-      border-bottom: solid 1px black;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-
   }

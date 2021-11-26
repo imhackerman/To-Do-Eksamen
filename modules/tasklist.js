@@ -41,11 +41,10 @@ router.get("/task", protect, async function(req, res, next) {
 	}
 });
 
-router.post("/lists", protect, async function(req, res, next){
+router.post("/lists", async function(req, res, next){
 
     let updata = req.body;
-    let userid = res.locals.userid;
-
+    let userid = req.locals.userid;
     
     try{
         let data = await db.createTasklist(updata.title, userid);
@@ -82,13 +81,12 @@ router.post("/task", protect, async function(req, res, next) {
     }
 });
 
-router.delete("/task", protect, async function(req, res, next) {
+router.delete("/task", async function(req, res, next) {
     // method for DELETING from database 
     let updata = req.body;
-    let userid = res.locals.userid;
     
     try{
-        let data = await db.deleteTask(updata.id, userid);
+        let data = await db.deleteTask(updata.id);
 
         if(data.rows.length>0){
             res.status(200).json({msg: "Gjøremålet er blitt slettet!"}).end();
@@ -103,13 +101,12 @@ router.delete("/task", protect, async function(req, res, next) {
     
 });
 
-router.delete("/tasklist", protect, async function(req, res, next){
+router.delete("/tasklist", async function(req, res, next){
     
     let updata = req.body;
-    let userid = res.locals.userid;
 
     try{
-        let data = await db.deleteList(updata.id, userid);
+        let data = await db.deleteList(updata.id);
 
         if(data.rows.length>0){
             res.status(200).json({msg: "Listen er blitt slettet!"}).end();

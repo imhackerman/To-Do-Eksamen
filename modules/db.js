@@ -10,7 +10,7 @@ const pool = new pg.Pool({
 let dbMethods = {};
 
 dbMethods.getAllTasklists = function(){
-    let sql = "SELECT id, title, userid FROM tasklists"
+    let sql = "SELECT id, title FROM tasklists"
     return pool.query(sql);
 }
 
@@ -25,15 +25,15 @@ dbMethods.getAllTasks = function(){
     return pool.query(sql);
 }
 
-dbMethods.deleteTask = function(id, userid){
-    let sql = "DELETE FROM tasks WHERE id = $1 AND userid = $2 RETURNING *";
-    let values = [id, userid];
+dbMethods.deleteTask = function(id){
+    let sql = "DELETE FROM tasks WHERE id = $1 RETURNING *";
+    let values = [id];
     return pool.query(sql, values);
 }
 
-dbMethods.deleteList = function(id, userid){
-    let sql = "DELETE FROM tasklists WHERE id = $1 AND userid = $2 RETURNING *";
-    let values = [id, userid];
+dbMethods.deleteList = function(id){
+    let sql = "DELETE FROM tasklists WHERE id = $1 RETURNING *";
+    let values = [id];
     return pool.query(sql, values);
 }
 
@@ -52,7 +52,7 @@ dbMethods.createTasklist = function(title, userid){
 
 //----------------------------------------
 dbMethods.getAllUsers = function() {
-    let sql = "SELECT id, username, password, salt FROM users";
+    let sql = "SELECT * FROM users";
     return pool.query(sql); //return the promise 
 
 }
