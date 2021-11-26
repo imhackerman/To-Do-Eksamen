@@ -47,6 +47,8 @@
 
       txtResult.innerHTML = data.msg;
       localStorage.setItem("token", data.token);
+      console.log(data)
+      window.location.href = '/tasklist.html'
 
 
     } catch (error) {
