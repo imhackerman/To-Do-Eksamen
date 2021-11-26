@@ -34,9 +34,9 @@
         <button class = 'createList' id="createList">Legg til ny liste</button>
     </div><br>
 
-    <div class="div">
+    
         <div id="container" ></div>
-  </div> 
+   
 
                 <!------- JAVSCRIPT ------->
 <script>
@@ -87,6 +87,7 @@
         try {
             let listresponse = await fetch(url, cfg);
             let listdata = await listresponse.json();
+            
 
             if (listresponse.status != 200) {
                 throw listdata.error;
