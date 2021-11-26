@@ -94,7 +94,7 @@ input {
     color:rgb(0, 0, 0);
     float: left;
     width: 100%;
-    padding: 100px;
+    padding: 1000px;
     overflow: scroll;
     /*height: 300px;  Should be removed. Only for demonstration */
   }
