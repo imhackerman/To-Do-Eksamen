@@ -10,7 +10,7 @@ const pool = new pg.Pool({
 let dbMethods = {};
 
 dbMethods.getAllTasklists = function(){
-    let sql = "SELECT id, title FROM tasklists"
+    let sql = "SELECT id, title, userid FROM tasklists"
     return pool.query(sql);
 }
 
@@ -52,7 +52,7 @@ dbMethods.createTasklist = function(title, userid){
 
 //----------------------------------------
 dbMethods.getAllUsers = function() {
-    let sql = "SELECT * FROM users";
+    let sql = "SELECT id, username, password, salt FROM users";
     return pool.query(sql); //return the promise 
 
 }

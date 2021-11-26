@@ -50,6 +50,27 @@
 
     let container = document.getElementById('container');
 
+    async function listUser(userid){
+        let url = '/users'
+
+        let users = [];
+
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+            if (response.status != 200) {
+                throw listdata.error;
+            }
+
+            for(let value of data){
+                if(value.id == userid){
+                    return value.username
+                }
+            }
+        } catch(err){
+            console.log(err)
+        }
+    }
 
     async function listTaskList(){
         
@@ -86,6 +107,8 @@
         
             
             let html = `<h2>${list.title}</h2>`;
+            console.log(list.userid)
+            html += `<p>${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
             div.innerHTML = html;
