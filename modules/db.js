@@ -25,15 +25,15 @@ dbMethods.getAllTasks = function(){
     return pool.query(sql);
 }
 
-dbMethods.deleteTask = function(id){
-    let sql = "DELETE FROM tasks WHERE id = $1 RETURNING *";
-    let values = [id];
+dbMethods.deleteTask = function(id, userid){
+    let sql = "DELETE FROM tasks WHERE id = $1 AND userid = $2 RETURNING *";
+    let values = [id, userid];
     return pool.query(sql, values);
 }
 
-dbMethods.deleteList = function(id){
-    let sql = "DELETE FROM tasklists WHERE id = $1 RETURNING *";
-    let values = [id];
+dbMethods.deleteList = function(id, userid){
+    let sql = "DELETE FROM tasklists WHERE id = $1 AND userid = $2 RETURNING *";
+    let values = [id, userid];
     return pool.query(sql, values);
 }
 
