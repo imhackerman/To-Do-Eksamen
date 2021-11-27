@@ -15,23 +15,7 @@ router.get("/lists", async function(req, res, next){
     }
 });
 
-router.get("/tasks/:id", async function(req, res, next){
-
-    let id = req.params.id;
-
-    try {
-        let data = await db.getTasksFromList(id);
-        res.status(200).send(data.rows).end();
-    }catch(err){
-        console.log(err)
-    }
-});
-
-
 router.get("/task", protect, async function(req, res, next) {
-
-    console.log(res.locals.username);
-    console.log(res.locals.userid);
 
     try {
 		let data = await db.getAllTasks();

@@ -59,7 +59,7 @@
             let response = await fetch(url);
             let data = await response.json();
             if (response.status != 200) {
-                throw listdata.error;
+                throw data.error;
             }
 
             for(let value of data){
@@ -74,14 +74,17 @@
 
     async function listTaskList(){
         
-        let url = "/lists"
-        let taskurl = "/task"
+        let url = "/lists";
+        let taskurl = "/task";
+        let userURL = '/users';
 
         let token = localStorage.getItem('token');
 
         let cfg = {
             method: 'GET',
-            headers: {'authorization': token}
+            headers: { "content-type": "application/json",
+                    "authorization": token
+                  },
         }
 
         try {
@@ -99,17 +102,17 @@
             if(taskresponse.status != 200){
                 throw taskresponse.error;
             }
+
         
             container.innerHTML = "";
 
-            console.log(listdata)
+            let id = localStorage.getItem('id')
 
         for (let list of listdata) { 
         
-            if(list.visibility == 'public'){ //eller list.userid == token?
+            if(list.visibility == 'public' || list.userid == id){
 
                 let html = `<h2>${list.title}</h2>`;
-                console.log(list.userid)
                 html += `<p>${await listUser(list.userid)}</p>`;
                 let div = document.createElement("div");
                 div.className = 'styleListDiv'
@@ -237,7 +240,6 @@
         }
     }
     
- 
     
 
     listTaskList()
