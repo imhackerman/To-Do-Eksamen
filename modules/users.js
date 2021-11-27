@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./db.js');
 const authUtils = require('./auth_utils.js');
+const { query } = require('express');
 const router = express.Router();
 
 
@@ -57,6 +58,7 @@ router.get('/users', async function(req, res, next){
     } catch(err){
         next(err)
     }
+    console.log(query.username);
  
 })
 
