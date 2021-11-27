@@ -31,13 +31,8 @@
 
     <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <div class="createList">
-<<<<<<< Updated upstream
         <button class = 'createList' id="createList">Legg til ny liste</button>
     </div><br>
-=======
-        <button id = 'createList'>Legg til ny liste</button>
-    </div>
->>>>>>> Stashed changes
 
     
         <div id="container" ></div>
@@ -161,7 +156,7 @@
                         
                     const a = document.body.appendChild(document.createElement("a"));
                     a.download = "export.html";
-                    a.href = "data:text/html," + document.getElementById("content").innerHTML;
+                    a.href = "data:text/html," + document.getElementById("taskDiv").innerHTML;
                     a.innerHTML = "[Export conent]";
                     })
 
