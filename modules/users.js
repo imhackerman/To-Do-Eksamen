@@ -58,7 +58,7 @@ router.get('/users', async function(req, res, next){
     } catch(err){
         next(err)
     }
-    console.log(query.username);
+    console.log(query.userlist);
  
 })
 
