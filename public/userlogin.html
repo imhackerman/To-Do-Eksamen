@@ -15,7 +15,7 @@
 
 <input id="inputUsername" type="text" placeholder="Brukernavn" /> 
 <input id="inputPassword" type="text" placeholder="Passord" />
-<input type="checkbox" onload="showPassword()" >vis passord
+<button id="btnShow">Vis passord</button>
 <hr><br>
 
 <button id="btnLogin">Login</button>
@@ -39,20 +39,21 @@ window.onload=function(){
 
 };
 
-function showPassword() {
+
+  let inputUsername = document.getElementById("inputUsername");
+  let inputPassword = document.getElementById("inputPassword");
+  let btnLogin = document.getElementById("btnLogin");
+  let btnShow = document.getElementById('btnShow')
+  let txtResult = document.getElementById("txtResult");
+
+btnShow.addEventListener("click", function (){
   let x = document.getElementById("inputPassword");
   if (x.type === "text") {
     x.type = "password";
   } else {
     x.type = "text";
   }
-}
-
-
-  let inputUsername = document.getElementById("inputUsername");
-  let inputPassword = document.getElementById("inputPassword");
-  let btnLogin = document.getElementById("btnLogin");
-  let txtResult = document.getElementById("txtResult");
+})
 
   btnLogin.addEventListener("click", async function (evt) {
     let url = "/users/login";
