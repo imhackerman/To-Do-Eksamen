@@ -9,20 +9,35 @@
 />
 <header class= "midtstill">
 <h1> To Do App Login</h1>
+<br>
 
 
 
 <input id="inputUsername" type="text" placeholder="Brukernavn" /> 
 <input id="inputPassword" type="text" placeholder="Passord" />
-
+<input type="checkbox" onclick="hiddenPassword()" >Gjem passord
 
 <button id="btnLogin">Login</button>
 <button id="btnLogin">Opprett bruker</button>
 <h3 id="txtResult">Result</h3>
 </header> 
 
+
+
+
 <!------------- JavaScript --------------->
 <script>
+
+function hiddenPassword() {
+  let x = document.getElementById("inputPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+
+
   let inputUsername = document.getElementById("inputUsername");
   let inputPassword = document.getElementById("inputPassword");
   let btnLogin = document.getElementById("btnLogin");

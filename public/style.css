@@ -65,6 +65,7 @@ input {
     font-size:30px;
     color: black;
     cursor: pointer;
+    padding-left: 15px;
 
 }
 
@@ -263,3 +264,4 @@ p {
     font-size: large;
     color: black;
 }
+
