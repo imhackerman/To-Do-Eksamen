@@ -8,8 +8,8 @@
 body {
     background-image: linear-gradient(pink, rgb(235, 194, 11));
     /*min-height: 200vh; /*farge blandingen i midten*/
-    height:max-content;
-    margin: 50px;
+    height:no-repeat;
+    
     
 }
 
