@@ -1,5 +1,11 @@
-
-<link rel= "stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Userlogin</title>
+  <link rel= "stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -7,12 +13,15 @@
   href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
   rel="stylesheet"
 />
+</head>
+<body class="loginPage">
+  
 <header class= "midtstill">
 <h1> To Do App Login</h1>
 <br>
 
 
-
+<div container id="placeHere" class="placeHere">
 <input id="inputUsername" type="text" placeholder="Brukernavn" /> 
 <input id="inputPassword" type="text" placeholder="Passord" />
 <button id="btnShow" class='createList'>Vis passord</button>
@@ -21,7 +30,7 @@
 <button id="btnLogin" class='createList'>Login</button>
 <button id="btnLogin" class='createList'>Opprett bruker</button>
 <h3 id="txtResult"></h3>
-
+</div>
 </header> 
 
 
@@ -91,3 +100,5 @@ btnShow.addEventListener("click", function (){
     return "basic" + b64Str;
   }
 </script>
+</body>
+</html>
