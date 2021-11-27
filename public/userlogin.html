@@ -20,7 +20,7 @@
 
 <button id="btnLogin">Login</button>
 <button id="btnLogin">Opprett bruker</button>
-<h3 id="txtResult">Result</h3>
+<h3 id="txtResult"></h3>
 </header> 
 
 
@@ -69,7 +69,7 @@ function hiddenPassword() {
 
     } catch (error) {
       console.log(error);
-      txtResult.innerHTML = "Something went wrong";
+      txtResult.innerHTML = "Feil brukernavn eller passord!";
     }
   });
 
