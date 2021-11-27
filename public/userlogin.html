@@ -15,7 +15,7 @@
 
 <input id="inputUsername" type="text" placeholder="Brukernavn" /> 
 <input id="inputPassword" type="text" placeholder="Passord" />
-<input type="checkbox" onclick="hiddenPassword()" >Gjem passord
+<input type="checkbox" onload="hiddenPassword()" >Gjem passord
 <hr><br>
 
 <button id="btnLogin">Login</button>
@@ -29,12 +29,22 @@
 <!------------- JavaScript --------------->
 <script>
 
-function hiddenPassword() {
+window.onload=function(){
   let x = document.getElementById("inputPassword");
   if (x.type === "password") {
     x.type = "text";
   } else {
     x.type = "password";
+  }
+
+};
+
+function showPassword() {
+  let x = document.getElementById("inputPassword");
+  if (x.type === "text") {
+    x.type = "password";
+  } else {
+    x.type = "text";
   }
 }
 
