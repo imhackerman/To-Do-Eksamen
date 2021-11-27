@@ -15,12 +15,13 @@
 
 <input id="inputUsername" type="text" placeholder="Brukernavn" /> 
 <input id="inputPassword" type="text" placeholder="Passord" />
-<button id="btnShow">Vis passord</button>
-<hr><br>
+<button id="btnShow" class='createList'>Vis passord</button>
+<br>
 
-<button id="btnLogin">Login</button>
-<button id="btnLogin">Opprett bruker</button>
+<button id="btnLogin" class='createList'>Login</button>
+<button id="btnLogin" class='createList'>Opprett bruker</button>
 <h3 id="txtResult"></h3>
+
 </header> 
 
 
@@ -30,11 +31,11 @@
 <script>
 
 window.onload=function(){
-  let x = document.getElementById("inputPassword");
-  if (x.type === "password") {
-    x.type = "text";
+  let string = document.getElementById("inputPassword");
+  if (string.type === "password") {
+    string.type = "text";
   } else {
-    x.type = "password";
+    string.type = "password";
   }
 
 };
