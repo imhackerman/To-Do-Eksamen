@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <button id = 'testbutton'>test</button>
+
+    <script>
+
+let testbutton = document.getElementById('testbutton')
+
+    
+testbutton.addEventListener('click', async function(evt){
+
+    let url = "/lists/share"
+
+    let updata = {
+            taskid: 88,
+        }
+
+    console.log(updata)
+
+    let cfg = {
+        method: "POST",
+        headers: { "content-type": "application/json"},
+        body: JSON.stringify(updata),
+    }
+
+    console.log(cfg)
+
+    try{
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+        console.log(data)
+        if (response.status != 200) {
+        throw data.error;
+    }
+
+    } catch(err){
+        console.log(err)
+    }
+
+})
+
+    </script>
+    
+</body>
+</html>
