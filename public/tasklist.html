@@ -134,55 +134,41 @@
             })
 
             div.appendChild(createNewTask)
-            
+
             let shareList = document.createElement('button');
             let shareInput = document.createElement ('input');
             shareList.innerHTML = '<i class="fas fa-share"></i>';
             shareList.className ='shareListButton';
 
-            function await (getUserId) {
-               let url = "/users";
-            }
-            let cfg = {
-                method:"GET" 
-            }
+            div.appendChild(shareList)
+            div.appendChild(shareInput)
+
             
+
             shareList.addEventListener('click', async function(evt){
             
-                if(shareInput.value != userid) {
-                txtResult.innerHTML = 'Dette brukernavnet finnes ikke';
-                return;
-            }
+            if(shareInput.value != userid) {
+            txtResult.innerHTML = 'Dette brukernavnet finnes ikke';
+            return;
 
-            let username = shareInput.value;
-            let url = "/lists";
-
-            let cfg = {
-                method: "POST"
-            }
-
-            try {
-            let response = await fetch(url, cfg); 
+            try{
+            let response = await fetch(url);
             let data = await response.json();
-            console.log(data)
-
             if (response.status != 200) {
-                throw data.error;
+                throw listdata.error;
             }
 
-            txtResult.innerHTML = data.msg;
-
+            for(let value of data){
+                if(value.id == userid){
+                    return value.username
+                }
+            }
+        } catch(err){
+            console.log(err)
         }
-        catch(error) {
-            console.log(error);
-            txtResult.innerHTML = "Somthing went wrong - check the console window";
-        }
+    }
 
-    }); 
-        
-
-            div.appendChild(shareList) 
-            div.appendChild(shareInput)
+            });
 
             for(let task of taskdata){
 
@@ -212,7 +198,7 @@
     catch(error) {
         console.log(error);
         }
-    
+    }
 
         
     async function deleteTask(taskId) {
