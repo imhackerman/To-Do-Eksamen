@@ -38,6 +38,12 @@
 
 <!------------- JavaScript --------------->
 <script>
+  
+  let inputUsername = document.getElementById("inputUsername");
+  let inputPassword = document.getElementById("inputPassword");
+  let btnLogin = document.getElementById("btnLogin");
+  let btnShow = document.getElementById('btnShow')
+  let txtResult = document.getElementById("txtResult");
 
 window.onload=function(){
   let string = document.getElementById("inputPassword");
@@ -48,14 +54,6 @@ window.onload=function(){
   }
 
 };
-
-
-  let inputUsername = document.getElementById("inputUsername");
-  let inputPassword = document.getElementById("inputPassword");
-  let btnLogin = document.getElementById("btnLogin");
-  let btnShow = document.getElementById('btnShow')
-  let txtResult = document.getElementById("txtResult");
-
 btnShow.addEventListener("click", function (){
   let x = document.getElementById("inputPassword");
   if (x.type === "text") {
