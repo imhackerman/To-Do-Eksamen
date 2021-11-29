@@ -82,6 +82,7 @@
     async function deleteUser(id){
 
         let url = "/users"
+        let token = localStorage.getItem('token');
 
         let updata = {
             id: id
