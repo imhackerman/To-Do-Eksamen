@@ -75,7 +75,7 @@ dbMethods.createUser = function(username, password, salt) {
 dbMethods.deleteUser = function (id) {
     let sql = "DELETE FROM users WHERE id = $1 RETURNING *";
     let values = [id];
-    return pool,query(sql, values);
+    return pool.query(sql, values);
 }
 
 

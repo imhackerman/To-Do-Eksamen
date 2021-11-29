@@ -96,7 +96,21 @@ router.get('/users', async function(req, res, next){
 
 
 router.delete('/users', async function(req, res, next){
-    res.status(200).send('DELETE /users').end();
+
+   let updata = req.body;
+
+   try{
+       let data = await db.deleteUser(updata.id);
+
+       if(data.rows.length>0){
+           res.status(200).json({msg: 'Brukeren ble slettet'}).end();
+
+       }else{
+           throw 'Brukeren ble ikke slettet'
+       }
+   } catch(err){
+        next(err)
+   }
 })
 
 

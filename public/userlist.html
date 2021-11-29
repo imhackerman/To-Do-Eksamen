@@ -34,10 +34,14 @@
 <script>
     let createUserListbtn = document.getElementById('createUserList');
 
+    /*
     createUserListbtn.addEventListener('click', async function(evt) {
         container.innerHTML = "";
         listUsers()
     })
+    */
+
+    
 
     let container = document.getElementById('container');
 
@@ -52,6 +56,8 @@
                 throw data.error;
             }
 
+            container.innerHTML = '';
+            
             for(let value of data){
                 let html = `<p>${value.username}<p>`;
                 let div = document.createElement('div');
@@ -60,6 +66,9 @@
 
                 let deleteButton = document.createElement('button');
                 deleteButton.innerHTML='Slett bruker';
+                deleteButton.addEventListener('click', async function(evt){
+                    deleteUser(value.id)
+                })
                 div.appendChild(deleteButton)
 
                 container.appendChild(div)
@@ -70,11 +79,36 @@
     }
 
 
-    async function deleteUser(){
+    async function deleteUser(id){
 
         let url = "/users"
+
+        let updata = {
+            id: id
+        }
+        console.log(updata.id)
+
+        let cfg = {
+            method: "DELETE",
+            headers:{"content-type":"application/json"},
+            body: JSON.stringify(updata)
+        }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            if(response.status != 200){
+                throw data.error;
+            }
+            listUsers();
+
+        }catch(error){
+           console.log(error)
+        }
     }
-    
+
+    listUsers()
     
 
 
