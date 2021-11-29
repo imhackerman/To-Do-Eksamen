@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tasklist</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,11 +20,11 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     
-    <a class="arrowBtn" href="taskcreate.html">
-        <i class="fas fa-arrow-left" id="arrow"></i>
+    <a class="arrowBtn" href="userlogin.html">
+        <i class="fas fa-arrow-left" id="arrow"> Bytt bruker</i>
     </a><br>
 
-    <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a>
+   <!----  <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a> -->
   
 <header class= "midtstill">
 <h1> Tasklist</h1>
@@ -111,6 +111,14 @@
         for (let list of listdata) { 
         
             if(list.visibility == 'public' || list.userid == id){
+            
+            let html = `<h2>${list.title}</h2>`;
+            console.log(list.userid)
+            html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
+            let div = document.createElement("div");
+            div.className = 'styleListDiv'
+            div.innerHTML = html;
+            container.appendChild(div);
 
                 let html = `<h2>${list.title}</h2>`;
                 html += `<p>${await listUser(list.userid)}</p>`;

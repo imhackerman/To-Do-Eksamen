@@ -1,12 +1,74 @@
+<!----------------html elements---------------->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Userlist</title>
+    <title>userlist</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <link rel= "stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+  rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     
+    <a class="arrowBtn" href="tasklist.html">
+        <i class="fas fa-arrow-left" id="arrow"></i>
+    </a><br>
+
+    <header class="midtstill";
+        <h1>Userlist</h1>
+    
+    <div class="createList">
+        <button class = 'createList' id="createUserList">Generer brukerliste</button>
+    </div><br>
+        <div id="container" ></div>
+<script>
+    let createUserListbtn = document.getElementById('createUserList');
+
+    createUserListbtn.addEventListener('click', async function(evt) {
+
+    })
+
+    let container = document.getElementById('container');
+
+    async function listUser(userid){
+        let url = '/users'
+
+        let users = [];
+
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+            if (response.status != 200) {
+                throw listdata.error;
+            }
+
+            for(let value of data){
+                if(value.id == userid){
+                    return value.username
+                }
+            }
+        } catch(err){
+            console.log(err)
+        }
+        console.log(users)
+    }
+
+    
+    
+
+
+            
+    
+</script>
 </body>
 </html>
