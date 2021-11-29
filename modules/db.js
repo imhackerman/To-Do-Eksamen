@@ -79,9 +79,9 @@ dbMethods.deleteUser = function (id) {
 }
 
 
-dbMethods.shareList = function(id){
-    let sql = "INSERT INTO tasklists(shared) VALUES $1 RETURNING *";
-    let values = [id];
+dbMethods.shareList = function(userid, taskid){
+    let sql = "UPDATE tasklists SET shared = $1 WHERE id = $2 RETURNING *";
+    let values = [userid, taskid];
     return pool.query(sql, values);
 }
 
