@@ -150,7 +150,9 @@
             if(shareInput.value != userid) {
             txtResult.innerHTML = 'Dette brukernavnet finnes ikke';
             return;
-
+            
+            let allUsers = []; 
+            
             try{
             let response = await fetch(url);
             let data = await response.json();
@@ -160,7 +162,7 @@
 
             for(let value of data){
                 if(value.id == userid){
-                    return value.username
+                    return value.id
                 }
             }
         } catch(err){
