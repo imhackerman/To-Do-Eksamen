@@ -60,9 +60,16 @@
         } catch(err){
             console.log(err)
         }
-        console.log(users)
     }
 
+    for (let list of userid) {
+        
+        let html = `<h2>${list.userid}</h2>`
+        html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
+        let div = document.createElement("div");
+        container.appen(div);
+
+    }
     
     
 
