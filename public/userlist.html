@@ -57,7 +57,7 @@
             }
 
             container.innerHTML = '';
-            
+
             for(let value of data){
                 let html = `<p>${value.username}<p>`;
                 let div = document.createElement('div');
@@ -90,7 +90,8 @@
 
         let cfg = {
             method: "DELETE",
-            headers:{"content-type":"application/json"},
+            headers:{"content-type":"application/json",
+                        'authorization': token},
             body: JSON.stringify(updata)
         }
 
