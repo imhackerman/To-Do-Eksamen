@@ -111,6 +111,8 @@
         
             
             let html = `<h2>${list.title}</h2>`;
+            let date = new Date(list.date);
+            html += "<p>" + date.toLocaleDateString() + "</p";
             console.log(list.userid)
             html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
@@ -146,7 +148,6 @@
             div.appendChild(shareList)
             div.appendChild(shareInput)
 
-            ;
 
             for(let task of taskdata){
 
