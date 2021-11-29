@@ -121,11 +121,13 @@ router.delete("/tasklist", protect, async function(req, res, next){
     }
 })
 
-router.post("/lists/share", protect, async function (req, res, next) {
-  let updata = req.body;
+router.post("/lists/share", async function(req, res, next) {
+  
+    let updata = req.body;
+    let taskid = 98;
 
   try {
-    let data = await db.shareList(updata.id, updata.userid);
+    let data = await db.shareList(98);
 
     if (data.rows.length > 0) {
       res.status(200).json({ msg: "Listen ble delt!" }).end();
