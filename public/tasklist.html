@@ -142,22 +142,44 @@
 
             function await (getUserId) {
                let url = "/users";
-
+            }
             let cfg = {
                 method:"GET" 
             }
             
             shareList.addEventListener('click', async function(evt){
-            let username = shareInput.value;
             
-            let listurl = "/lists";
-            list.cfg = post,
-            
-            console.log(username)
-            
-            
+                if(shareInput.value != userid) {
+                txtResult.innerHTML = 'Dette brukernavnet finnes ikke';
+                return;
+            }
 
-            });
+            let username = shareInput.value;
+            let url = "/lists";
+
+            let cfg = {
+                method: "POST"
+            }
+
+            try {
+            let response = await fetch(url, cfg); 
+            let data = await response.json();
+            console.log(data)
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+
+            txtResult.innerHTML = data.msg;
+
+        }
+        catch(error) {
+            console.log(error);
+            txtResult.innerHTML = "Somthing went wrong - check the console window";
+        }
+
+    }); 
+        
 
             div.appendChild(shareList) 
             div.appendChild(shareInput)
@@ -190,7 +212,7 @@
     catch(error) {
         console.log(error);
         }
-    }
+    
 
         
     async function deleteTask(taskId) {
