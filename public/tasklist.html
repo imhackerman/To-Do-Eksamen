@@ -134,7 +134,15 @@
             })
 
             div.appendChild(createNewTask)
+            
+            let shareList = document.createElement('button');
+            shareList.innerHTML = '<i class="fas fa-share"></i>';
+            shareList.className ='shareListButton';
+            shareList.addEventListener('click', async function(evt){
 
+            })
+
+            div.appendChild(shareList)
 
             for(let task of taskdata){
 

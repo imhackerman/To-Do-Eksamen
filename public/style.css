@@ -209,6 +209,16 @@ p {
     
     
   }
+  
+  .shareListButton {
+    background-color: rgb(255, 255, 255);
+    color: rgb(5, 187, 5);
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 10px;
+    justify-self: right;
+  }
 
   .checkTaskButton {
     background-color: rgb(255, 255, 255);
