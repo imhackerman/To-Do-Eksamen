@@ -50,6 +50,7 @@
 
     let container = document.getElementById('container');
 
+
     async function listUser(userid){
         let url = '/users'
 
@@ -83,6 +84,8 @@
             method: 'GET',
             headers: {'authorization': token}
         }
+
+        console.log(cfg)
 
         try {
             let listresponse = await fetch(url, cfg);
@@ -143,46 +146,7 @@
             div.appendChild(shareList)
             div.appendChild(shareInput)
 
-            
-
-            shareList.addEventListener('click', async function(evt){
-
-                let url = "/lists"
-            
-            if(shareInput.value != userid) {
-            txtResult.innerHTML = 'Dette brukernavnet finnes ikke';
-            return;
-            
-            let allUsers = [];
-            let updata = {
-                shared: 1
-            }
-
-            let cfg = {
-                method: "POST",
-                body: JSON.stringify(body)
-            }
-
-            try{
-            let response = await fetch(url, cfg);
-            let data = await response.json();
-            if (response.status != 200) {
-                throw data.error;
-            }
-/*
-            for(let value of data){
-                if(value.id == userid){
-                    console.log(value.id)
-                    return value.id
-                }
-                
-            }*/
-        } catch(err){
-            console.log(err)
-        }
-    }
-
-            });
+            ;
 
             for(let task of taskdata){
 
