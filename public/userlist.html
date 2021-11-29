@@ -24,7 +24,7 @@
         <i class="fas fa-arrow-left" id="arrow"></i>
     </a><br>
 
-    <header class="midtstill";
+    <header class="midtstill">
         <h1>Userlist</h1>
     
     <div class="createList">
@@ -35,40 +35,44 @@
     let createUserListbtn = document.getElementById('createUserList');
 
     createUserListbtn.addEventListener('click', async function(evt) {
-
+        container.innerHTML = "";
+        listUsers()
     })
 
     let container = document.getElementById('container');
 
-    async function listUser(userid){
-        let url = '/users'
+        async function listUsers(){
+            let url = '/users'
 
-        let users = [];
 
         try{
             let response = await fetch(url);
             let data = await response.json();
             if (response.status != 200) {
-                throw listdata.error;
+                throw data.error;
             }
 
             for(let value of data){
-                if(value.id == userid){
-                    return value.username
-                }
+                let html = `<p>${value.username}<p>`;
+                let div = document.createElement('div');
+                div.innerHTML = html;
+                
+
+                let deleteButton = document.createElement('button');
+                deleteButton.innerHTML='Slett bruker';
+                div.appendChild(deleteButton)
+
+                container.appendChild(div)
             }
         } catch(err){
             console.log(err)
         }
     }
 
-    for (let list of userid) {
-        
-        let html = `<h2>${list.userid}</h2>`
-        html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
-        let div = document.createElement("div");
-        container.appen(div);
 
+    async function deleteUser(){
+
+        let url = "/users"
     }
     
     
