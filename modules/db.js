@@ -79,5 +79,11 @@ dbMethods.deleteUser = function (id) {
 }
 
 
+dbMethods.shareList = function(id){
+    let sql = "INSERT INTO tasklists(shared) VALUES $1 RETURNING *";
+    let values = [id];
+    return pool, query(sql, values);
+}
+
 
 module.exports = dbMethods;
