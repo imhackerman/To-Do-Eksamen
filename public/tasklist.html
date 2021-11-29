@@ -136,13 +136,31 @@
             div.appendChild(createNewTask)
             
             let shareList = document.createElement('button');
+            let shareInput = document.createElement ('input');
             shareList.innerHTML = '<i class="fas fa-share"></i>';
             shareList.className ='shareListButton';
+
+            function await (getUserId) {
+               let url = "/users";
+
+            let cfg = {
+                method:"GET" 
+            }
+            
             shareList.addEventListener('click', async function(evt){
+            let username = shareInput.value;
+            
+            let listurl = "/lists";
+            list.cfg = post,
+            
+            console.log(username)
+            
+            
 
-            })
+            });
 
-            div.appendChild(shareList)
+            div.appendChild(shareList) 
+            div.appendChild(shareInput)
 
             for(let task of taskdata){
 
