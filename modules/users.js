@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./db.js');
 const authUtils = require('./auth_utils.js');
 const router = express.Router();
+const protect = require('./auth.js');
 
 router.post('/users/login', async function(req, res, next){
 
@@ -95,12 +96,14 @@ router.get('/users', async function(req, res, next){
 
 
 
-router.delete('/users', async function(req, res, next){
+router.delete('/users', protect, async function(req, res, next){
 
    let updata = req.body;
+   let userid = res.locals.userid;
+   console.log(userid)
 
    try{
-       let data = await db.deleteUser(updata.id);
+       let data = await db.deleteUser(updata.id, userid);
 
        if(data.rows.length>0){
            res.status(200).json({msg: 'Brukeren ble slettet'}).end();

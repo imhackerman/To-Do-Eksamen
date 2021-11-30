@@ -33,14 +33,6 @@
         <div id="container" ></div>
 <script>
     let createUserListbtn = document.getElementById('createUserList');
-
-    /*
-    createUserListbtn.addEventListener('click', async function(evt) {
-        container.innerHTML = "";
-        listUsers()
-    })
-    */
-
     
 
     let container = document.getElementById('container');
@@ -48,9 +40,15 @@
         async function listUsers(){
             let url = '/users'
 
+            let token = localStorage.getItem('token');
+            
+            let cfg = {
+                method: 'GET',
+                headers: {'authorization': token}
+            }
 
         try{
-            let response = await fetch(url);
+            let response = await fetch(url, cfg);
             let data = await response.json();
             if (response.status != 200) {
                 throw data.error;
@@ -62,6 +60,7 @@
                 let html = `<p>${value.username}<p>`;
                 let div = document.createElement('div');
                 div.innerHTML = html;
+                console.log(value.id)
                 
 
                 let deleteButton = document.createElement('button');

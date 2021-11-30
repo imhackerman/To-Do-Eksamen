@@ -56,7 +56,8 @@
 
         let cfg = {
             method: "POST", 
-            headers: {"authorization":credString}
+            headers: {"content-type": "application/json",
+                      "authorization":credString}
         }   
 
         console.log(cfg.headers.authorization)
