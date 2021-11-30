@@ -145,6 +145,11 @@
             shareList.innerHTML = '<i class="fas fa-share"></i>';
             shareList.className ='shareListButton';
 
+            shareList.addEventListener('click', function(evt){
+                localStorage.setItem('listid', list.id)
+                window.location.href = '/sharelist.html'
+            })
+
             div.appendChild(shareList)
             div.appendChild(shareInput)
 
@@ -178,6 +183,8 @@
         console.log(error);
         }
     }
+
+
 
         
     async function deleteTask(taskId) {

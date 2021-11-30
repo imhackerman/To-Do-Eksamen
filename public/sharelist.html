@@ -8,8 +8,9 @@
 </head>
 <body>
 
+    <input id="inpUsername" type= "text" placeholder="Brukernavn" />
 
-    <button id = 'testbutton'>test</button>
+    <button id = 'testbutton'>del</button>
 
     <script>
 
@@ -18,11 +19,14 @@ let testbutton = document.getElementById('testbutton')
     
 testbutton.addEventListener('click', async function(evt){
 
+    let id = localStorage.getItem('listid');
+    console.log(id)
+
     let url = "/lists/share"
 
     let updata = {
-            taskid: 98,
-        }
+            taskid: id
+     }
 
     console.log(updata)
 
