@@ -1,7 +1,9 @@
 const express = require('express');
 const db = require('./db.js');
 const authUtils = require('./auth_utils.js');
+const { createHash } = require('./auth_utils.js');
 const router = express.Router();
+const protect = require('./auth.js')
 
 router.post('/users/login', async function(req, res, next){
 
@@ -21,7 +23,6 @@ router.post('/users/login', async function(req, res, next){
             let username = data.rows[0].username;
             let hash = data.rows[0].password;
             let salt = data.rows[0].salt;
-
 
             let passwordVeryfied = authUtils.verifyPassword(cred.password, hash, salt);
 
@@ -91,6 +92,19 @@ router.get('/users', async function(req, res, next){
         next(err)
     }
  
+})
+
+
+router.get('/user', protect, async function(req, res, next){
+
+    let username = req.locals.username;
+
+    try{
+        let data = await db.getUser(username);
+        res.status(200).send(data.rows).end();
+    }catch(err){
+        next(err);
+    }
 })
 
 

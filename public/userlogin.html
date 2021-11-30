@@ -65,7 +65,10 @@ btnShow.addEventListener("click", function (){
 
   btnLogin.addEventListener("click", async function (evt) {
     let url = "/users/login";
+    let userURL = '/users'
     let credString = createCredentialString(inputUsername.value, inputPassword.value);
+    localStorage.setItem('username', inputUsername.value)
+    
 
     let cfg = {
       method: "POST",
@@ -80,10 +83,22 @@ btnShow.addEventListener("click", function (){
         throw data.error;
       }
 
+      let userresponse = await fetch(userURL);
+      let userdata = await userresponse.json();
+
+      for(let value of userdata){
+        if(value.username == inputUsername.value){
+          console.log(value.id)
+          localStorage.setItem('id', value.id)
+        }
+      }
+    
+
+      
+     
       txtResult.innerHTML = data.msg;
       localStorage.setItem("token", data.token);
-      console.log(data)
-      window.location.href = '/tasklist.html'
+      //window.location.href = '/tasklist.html'
 
 
     } catch (error) {
@@ -97,6 +112,13 @@ btnShow.addEventListener("click", function (){
     let b64Str = btoa(combinedStr);
     return "basic" + b64Str;
   }
+
+  async function getUserId(username){
+
+ 
+  } 
+
+ 
 </script>
 </body>
 </html>
