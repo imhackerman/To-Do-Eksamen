@@ -25,12 +25,14 @@
     
     <button id="deleteUser" class="settingButtons">Slett bruker</button>
     <button id="changePassword" class="settingButtons">Endre passord</button>
+    <button id="logOut" class="settingButtons">Logg ut</button>
 <script>
 
     let deleteUser = document.getElementById('deleteUser');
     let changePassword = document.getElementById('changePassword');
-
     let container = document.getElementById('container');
+    let logOutBtn = document.getElementById("logOut");
+    
 
 async function listUser(userid){
     let url = '/users'
@@ -81,6 +83,11 @@ async function listUser(userid){
     });
 
     deleteUser();
+  
+    logOutBtn.addEventListener("click", function(evt) {// logg ut funksjon
+          localStorage.setItem("token","");
+          location.href = "userlogin.html";
+      });
 
 </script>
 
