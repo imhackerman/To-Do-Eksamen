@@ -15,17 +15,24 @@
     <script>
 
 let testbutton = document.getElementById('testbutton')
+let inputUsername = document.getElementById('inpUsername')
 
     
 testbutton.addEventListener('click', async function(evt){
 
     let id = localStorage.getItem('listid');
-    console.log(id)
+
+    let username = inputUsername.value;
+    console.log(username)
+
+    let userid = await getUserId(username);
+    console.log(userid)
 
     let url = "/lists/share"
 
     let updata = {
-            taskid: id
+            taskid: id,
+            userid: userid 
      }
 
     console.log(updata)
@@ -51,6 +58,29 @@ testbutton.addEventListener('click', async function(evt){
     }
 
 })
+
+    async function getUserId(username){
+
+        let url = '/users'
+
+        let cfg = {
+            method: 'GET',
+            headers: { "content-type": "application/json"},
+        }
+
+        try{
+            let response = await fetch(url, cfg)
+            let data = await response.json();
+
+            for(let value of data){
+                if(value.username == username){
+                    return value.id;
+                }
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
 
     </script>
     
