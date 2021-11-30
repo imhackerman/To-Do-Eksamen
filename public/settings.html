@@ -26,9 +26,61 @@
     <button id="deleteUser" class="settingButtons">Slett bruker</button>
     <button id="changePassword" class="settingButtons">Endre passord</button>
 <script>
-    
+
     let deleteUser = document.getElementById('deleteUser');
     let changePassword = document.getElementById('changePassword');
+
+    let container = document.getElementById('container');
+
+async function listUser(userid){
+    let url = '/users'
+
+    let users = [];
+
+    try{
+        let response = await fetch(url);
+        let data = await response.json();
+        if (response.status != 200) {
+            throw data.error;
+        }
+
+        for(let value of data){
+            if(value.id == userid){
+                return value.username
+            }
+        }
+    } catch(err){
+        console.log(err)
+    }
+}
+
+    deleteUser.addEventListener('click', async function(evt){
+        let url = "/users";
+        let token = localStorage.getItem('token')
+
+        let updata = {
+            id:userid
+        }
+        let cfg = {
+            method: "DELETE",
+            headers: {"content-type":"application/json",
+                          'authorization': token},
+                          body: JSON.stringify(updata)
+        }
+        try {
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+            deleteUser();
+        } catch(error){
+            console.log(error)
+        }
+    });
+
+    deleteUser();
 
 </script>
 
