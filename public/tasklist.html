@@ -73,7 +73,8 @@
         }
     }
 
-    async function listTaskList(){
+
+    async function listTaskList(listid){
         
         let url = "/lists"
         let taskurl = "/task"
@@ -108,8 +109,11 @@
             console.log(listdata)
 
         for (let list of listdata) { 
+
+            // list alle lister brukeren selv har laget
+            //list alle offentlige lister
+            //list alle lister delt med brukeren
         
-            
             let html = `<h2>${list.title}</h2>`;
             let date = new Date(list.date);
             html += "<p>" + date.toLocaleDateString() + "</p";
@@ -184,8 +188,23 @@
         }
     }
 
+    // local storage get token 
+    // tre funksjoner som returnere objekter med listedata
+    // tre funksjoner som henter lister fra databasen, 
+    // men publiserer dem bare hvis noen bestemte kriterier er oppfylt. 
+
+    async function owned(){
+        // returnere listid på lister man har laget selv
+    }
+
+    async function shared(){
+        // returnerer listid på lister som er delt med deg
+    }
 
 
+    async function listAllLists(owned, public, shared){
+
+    }
         
     async function deleteTask(taskId) {
 
