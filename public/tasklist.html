@@ -36,6 +36,8 @@
     <input id="shareInput" autocomplete="on">
     
         <div id="container" ></div>
+
+        <div id = 'container2'></div>
    
 
                 <!------- JAVSCRIPT ------->
@@ -49,6 +51,7 @@
 
 
     let container = document.getElementById('container');
+    let cintainer2 = document.getElementById('container2')
 
 
     async function listUser(userid){
@@ -106,7 +109,6 @@
         
             container.innerHTML = "";
 
-            console.log(listdata)
 
         for (let list of listdata) { 
 
@@ -117,7 +119,6 @@
             let html = `<h2>${list.title}</h2>`;
             let date = new Date(list.date);
             html += "<p>" + date.toLocaleDateString() + "</p";
-            console.log(list.userid)
             html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
@@ -197,14 +198,26 @@
         // returnere listid på lister man har laget selv
     }
 
-    async function shared(){
+    async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
+        let data = await fetchData('lists', 'GET')
+        console.log(data)
+
+        for(let list of data){
+            
+                
+            if(list.shared == 6){
+                let html = `<h2>${list.title}</h2>`
+                let div = document.createElement('div');
+                div.className = 'styleListDiv';
+                div.innerHTML = html;
+                container2.appendChild(div)
+            }
+        }
+
     }
 
 
-    async function listAllLists(owned, public, shared){
-
-    }
         
     async function deleteTask(taskId) {
 
@@ -240,6 +253,7 @@
 
     async function deleteList(listId){
 
+        
         let url = '/tasklist'
         let token = localStorage.getItem('token');
 
@@ -276,6 +290,30 @@
     
 
     listTaskList()
+    sharedWithMe()
+
+    //---------------------------------------------------------------------------------------------
+
+    async function fetchData(inputurl, inputmethod, inputupdata){
+
+        let url = inputurl;
+        let token = localStorage.getItem('token')
+
+        let cfg = {
+            method: inputmethod,
+            headers: {"content-type":"application/json",
+                        'authorization': token}
+        }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            return data;
+
+        }catch(err){
+            console.log(err)
+        }
+    }
 
  
 
