@@ -46,6 +46,15 @@ async function listUser(userid){
             throw data.error;
         }
 
+        container.innerHTML = "";
+         
+            let html = `<h2> Username: ${value.username}</h2>`;
+            html += `<p> User ID: ${value.id} </p><hr>`;
+
+            let newDiv = document.createElement("div");
+            newDiv.innerHTML = html;
+            container.appendChild(newDiv);
+
         for(let value of data){
             if(value.id == userid){
                 return value.username
