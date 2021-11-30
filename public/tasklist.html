@@ -120,12 +120,6 @@
             div.innerHTML = html;
             container.appendChild(div);
 
-                let html = `<h2>${list.title}</h2>`;
-                html += `<p>${await listUser(list.userid)}</p>`;
-                let div = document.createElement("div");
-                div.className = 'styleListDiv'
-                div.innerHTML = html;
-                container.appendChild(div);
 
                 let deleteListButton = document.createElement('button');
                 deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
