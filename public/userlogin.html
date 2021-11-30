@@ -28,7 +28,7 @@
 <br>
 
 <button id="btnLogin" class='createList'>Login</button>
-<button id="btnLogin" class='createList'>Opprett bruker</button>
+<button id="btnCreate" class='createList'>Opprett bruker</button>
 <h3 id="txtResult"></h3>
 </div>
 </header> 
@@ -97,6 +97,57 @@ btnShow.addEventListener("click", function (){
     let b64Str = btoa(combinedStr);
     return "basic" + b64Str;
   }
+
+  btnCreate.addEventListener("click", async function(evt) {
+
+if(inputUsername.value.includes(':')){
+  txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
+  return;
+}
+
+let username = inputUsername.value;
+let password = inputPassword.value;
+
+let url = "/users";
+let credString = createCredentialString(username, password);
+
+
+
+let cfg = {
+    method: "POST", 
+    headers: {"authorization":credString}
+}   
+
+console.log(cfg.headers.authorization)
+
+try {
+    let response = await fetch(url, cfg); 
+    let data = await response.json();
+    console.log(data)
+
+    if (response.status != 200) {
+        throw data.error;
+    }
+
+    txtResult.innerHTML = data.msg;
+
+}
+catch(error) {
+    console.log(error);
+    txtResult.innerHTML = "Denne brukeren finnes allerede";
+}
+
+}); 
+
+//------------------------------------
+function createCredentialString(username, password) {
+let combinedStr = username + ":" + password;
+console.log(combinedStr)
+let b64Str = btoa(combinedStr);
+return "basic" + b64Str;
+}
+
+
 </script>
 </body>
 </html>
