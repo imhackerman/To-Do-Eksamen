@@ -119,9 +119,10 @@ router.post("/lists/share", async function(req, res, next) {
     console.log(updata);
 
     let taskid = updata.taskid;
+    let userid = updata.userid;
 
   try {
-    let data = await db.shareList(taskid);
+    let data = await db.shareList(taskid, userid);
 
     if (data.rows.length > 0) {
       res.status(200).json({ msg: "Listen ble delt!" }).end();
