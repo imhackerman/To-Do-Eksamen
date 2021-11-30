@@ -113,10 +113,13 @@ router.delete('/users', protect, async function(req, res, next){
 
    let updata = req.body;
    let userid = res.locals.userid;
-   console.log(userid)
+   let username = res.locals.username;
+  
+   console.log(updata)
+   console.log(username)
 
    try{
-       let data = await db.deleteUser(updata.id, userid);
+       let data = await db.deleteUser(updata.id, username);
 
        if(data.rows.length>0){
            res.status(200).json({msg: 'Brukeren ble slettet'}).end();
