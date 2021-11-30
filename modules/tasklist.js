@@ -6,24 +6,13 @@ const protect = require('./auth.js')
 
 // endpoints ----------------------
 
+
 router.get("/lists", async function(req, res, next){
     try {
         let data = await db.getAllTasklists();
         res.status(200).json(data.rows).end();
     }catch(err){
         next(err);
-    }
-});
-
-router.get("/tasks/:id", async function(req, res, next){
-
-    let id = req.params.id;
-
-    try {
-        let data = await db.getTasksFromList(id);
-        res.status(200).send(data.rows).end();
-    }catch(err){
-        console.log(err)
     }
 });
 
@@ -82,6 +71,7 @@ router.post("/task", protect, async function(req, res, next) {
     }
 });
 
+
 router.delete("/task", protect, async function(req, res, next) {
     // method for DELETING from database 
     let updata = req.body;
@@ -123,11 +113,15 @@ router.delete("/tasklist", protect, async function(req, res, next){
 
 router.post("/lists/share", async function(req, res, next) {
   
+    
     let updata = req.body;
-    let taskid = 98;
+
+    console.log(updata);
+
+    let taskid = updata.taskid;
 
   try {
-    let data = await db.shareList(98);
+    let data = await db.shareList(taskid);
 
     if (data.rows.length > 0) {
       res.status(200).json({ msg: "Listen ble delt!" }).end();
@@ -138,6 +132,8 @@ router.post("/lists/share", async function(req, res, next) {
     next(err);
   }
 });
+
+
 
 
 

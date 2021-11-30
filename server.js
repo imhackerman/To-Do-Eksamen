@@ -30,6 +30,8 @@ server.use(users);
 
 //General error handling --------------------------------
 server.use(function (err, req, res, next) {
+
+    console.log(err);
     res.status(500).json({
         error:'Noe gikk galt på serveren!',
         descr: err
