@@ -49,6 +49,7 @@ async function listUser(userid){
 
         container.innerHTML = "";
          
+            for (let value of data) {
             let html = `<h2> Username: ${value.username}</h2>`;
             html += `<p> User ID: ${value.id} </p><hr>`;
 
@@ -61,10 +62,13 @@ async function listUser(userid){
                 return value.username
             }
         }
+    }
+
     } catch(err){
         console.log(err)
     }
 }
+
     listUser();
 
     deleteUser.addEventListener('click', async function(evt){
