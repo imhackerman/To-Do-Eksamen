@@ -119,11 +119,9 @@ let credentialString = createCredentialString(username.value(),
 });
 
     /*
-
     deleteUser.addEventListener('click', async function(evt){
         let url = "/users";
         let token = localStorage.getItem('token')
-
         let updata = {
             id:userid
         }
@@ -136,7 +134,6 @@ let credentialString = createCredentialString(username.value(),
         try {
             let response = await fetch(url, cfg);
             let data = await response.json();
-
             if (response.status != 200) {
                 throw data.error;
             }
