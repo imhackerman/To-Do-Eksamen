@@ -240,11 +240,7 @@ try{
     async function owned(){
         // returnere listid på lister man har laget selv
         let data = await fetchData('mylists', 'GET')
-        console.log('my lists:')
-        console.log(data)
-
-        let taskData = await fetchData('task', 'GET')
-        console.log(taskData)
+        let taskdata = await fetchData('task', 'GET');
 
         for(let list of data){
             
@@ -287,10 +283,13 @@ try{
             
                 div.appendChild(deleteListButton)
 
+<<<<<<< HEAD
                 
 
                 // hvis listen er delt med noen andre, legg til knapp for å slutte å dele listen
 
+=======
+>>>>>>> 7633ceb95897a66ae97927e8da63c236385e84ac
                 if(list.shared){
                     
                     let sharing = document.createElement('button');
@@ -302,7 +301,7 @@ try{
                     div.appendChild(sharing)
                 }
 
-                for(let task of taskData){
+                for(let task of taskdata){
                     if(list.id == task.listid){
                         let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
 
@@ -331,6 +330,7 @@ try{
         // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
         let userdata = await fetchData('user', 'GET')
+        let taskdata = await fetchData('task', 'GET')
         id = userdata[0].id;
         
         for(let list of data){
@@ -352,6 +352,26 @@ try{
                 })
             
                 div.appendChild(deleteListButton)
+
+                for(let task of taskdata){
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
+
+                        let deleteTaskButton = document.createElement('button')
+                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                        deleteTaskButton.className = 'checkTaskButton';
+                        deleteTaskButton.addEventListener('click', function(evt){
+                            deleteTask(task.id);
+                        })
+
+                        taskdiv.appendChild(deleteTaskButton)
+                }
+            }
 
             }
         }
@@ -392,8 +412,6 @@ try{
     }
 
     async function deleteList(listId){
-
-        
         let url = '/tasklist'
         let token = localStorage.getItem('token');
 
@@ -415,8 +433,11 @@ try{
             if (response.status != 200) {
                 throw data.error;
             }
+
+            maincontainer.innerHTML = '';
             
-            owned(); // refreshes the lists
+            owned()
+            sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
         }
@@ -474,7 +495,7 @@ try{
         try{
             let response = await fetch(url, cfg);
             let data = await response.json();
-            mylists.innerHTML = '';
+            maincontainer.innerHTML = '';
             owned()
             return data;
 
