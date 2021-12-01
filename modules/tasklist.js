@@ -16,6 +16,19 @@ router.get("/lists", async function(req, res, next){
     }
 });
 
+router.get('/mylists', protect, async function(req, res, next){
+    
+    let userid = res.locals.userid;
+
+    try{
+        let data = await db.getMyLists(userid);
+        res.status(200).json(data.rows).end();
+    }catch(err){
+        next(err);
+    }
+
+})
+
 
 router.get("/task", protect, async function(req, res, next) {
 

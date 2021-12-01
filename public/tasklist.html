@@ -38,6 +38,8 @@
         <div id="container" ></div>
 
         <div id = 'container2'></div>
+
+        <div id = 'mylists'></div>
    
 
                 <!------- JAVSCRIPT ------->
@@ -51,7 +53,8 @@
 
 
     let container = document.getElementById('container');
-    let cintainer2 = document.getElementById('container2')
+    let container2 = document.getElementById('container2')
+    let mylists = document.getElementById('mylists')
 
 
     async function listUser(userid){
@@ -196,17 +199,44 @@
 
     async function owned(){
         // returnere listid på lister man har laget selv
+        let data = await fetchData('mylists', 'GET')
+        console.log('my lists:')
+        console.log(data)
+
+        for(let list of data){
+            
+                let html = `<h2>${list.title}</h2>`
+                let div = document.createElement('div');
+                div.className = 'styleListDiv';
+                div.innerHTML = html;
+                mylists.appendChild(div)
+
+                let shareList = document.createElement('button');
+                let shareInput = document.createElement ('input');
+                shareList.innerHTML = '<i class="fas fa-share"></i>';
+                shareList.className ='shareListButton';
+
+                shareList.addEventListener('click', function(evt){
+                localStorage.setItem('listid', list.id)
+                window.location.href = '/sharelist.html'
+            })
+
+            div.appendChild(shareList)
+
+        }
     }
 
     async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
-        console.log(data)
+        console.log('shared with me:')  
 
         for(let list of data){
             
+              
+            if(list.shared == 4){
                 
-            if(list.shared == 6){
+                console.log(list.title + list.shared)
                 let html = `<h2>${list.title}</h2>`
                 let div = document.createElement('div');
                 div.className = 'styleListDiv';
@@ -289,12 +319,15 @@
  
     
 
-    listTaskList()
+    //listTaskList()
+    
+    owned()
     sharedWithMe()
+   
 
     //---------------------------------------------------------------------------------------------
 
-    async function fetchData(inputurl, inputmethod, inputupdata){
+    async function fetchData(inputurl, inputmethod){
 
         let url = inputurl;
         let token = localStorage.getItem('token')
