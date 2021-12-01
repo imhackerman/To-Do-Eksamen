@@ -141,8 +141,9 @@ p {
     
         
 
-        #maincontainer {
+        .tasklistContainer {
            
+            border-style: dotted;
             height: 100%;
             display: grid;
             grid-template-columns: 300px 300px 300px;
@@ -157,7 +158,7 @@ p {
         /* MOBILE OVERFLATER */ 
         @media only screen and (max-width: 815px) {
         
-            #maincontainer {
+            .tasklistContainer {
             
                 height: 100%;
                 display: grid;
