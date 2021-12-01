@@ -242,17 +242,21 @@
         }
     }
 
+    
+
     async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
         console.log('shared with me:')  
 
+        let userdata = await fetchData('user', 'GET')
+        id = userdata[0].id;
+        
         for(let list of data){
             
               
-            if(list.shared == 4){
+            if(list.shared == id){
                 
-                console.log(list.title + list.shared)
                 let html = `<h2>${list.title}</h2>`
                 let div = document.createElement('div');
                 div.className = 'styleListDiv';
