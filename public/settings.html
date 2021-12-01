@@ -69,6 +69,7 @@ async function listUser(userid){
             deleteUser.addEventListener("click", async function(evt) {
 
                 userDelete(value.id)
+                location.href = "userlogin.html";
             })
             div.appendChild(deleteUser);
             //newDiv.innerHTML = html;
