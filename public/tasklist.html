@@ -60,14 +60,25 @@
     async function listUser(userid){
 
         let data = await fetch('/users')
-        console.log(data)
+        let url = '/users'
 
+        let users = [];
+
+        try{
+            let response = await fetch(url);
+            let data = await response.json();
+            if (response.status != 200) {
+                throw listdata.error;
+            }
 
             for(let value of data){
                 if(value.id == userid){
                     return value.username
                 }
             }
+        } catch(err){
+            console.log(err)
+        }
     }
 
 
@@ -190,7 +201,7 @@
 
     async function owned(){
         // returnere listid på lister man har laget selv
-        let data = await fetchData('mylists')
+        let data = await fetchData('mylists', 'GET')
         console.log('my lists:')
         console.log(data)
 
@@ -219,7 +230,7 @@
 
     async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
-        let data = await fetchData('lists')
+        let data = await fetchData('lists', 'GET')
         console.log('shared with me:')  
 
         for(let list of data){
@@ -318,14 +329,14 @@
 
     //---------------------------------------------------------------------------------------------
 
-    async function fetchData(inputurl){
-
+    async function fetchData(inputurl, inputmethod){
+        
 
         let url = inputurl;
         let token = localStorage.getItem('token')
 
         let cfg = {
-            method: 'GET',
+            method: inputmethod,
             headers: {"content-type":"application/json",
                         'authorization': token}
         }
