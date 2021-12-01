@@ -241,6 +241,9 @@ try{
         let data = await fetchData('mylists', 'GET')
         let taskdata = await fetchData('task', 'GET');
 
+        maincontainer.innerHTML = "";
+
+
         for(let list of data){
             
                 let html = `<h2>${list.title}</h2>`
@@ -340,14 +343,6 @@ try{
                 div.innerHTML = html;
                 sharedlists.appendChild(div)
 
-                let deleteListButton = document.createElement('button')
-                deleteListButton.innerHTML = '<i class="fas fa-check"></i>';
-                deleteListButton.className = 'checkTaskButton';
-                deleteListButton.addEventListener('click', function(evt){
-                        
-                })
-            
-                div.appendChild(deleteListButton)
 
                 for(let task of taskdata){
                     if(list.id == task.listid){
@@ -357,15 +352,6 @@ try{
                         taskdiv.classList.add("taskDiv");
                         taskdiv.innerHTML = taskhtml;
                         div.appendChild(taskdiv)
-
-                        let deleteTaskButton = document.createElement('button')
-                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
-                        deleteTaskButton.className = 'checkTaskButton';
-                        deleteTaskButton.addEventListener('click', function(evt){
-                            deleteTask(task.id);
-                        })
-
-                        taskdiv.appendChild(deleteTaskButton)
                 }
             }
 
@@ -400,7 +386,7 @@ try{
                 throw data.error;
             }
             
-            owned()
+            sharedlists.innerHTML = '';
             sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
