@@ -140,8 +140,22 @@ router.delete('/users', protect, async function(req, res, next){
      if (credentials.password == "" || credentials.username =="") {
          return;
      }
+     let hash = authUtils.createHash(credentials.password);
 
- })
+     try {
+         let data = await db.changePassword(hash.value, hash.salt, credentials.username);
+         if (data.rows.length > 0) {
+             res  
+                .status(200)
+                .json({msg:"Passordet ble endret!"})
+                .end();
+         }else{
+             throw "Passordet kunne ikke bli oppdatert";
+         }
+     } catch (err) {
+         next(err);
+     }
+ });
 
 
 module.exports = router;
