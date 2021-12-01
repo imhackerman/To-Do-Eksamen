@@ -141,8 +141,8 @@ p {
     
         
 
-        #container {
-            
+        #maincontainer {
+           
             height: 100%;
             display: grid;
             grid-template-columns: 300px 300px 300px;
@@ -157,7 +157,7 @@ p {
         /* MOBILE OVERFLATER */ 
         @media only screen and (max-width: 815px) {
         
-            #container {
+            #maincontainer {
             
                 height: 100%;
                 display: grid;
