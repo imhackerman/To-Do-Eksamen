@@ -6,6 +6,7 @@ const protect = require('./auth.js')
 
 // endpoints ----------------------
 
+
 router.get("/lists", async function(req, res, next){
     try {
         let data = await db.getAllTasklists();
@@ -15,7 +16,21 @@ router.get("/lists", async function(req, res, next){
     }
 });
 
-router.get("/task", protect, async function(req, res, next) {
+router.get('/mylists', protect, async function(req, res, next){
+    
+    let userid = res.locals.userid;
+
+    try{
+        let data = await db.getMyLists(userid);
+        res.status(200).json(data.rows).end();
+    }catch(err){
+        next(err);
+    }
+
+})
+
+
+router.get("/task", async function(req, res, next) {
 
     try {
 		let data = await db.getAllTasks();
@@ -66,6 +81,7 @@ router.post("/task", protect, async function(req, res, next) {
     }
 });
 
+
 router.delete("/task", protect, async function(req, res, next) {
     // method for DELETING from database 
     let updata = req.body;
@@ -104,6 +120,51 @@ router.delete("/tasklist", protect, async function(req, res, next){
         next(err)
     }
 })
+
+router.post("/lists/share", async function(req, res, next) {
+  
+    
+    let updata = req.body;
+
+    console.log(updata);
+
+    let taskid = updata.taskid;
+    let userid = updata.userid;
+
+  try {
+    let data = await db.shareList(taskid, userid);
+
+    if (data.rows.length > 0) {
+      res.status(200).json({ msg: "Listen ble delt!" }).end();
+    } else {
+      throw "Listen ble ikke delt";
+    }
+ } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/lists/unshare', async function(req, res, next){
+    let updata = req.body;
+
+    try {
+        let data = await db.stopSharing(updata.listid)
+    
+        if (data.rows.length > 0) {
+          res.status(200).json({ msg: "Du har sluttet å dele denne listen" }).end();
+        } else {
+          throw "Listen er fortsatt delt";
+        }
+     } catch (err) {
+        next(err);
+      }
+
+
+})
+
+
+
+
 
 
 

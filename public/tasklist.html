@@ -36,9 +36,12 @@
     <div class="createList">
         <button class = 'createList' id="createList">Legg til ny liste</button>
     </div><br>
-
     
-        <div id="container" ></div>
+        <div id="maincontainer" class = 'tasklistContainer'></div>
+        <h1>Delte lister</h1>
+        <div id = 'sharedlists' class = 'tasklistContainer'></div>
+
+        <div id = 'mylists'></div>
    
 
                 <!------- JAVSCRIPT ------->
@@ -51,9 +54,14 @@
     })
 
 
-    let container = document.getElementById('container');
+    let maincontainer = document.getElementById('maincontainer');
+    let sharedlists = document.getElementById('sharedlists')
+    let mylists = document.getElementById('mylists')
 
+/*
     async function listUser(userid){
+
+        let data = await fetch('/users')
         let url = '/users'
 
         let users = [];
@@ -75,7 +83,8 @@
         }
     }
 
-    async function listTaskList(){
+
+    async function listTaskList(listid){
         
         let url = "/lists";
         let taskurl = "/task";
@@ -89,6 +98,8 @@
                     "authorization": token
                   },
         }
+
+        console.log(cfg)
 
         try {
             let listresponse = await fetch(url, cfg);
@@ -112,11 +123,16 @@
             let id = localStorage.getItem('id')
 
         for (let list of listdata) { 
+
+            // list alle lister brukeren selv har laget
+            //list alle offentlige lister
+            //list alle lister delt med brukeren
         
             if(list.visibility == 'public' || list.userid == id){
             
             let html = `<h2>${list.title}</h2>`;
-            console.log(list.userid)
+            let date = new Date(list.date);
+            html += "<p>" + date.toLocaleDateString() + "</p";
             html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
             let div = document.createElement("div");
             div.className = 'styleListDiv'
@@ -143,6 +159,19 @@
                 })
 
                 div.appendChild(createNewTask)
+
+            let shareList = document.createElement('button');
+            let shareInput = document.createElement ('input');
+            shareList.innerHTML = '<i class="fas fa-share"></i>';
+            shareList.className ='shareListButton';
+
+            shareList.addEventListener('click', function(evt){
+                localStorage.setItem('listid', list.id)
+                window.location.href = '/sharelist.html'
+            })
+
+            div.appendChild(shareList)
+            div.appendChild(shareInput)
 
 
                 for(let task of taskdata){
@@ -178,6 +207,160 @@
         }
     }
 
+    // local storage get token 
+    // tre funksjoner som returnere objekter med listedata
+    // tre funksjoner som henter lister fra databasen, 
+    // men publiserer dem bare hvis noen bestemte kriterier er oppfylt. 
+*/
+async function listUser(userid){
+
+let data = await fetch('/users')
+let url = '/users'
+
+let users = [];
+
+try{
+    let response = await fetch(url);
+    let data = await response.json();
+    if (response.status != 200) {
+        throw data.error;
+    }
+
+    for(let value of data){
+        if(value.id == userid){
+            return value.username
+        }
+    }
+} catch(err){
+    console.log(err)
+}
+}
+
+    async function owned(){
+        // returnere listid på lister man har laget selv
+        let data = await fetchData('mylists', 'GET')
+        let taskdata = await fetchData('task', 'GET');
+
+        maincontainer.innerHTML = "";
+
+
+        for(let list of data){
+            
+                let html = `<h2>${list.title}</h2>`
+                html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
+                let div = document.createElement('div');
+                div.className = 'styleListDiv';
+                div.innerHTML = html;
+                maincontainer.appendChild(div)
+
+                let createNewTask = document.createElement('button');
+                createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
+                createNewTask.className = 'createTaskButton';
+                createNewTask.addEventListener('click', async function(evt){
+
+                    localStorage.setItem('list', list.id)
+                    window.location.href = '/taskcreate.html'
+                })
+
+                div.appendChild(createNewTask)
+
+                let shareList = document.createElement('button');
+                let shareInput = document.createElement ('input');
+                shareList.innerHTML = '<i class="fas fa-share"></i>';
+                shareList.className ='shareListButton';
+
+                shareList.addEventListener('click', function(evt){
+                localStorage.setItem('listid', list.id)
+                    window.location.href = '/sharelist.html'
+                })
+            
+                div.appendChild(shareList)
+
+                let deleteListButton = document.createElement('button')
+                deleteListButton.innerHTML = '<i class="fas fa-check"></i>';
+                deleteListButton.className = 'checkTaskButton';
+                deleteListButton.addEventListener('click', function(evt){
+                        deleteList(list.id)
+            })
+            
+                div.appendChild(deleteListButton)
+
+                
+
+                // hvis listen er delt med noen andre, legg til knapp for å slutte å dele listen
+
+                if(list.shared){
+                    
+                    let sharing = document.createElement('button');
+                    sharing.innerHTML = 'Slutt å dele'
+                    sharing.addEventListener('click', function(evt){
+                        stopSharing(list.id)
+                    })
+
+                    div.appendChild(sharing)
+                }
+
+                for(let task of taskdata){
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
+
+                        let deleteTaskButton = document.createElement('button')
+                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                        deleteTaskButton.className = 'checkTaskButton';
+                        deleteTaskButton.addEventListener('click', function(evt){
+                            deleteTask(task.id);
+                        })
+
+                        taskdiv.appendChild(deleteTaskButton)
+                    
+                }
+            }
+
+        }
+    }
+
+    
+    async function sharedWithMe(){
+        // returnerer listid på lister som er delt med deg
+        let data = await fetchData('lists', 'GET')
+        let userdata = await fetchData('user', 'GET')
+        let taskdata = await fetchData('task', 'GET')
+        id = userdata[0].id;
+        
+        for(let list of data){
+            
+              
+            if(list.shared == id){
+                let html = `<h2>${list.title}</h2>`
+                html += `<p>Delt av : ${await listUser(list.userid)}</p>`;
+                let div = document.createElement('div');
+                div.className = 'styleListDiv';
+                div.innerHTML = html;
+                sharedlists.appendChild(div)
+
+
+                for(let task of taskdata){
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
+                }
+            }
+
+            }
+        }
+
+    }
+
+
         
     async function deleteTask(taskId) {
 
@@ -188,8 +371,6 @@
             id: taskId
         }
 
-        console.log(updata)
-
         let cfg = {
             method: "DELETE",
             headers: {"content-type":"application/json",
@@ -204,15 +385,17 @@
             if (response.status != 200) {
                 throw data.error;
             }
-            
-            listTaskList(); // refreshes the lists
+
+            maincontainer.innerHTML = '';
+            sharedlists.innerHTML = '';
+            owned()
+            sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
         }
     }
 
     async function deleteList(listId){
-
         let url = '/tasklist'
         let token = localStorage.getItem('token');
 
@@ -220,10 +403,6 @@
             id: listId
         }
 
-        //sjekke dette 
-
-        console.log(updata);
-
         let cfg = {
             method: "DELETE",
             headers: {"content-type":"application/json",
@@ -238,8 +417,12 @@
             if (response.status != 200) {
                 throw data.error;
             }
+
+            maincontainer.innerHTML = '';
+            sharedlists.innerHTML = '';
             
-            listTaskList(); // refreshes the lists
+            owned()
+            sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
         }
@@ -247,9 +430,65 @@
     
     
 
-    listTaskList()
+    //listTaskList()
+    
+    owned()
+    sharedWithMe()
+   
 
- 
+    //---------------------------------------------------------------------------------------------
+
+    async function fetchData(inputurl, inputmethod){
+        
+
+        let url = inputurl;
+        let token = localStorage.getItem('token')
+
+        let cfg = {
+            method: inputmethod,
+            headers: {"content-type":"application/json",
+                        'authorization': token}
+        }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            return data;
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async function stopSharing(listid){
+
+        let url = 'lists/unshare';
+
+        let token = localStorage.getItem('token');
+
+        let updata = {
+            listid: listid
+        }
+
+        let cfg = {
+            method: 'POST',
+            headers: {"content-type":"application/json",
+                        'authorization': token},
+                        body: JSON.stringify(updata)
+        }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            maincontainer.innerHTML = '';
+            owned()
+            return data;
+
+        }catch(err){
+            console.log(err)
+        }
+
+    }
 
 
 </script>

@@ -141,12 +141,14 @@ p {
     
         
 
-        #container {
-            
+        .tasklistContainer {
+           padding-bottom: 50px;
+      
             height: 100%;
             display: grid;
             grid-template-columns: 300px 300px 300px;
             grid-template-rows: auto auto auto;
+            
             
             /*grid-template-areas: "hd hd hd"
                                  "mn ct ct"
@@ -157,7 +159,7 @@ p {
         /* MOBILE OVERFLATER */ 
         @media only screen and (max-width: 815px) {
         
-            #container {
+            .tasklistContainer {
             
                 height: 100%;
                 display: grid;

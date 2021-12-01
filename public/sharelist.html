@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>share list</title>
+</head>
+<body>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet"/>
+
+    <link rel = "stylesheet" href="./style.css">
+    <header class = "midtstill">
+        <h1>
+            Skriv inn Brukernavn til den du vil dele med 
+        </h1>
+
+       
+
+    <input id="inpUsername" type= "text" placeholder="Brukernavn" autocomplete="on" />
+
+    <button id = 'testbutton'>del</button>
+
+ </header>
+    <script>
+
+let testbutton = document.getElementById('testbutton')
+let inputUsername = document.getElementById('inpUsername')
+
+    
+testbutton.addEventListener('click', async function(evt){
+    
+    let id = localStorage.getItem('listid');
+
+    let username = inputUsername.value;
+    let userid = await getUserId(username);
+
+    let url = "/lists/share"
+
+    let updata = {
+            taskid: id,
+            userid: userid 
+     }
+
+    let cfg = {
+        method: "POST",
+        headers: { "content-type": "application/json"},
+        body: JSON.stringify(updata),
+    }
+
+    console.log(cfg)
+
+    try{
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+        console.log(data)
+        if (response.status != 200) {
+        throw data.error;
+    }
+
+    } catch(err){
+        console.log(err)
+    }
+
+})
+
+    async function getUserId(username){
+
+        let url = '/users'
+
+        let cfg = {
+            method: 'GET',
+            headers: { "content-type": "application/json"},
+        }
+
+        try{
+            let response = await fetch(url, cfg)
+            let data = await response.json();
+
+            for(let value of data){
+                if(value.username == username){
+                    return value.id;
+                }
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    </script>
+    
+</body>
+</html>

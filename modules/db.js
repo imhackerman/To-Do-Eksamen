@@ -10,8 +10,14 @@ const pool = new pg.Pool({
 let dbMethods = {};
 
 dbMethods.getAllTasklists = function(){
-    let sql = "SELECT * FROM tasklists"
+    let sql = "SELECT id, title, userid, shared FROM tasklists"
     return pool.query(sql);
+}
+
+dbMethods.getMyLists = function(userid){
+    let sql = 'SELECT id, title, userid, shared FROM tasklists WHERE userid = $1';
+    let values = [userid];
+    return pool.query(sql, values);
 }
 
 dbMethods.getTasksFromList = function(){
@@ -78,6 +84,18 @@ dbMethods.deleteUser = function (id) {
     return pool.query(sql, values);
 }
 
+
+dbMethods.shareList = function(taskid, userid){
+    let sql = "UPDATE tasklists SET shared = $2 WHERE id = $1 RETURNING *";
+    let values = [taskid, userid];
+    return pool.query(sql, values);
+}
+
+dbMethods.stopSharing = function(listid){
+    let sql = 'UPDATE tasklists SET shared = NULL WHERE id = $1 RETURNING *';
+    let values = [listid];
+    return pool.query(sql, values)
+}
 
 
 module.exports = dbMethods;
