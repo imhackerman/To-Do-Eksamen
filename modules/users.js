@@ -11,7 +11,7 @@ router.post('/users/login', async function(req, res, next){
     let cred = authUtils.decodeCred(credentials);
 
     if(cred.username == '' || cred.password == ''){
-        res.status(401).json({error: 'No username or password'}).end();
+        res.status(401).json({error: 'ingen brukernavn, eller passord'}).end();
         return;
     }
 
@@ -27,14 +27,14 @@ router.post('/users/login', async function(req, res, next){
             let passwordVeryfied = authUtils.verifyPassword(cred.password, hash, salt);
 
             if(!passwordVeryfied){
-                res.status(403).json({msg:'The password is not correct'}).end();
+                res.status(403).json({msg:'Feil passord'}).end();
                 return;
             }
 
             let tok = authUtils.createToken(username, userid)
             
             res.status(200).json({
-                msg: 'The login was successful',
+                msg: 'Du blir nå logget inn',
                 token: tok
             }).end();
             return;
@@ -42,7 +42,6 @@ router.post('/users/login', async function(req, res, next){
     } catch (error) {
         console.log(error)
     }
-    res.status(200).send('Hello from post - /users/login').end();
 })
 
 
@@ -58,7 +57,7 @@ router.post("/users", async function(req, res, next){
 
 
     if (cred.username == "" || cred.password == "") {
-        res.status(401).json({error: "no username or password"}).end();
+        res.status(401).json({error: "ingen brukernavn, eller passord"}).end();
         return;
     }
 
@@ -68,11 +67,11 @@ router.post("/users", async function(req, res, next){
         let data = await db.createUser(cred.username, hash.value, hash.salt);
 
         if (data.rows.length > 0) {
-            res.status(200).json({msg: "the user was created succefully"}).end();
+            res.status(200).json({msg: "Brukeren ble opprettet"}).end();
         }
 
         else {
-            throw "the user could not be created"
+            throw "Brukeren kunne ikke opprettes"
         }
     }
 
