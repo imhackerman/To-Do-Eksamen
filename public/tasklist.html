@@ -293,8 +293,6 @@
     async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
-        console.log('shared with me:')  
-
         let userdata = await fetchData('user', 'GET')
         id = userdata[0].id;
         
@@ -334,8 +332,6 @@
             id: taskId
         }
 
-        console.log(updata)
-
         let cfg = {
             method: "DELETE",
             headers: {"content-type":"application/json",
@@ -367,8 +363,6 @@
         let updata = {
             id: listId
         }
-
-        console.log(updata);
 
         let cfg = {
             method: "DELETE",
