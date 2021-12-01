@@ -30,7 +30,7 @@ router.get('/mylists', protect, async function(req, res, next){
 })
 
 
-router.get("/task", protect, async function(req, res, next) {
+router.get("/task", async function(req, res, next) {
 
     try {
 		let data = await db.getAllTasks();

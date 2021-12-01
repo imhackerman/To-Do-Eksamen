@@ -59,7 +59,7 @@
     let container2 = document.getElementById('container2')
     let mylists = document.getElementById('mylists')
 
-
+/*
     async function listUser(userid){
 
         let data = await fetch('/users')
@@ -212,12 +212,15 @@
     // tre funksjoner som returnere objekter med listedata
     // tre funksjoner som henter lister fra databasen, 
     // men publiserer dem bare hvis noen bestemte kriterier er oppfylt. 
-
+*/
     async function owned(){
         // returnere listid på lister man har laget selv
         let data = await fetchData('mylists', 'GET')
         console.log('my lists:')
         console.log(data)
+
+        let taskData = await fetchData('task', 'GET')
+        console.log(taskData)
 
         for(let list of data){
             
@@ -227,6 +230,17 @@
                 div.innerHTML = html;
                 mylists.appendChild(div)
 
+                let createNewTask = document.createElement('button');
+                createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
+                createNewTask.className = 'createTaskButton';
+                createNewTask.addEventListener('click', async function(evt){
+
+                    localStorage.setItem('list', list.id)
+                    window.location.href = '/taskcreate.html'
+                })
+
+                div.appendChild(createNewTask)
+
                 let shareList = document.createElement('button');
                 let shareInput = document.createElement ('input');
                 shareList.innerHTML = '<i class="fas fa-share"></i>';
@@ -235,15 +249,34 @@
                 shareList.addEventListener('click', function(evt){
                 localStorage.setItem('listid', list.id)
                 window.location.href = '/sharelist.html'
-            })
+                })
+            
+                div.appendChild(shareList)
 
-            div.appendChild(shareList)
+                let deleteListButton = document.createElement('button')
+                deleteListButton.innerHTML = '<i class="fas fa-check"></i>';
+                deleteListButton.className = 'checkTaskButton';
+                deleteListButton.addEventListener('click', function(evt){
+                        deleteList(list.id)
+            })
+            
+                div.appendChild(deleteListButton)
+
+                for(let task of taskData){
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
+                }
+            }
 
         }
     }
 
     
-
     async function sharedWithMe(){
         // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
@@ -262,6 +295,16 @@
                 div.className = 'styleListDiv';
                 div.innerHTML = html;
                 container2.appendChild(div)
+
+                let deleteListButton = document.createElement('button')
+                deleteListButton.innerHTML = '<i class="fas fa-check"></i>';
+                deleteListButton.className = 'checkTaskButton';
+                deleteListButton.addEventListener('click', function(evt){
+                        
+                })
+            
+                div.appendChild(deleteListButton)
+
             }
         }
 
@@ -295,7 +338,8 @@
                 throw data.error;
             }
             
-            listTaskList(); // refreshes the lists
+            owned()
+            sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
         }
@@ -310,8 +354,6 @@
         let updata = {
             id: listId
         }
-
-        //sjekke dette 
 
         console.log(updata);
 
