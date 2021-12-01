@@ -245,12 +245,7 @@ span {
 }
 
 .loginPage {
-  background-image: linear-gradient(
-    43deg,
-    #7f91ee 0%,
-    #ee7fe6 46%,
-    #ffcc70 100%
-  );
+  background-image: linear-gradient(#888ea8 0%, #ee7fe6 46%, #888ea8 100%);
   /*min-height: 200vh; /*farge blandingen i midten*/
   height: 928px;
   background-color: #4158d0;
