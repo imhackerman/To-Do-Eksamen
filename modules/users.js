@@ -132,5 +132,13 @@ router.delete('/users', protect, async function(req, res, next){
     }
  })
 
+ router.put("/users,changePassword", protect, async function(req, res, next){
+     let credentialString = req.headers.authorization;
+     let credentials = authUtils.decodeCred(credentialString);
+     console.log(credentials);
+     
+
+ })
+
 
 module.exports = router;
