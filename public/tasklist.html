@@ -248,7 +248,7 @@
 
                 shareList.addEventListener('click', function(evt){
                 localStorage.setItem('listid', list.id)
-                window.location.href = '/sharelist.html'
+                    window.location.href = '/sharelist.html'
                 })
             
                 div.appendChild(shareList)
@@ -261,6 +261,19 @@
             })
             
                 div.appendChild(deleteListButton)
+
+                // hvis listen er delt med noen andre, legg til knapp for å slutte å dele listen
+
+                if(list.shared){
+                    
+                    let sharing = document.createElement('button');
+                    sharing.innerHTML = 'Slutt å dele'
+                    sharing.addEventListener('click', function(evt){
+                        stopSharing(list.id)
+                    })
+
+                    div.appendChild(sharing)
+                }
 
                 for(let task of taskData){
                     if(list.id == task.listid){
@@ -372,7 +385,7 @@
                 throw data.error;
             }
             
-            listTaskList(); // refreshes the lists
+            owned(); // refreshes the lists
         }catch(error){
             console.log(error)
         }
@@ -410,7 +423,35 @@
         }
     }
 
- 
+    async function stopSharing(listid){
+
+        let url = 'lists/unshare';
+
+        let token = localStorage.getItem('token');
+
+        let updata = {
+            listid: listid
+        }
+
+        let cfg = {
+            method: 'POST',
+            headers: {"content-type":"application/json",
+                        'authorization': token},
+                        body: JSON.stringify(updata)
+        }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            mylists.innerHTML = '';
+            owned()
+            return data;
+
+        }catch(err){
+            console.log(err)
+        }
+
+    }
 
 
 </script>

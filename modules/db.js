@@ -91,5 +91,11 @@ dbMethods.shareList = function(taskid, userid){
     return pool.query(sql, values);
 }
 
+dbMethods.stopSharing = function(listid){
+    let sql = 'UPDATE tasklists SET shared = NULL WHERE id = $1 RETURNING *';
+    let values = [listid];
+    return pool.query(sql, values)
+}
+
 
 module.exports = dbMethods;

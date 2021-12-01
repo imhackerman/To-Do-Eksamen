@@ -19,14 +19,11 @@ let inputUsername = document.getElementById('inpUsername')
 
     
 testbutton.addEventListener('click', async function(evt){
-
+    
     let id = localStorage.getItem('listid');
 
     let username = inputUsername.value;
-    console.log(username)
-
     let userid = await getUserId(username);
-    console.log(userid)
 
     let url = "/lists/share"
 
@@ -34,8 +31,6 @@ testbutton.addEventListener('click', async function(evt){
             taskid: id,
             userid: userid 
      }
-
-    console.log(updata)
 
     let cfg = {
         method: "POST",

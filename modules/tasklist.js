@@ -144,6 +144,24 @@ router.post("/lists/share", async function(req, res, next) {
   }
 });
 
+router.post('/lists/unshare', async function(req, res, next){
+    let updata = req.body;
+
+    try {
+        let data = await db.stopSharing(updata.listid)
+    
+        if (data.rows.length > 0) {
+          res.status(200).json({ msg: "Du har sluttet å dele denne listen" }).end();
+        } else {
+          throw "Listen er fortsatt delt";
+        }
+     } catch (err) {
+        next(err);
+      }
+
+
+})
+
 
 
 
