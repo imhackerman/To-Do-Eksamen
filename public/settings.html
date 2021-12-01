@@ -22,12 +22,13 @@
     <h1> Settings</h1>
     <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
     <p>OBS! Dersom du sletter din bruker vil alle lister laget med din bruker også bli slettet.</p>
-    
-    <input id="inpPassword" type= "text" placeholder="skriv inn nytt passord" />
+    <br>
+    <input id="inpPassword" type= "text" placeholder="Skriv inn nytt passord" />
     <button id="changePassword" class="settingButtons">Endre passord</button>
     <p id = txtResult></p>
-    <button id="logOut" class="settingButtons">Logg ut</button>
+    <button id="logOut" class="settingButtons">Logg ut</button><br>
     <div id="container"></div></header>
+    <button id="deleteUser" class="settingButtons"></button>
 <script>
 
    
@@ -35,7 +36,8 @@
     let container = document.getElementById('container');
     let logOutBtn = document.getElementById("logOut");
     let newPassword = document.getElementById('inpPassword');
-    let txtResult = document.getElementById('txtResult')
+    let txtResult = document.getElementById('txtResult');
+    let deleteUser = document.getElementById('deleteUser');
     
 
 async function listUser(userid){
@@ -67,9 +69,9 @@ async function listUser(userid){
             div.innerHTML = html
         
         
-            let deleteUser = document.createElement('button');
+            let deleteUser = document.getElementById('deleteUser');
             //let newDiv = document.createElement("div");
-            deleteUser.innerHTML="slett";
+            deleteUser.innerHTML="Slett";
             deleteUser.addEventListener("click", async function(evt) {
 
                 userDelete(value.id)

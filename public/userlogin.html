@@ -45,6 +45,13 @@
   let btnShow = document.getElementById('btnShow')
   let txtResult = document.getElementById("txtResult");
 
+  function createCredentialString(username, password) {
+let combinedStr = username + ":" + password;
+console.log(combinedStr)
+let b64Str = btoa(combinedStr);
+return "basic" + b64Str;
+}
+
 window.onload=function(){
   let string = document.getElementById("inputPassword");
   if (string.type === "password") {
@@ -140,12 +147,7 @@ catch(error) {
 }); 
 
 //------------------------------------
-function createCredentialString(username, password) {
-let combinedStr = username + ":" + password;
-console.log(combinedStr)
-let b64Str = btoa(combinedStr);
-return "basic" + b64Str;
-}
+
 
 
 </script>
