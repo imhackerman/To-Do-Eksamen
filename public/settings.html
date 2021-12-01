@@ -23,27 +23,37 @@
     <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
     <br>
     
-    <button id="deleteUser" class="settingButtons">Slett bruker</button>
+    
     <button id="changePassword" class="settingButtons">Endre passord</button>
     <button id="logOut" class="settingButtons">Logg ut</button>
     <div id="container"></div>
 <script>
 
-    let deleteUser = document.getElementById('deleteUser');
+   
     let changePassword = document.getElementById('changePassword');
     let container = document.getElementById('container');
     let logOutBtn = document.getElementById("logOut");
     
 
 async function listUser(userid){
-    let url = '/users'
+    let url = '/user'
+    let token = localStorage.getItem('token')
+
+            let cfg = {
+            method: "GET",
+            headers: {"content-type":"application/json",
+                          'authorization': token},
+            }
+                
 
     try{
-        let response = await fetch(url);
+        let response = await fetch(url, cfg);
         let data = await response.json();
         if (response.status != 200) {
             throw data.error;
+        
         }
+        console.log(data);
 
         container.innerHTML = "";
          
@@ -51,9 +61,23 @@ async function listUser(userid){
             let html = `<h2> Username: ${value.username}</h2>`;
             html += `<p> User ID: ${value.id} </p><hr>`;
 
+
+
+        
+            let deleteUser = document.getElementById('deleteUser');
             let newDiv = document.createElement("div");
+            deleteUser.innerHTML="slett";
+                deleteUser.addEventListener("click", async function(evt) {
+
+                     deleteUser(value.id)
+                })
+                div.appendChild(deleteUser);
             newDiv.innerHTML = html;
+          
+           
             container.appendChild(newDiv);
+
+
 
         
             if(value.id == userid){
