@@ -131,5 +131,30 @@ router.delete('/users', protect, async function(req, res, next){
     }
  })
 
+ router.put("/users/changePassword", async function(req, res, next){
+     let credentialString = req.headers.authorization;
+     let credentials = authUtils.decodeCred(credentialString);
+     console.log(credentials);
+
+     if (credentials.password == "") {
+        throw 'ingen passord er skrevet inn'
+     }
+     let hash = authUtils.createHash(credentials.password);
+
+     try {
+         let data = await db.changePassword(hash.value, hash.salt, credentials.username);
+         if (data.rows.length > 0) {
+             res  
+                .status(200)
+                .json({msg:"Passordet ble endret!"})
+                .end();
+         }else{
+             throw "Passordet kunne ikke bli oppdatert";
+         }
+     } catch (err) {
+         next(err);
+     }
+ });
+
 
 module.exports = router;

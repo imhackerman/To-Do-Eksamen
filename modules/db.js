@@ -84,6 +84,12 @@ dbMethods.deleteUser = function (id) {
     return pool.query(sql, values);
 }
 
+dbMethods.changePassword = function (password, salt, username) {
+    let sql = "UPDATE users SET password = $1, salt = $2 WHERE username =$3 RETURNING *";
+    let values = [password, salt, username];
+    return pool.query(sql, values);
+}
+
 
 dbMethods.shareList = function(taskid, userid){
     let sql = "UPDATE tasklists SET shared = $2 WHERE id = $1 RETURNING *";
