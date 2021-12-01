@@ -1,7 +1,9 @@
 const express = require('express');
 const db = require('./db.js');
 const authUtils = require('./auth_utils.js');
+const { createHash } = require('./auth_utils.js');
 const router = express.Router();
+const protect = require('./auth.js')
 
 router.post('/users/login', async function(req, res, next){
 
@@ -21,7 +23,6 @@ router.post('/users/login', async function(req, res, next){
             let username = data.rows[0].username;
             let hash = data.rows[0].password;
             let salt = data.rows[0].salt;
-
 
             let passwordVeryfied = authUtils.verifyPassword(cred.password, hash, salt);
 
@@ -94,10 +95,42 @@ router.get('/users', async function(req, res, next){
 })
 
 
+router.get('/user', protect, async function(req, res, next){
 
-router.delete('/users', async function(req, res, next){
-    res.status(200).send('DELETE /users').end();
+    let username = res.locals.username;
+
+    try{
+        let data = await db.getUser(username);
+        res.status(200).send(data.rows).end();
+    }catch(err){
+        next(err);
+    }
 })
+
+
+
+router.delete('/users', protect, async function(req, res, next){
+
+    let updata = req.body;
+    let userid = res.locals.userid;
+    let username = res.locals.username;
+   
+    console.log(updata)
+    console.log(username)
+ 
+    try{
+        let data = await db.deleteUser(updata.id, username);
+ 
+        if(data.rows.length>0){
+            res.status(200).json({msg: 'Brukeren ble slettet'}).end();
+ 
+        }else{
+            throw 'Brukeren ble ikke slettet'
+        }
+    } catch(err){
+         next(err)
+    }
+ })
 
 
 module.exports = router;

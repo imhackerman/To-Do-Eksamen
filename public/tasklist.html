@@ -23,6 +23,9 @@
     <a class="arrowBtn" href="userlogin.html">
         <i class="fas fa-arrow-left" id="arrow"> Bytt bruker</i>
     </a><br>
+    <a class="arrowBtn" href="settings.html">
+        <i class="fas fa-cog" id="arrow"> Settings</i>
+    </a>
 
    <!----  <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a> -->
   
@@ -68,7 +71,7 @@
             let response = await fetch(url);
             let data = await response.json();
             if (response.status != 200) {
-                throw listdata.error;
+                throw data.error;
             }
 
             for(let value of data){
@@ -84,14 +87,17 @@
 
     async function listTaskList(listid){
         
-        let url = "/lists"
-        let taskurl = "/task"
+        let url = "/lists";
+        let taskurl = "/task";
+        let userURL = '/users';
 
         let token = localStorage.getItem('token');
 
         let cfg = {
             method: 'GET',
-            headers: {'authorization': token}
+            headers: { "content-type": "application/json",
+                    "authorization": token
+                  },
         }
 
         console.log(cfg)
@@ -111,9 +117,11 @@
             if(taskresponse.status != 200){
                 throw taskresponse.error;
             }
+
         
             container.innerHTML = "";
 
+            let id = localStorage.getItem('id')
 
         for (let list of listdata) { 
 
@@ -121,6 +129,8 @@
             //list alle offentlige lister
             //list alle lister delt med brukeren
         
+            if(list.visibility == 'public' || list.userid == id){
+            
             let html = `<h2>${list.title}</h2>`;
             let date = new Date(list.date);
             html += "<p>" + date.toLocaleDateString() + "</p";
@@ -130,25 +140,26 @@
             div.innerHTML = html;
             container.appendChild(div);
 
-            let deleteListButton = document.createElement('button');
-            deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-            deleteListButton.className = 'deleteListButton';
-            deleteListButton.addEventListener('click', function(evt){
-                deleteList(list.id)
-            })
 
-            div.appendChild(deleteListButton)
+                let deleteListButton = document.createElement('button');
+                deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                deleteListButton.className = 'deleteListButton';
+                deleteListButton.addEventListener('click', function(evt){
+                    deleteList(list.id)
+                })
 
-            let createNewTask = document.createElement('button');
-            createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
-            createNewTask.className = 'createTaskButton';
-            createNewTask.addEventListener('click', async function(evt){
+                div.appendChild(deleteListButton)
 
-                localStorage.setItem('list', list.id)
-                window.location.href = '/taskcreate.html'
-            })
+                let createNewTask = document.createElement('button');
+                createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
+                createNewTask.className = 'createTaskButton';
+                createNewTask.addEventListener('click', async function(evt){
 
-            div.appendChild(createNewTask)
+                    localStorage.setItem('list', list.id)
+                    window.location.href = '/taskcreate.html'
+                })
+
+                div.appendChild(createNewTask)
 
             let shareList = document.createElement('button');
             let shareInput = document.createElement ('input');
@@ -164,27 +175,30 @@
             div.appendChild(shareInput)
 
 
-            for(let task of taskdata){
+                for(let task of taskdata){
 
-                if(list.id == task.listid){
-                    let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
+                    if(list.id == task.listid){
+                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
 
-                    let taskdiv = document.createElement('div');
-                    taskdiv.classList.add("taskDiv");
-                    taskdiv.innerHTML = taskhtml;
-                    div.appendChild(taskdiv)
+                        let taskdiv = document.createElement('div');
+                        taskdiv.classList.add("taskDiv");
+                        taskdiv.innerHTML = taskhtml;
+                        div.appendChild(taskdiv)
 
 
-                    let deleteTaskButton = document.createElement('button')
-                    deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
-                    deleteTaskButton.className = 'checkTaskButton';
-                    deleteTaskButton.addEventListener('click', function(evt){
-                        deleteTask(task.id);
-                    })
+                        let deleteTaskButton = document.createElement('button')
+                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
+                        deleteTaskButton.className = 'checkTaskButton';
+                        deleteTaskButton.addEventListener('click', function(evt){
+                            deleteTask(task.id);
+                        })
 
-                    taskdiv.appendChild(deleteTaskButton)
+                        taskdiv.appendChild(deleteTaskButton)
+                    }
                 }
+
             }
+            
         }
     }
     
@@ -318,7 +332,6 @@
         }
     }
     
- 
     
 
     //listTaskList()

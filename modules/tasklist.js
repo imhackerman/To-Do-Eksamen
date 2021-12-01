@@ -32,9 +32,6 @@ router.get('/mylists', protect, async function(req, res, next){
 
 router.get("/task", protect, async function(req, res, next) {
 
-    console.log(res.locals.username);
-    console.log(res.locals.userid);
-
     try {
 		let data = await db.getAllTasks();
 		res.status(200).json(data.rows).end();
@@ -50,7 +47,7 @@ router.post("/lists", protect, async function(req, res, next){
 
     
     try{
-        let data = await db.createTasklist(updata.title, userid);
+        let data = await db.createTasklist(updata.title, userid, updata.visibility);
 
         if (data.rows.length > 0){
             res.status(200).json({msg: "Listen er opprettet"}).end();

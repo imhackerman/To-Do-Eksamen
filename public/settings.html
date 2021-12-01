@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>settings</title>
+</head>
+<body>
+    <link rel= "stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+  rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <a class="arrowBtn" href="tasklist.html">
+    <i class="fas fa-arrow-left" id="arrow"> Tilbake til lister</i>
+</a><br>
+<header class= "midtstill">
+    <h1> Settings</h1>
+    <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
+    <p>OBS! Dersom du sletter din bruker vil alle lister laget med din bruker også bli slettet.</p>
+    
+    
+    <button id="changePassword" class="settingButtons">Endre passord</button>
+    <button id="logOut" class="settingButtons">Logg ut</button>
+    <div id="container"></div>
+<script>
+
+   
+    let changePassword = document.getElementById('changePassword');
+    let container = document.getElementById('container');
+    let logOutBtn = document.getElementById("logOut");
+    
+
+async function listUser(userid){
+    let url = '/user'
+    let token = localStorage.getItem('token')
+
+            let cfg = {
+            method: "GET",
+            headers: {"content-type":"application/json",
+                          'authorization': token},
+            }
+                
+
+    try{
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+        if (response.status != 200) {
+            throw data.error;
+        
+        }
+        console.log(data);
+
+        container.innerHTML = "";
+         
+            for(let value of data){
+            let html = `<h2> Username: ${value.username}</h2>`;
+            html += `<p> User ID: ${value.id} </p><hr>`;
+            let div = document.createElement('div');
+            div.innerHTML = html
+        
+            let deleteUser = document.createElement('button');
+            //let newDiv = document.createElement("div");
+            deleteUser.innerHTML="slett";
+            deleteUser.addEventListener("click", async function(evt) {
+
+                userDelete(value.id)
+                location.href = "userlogin.html";
+            })
+            div.appendChild(deleteUser);
+            //newDiv.innerHTML = html;
+          
+           
+            container.appendChild(div);
+
+
+
+        
+            if(value.id == userid){
+                return value.username
+            }
+        
+    }
+
+    } catch(err){
+        console.log(err)
+    }
+}
+
+
+
+    /*
+
+    deleteUser.addEventListener('click', async function(evt){
+        let url = "/users";
+        let token = localStorage.getItem('token')
+
+        let updata = {
+            id:userid
+        }
+        let cfg = {
+            method: "DELETE",
+            headers: {"content-type":"application/json",
+                          'authorization': token},
+                          body: JSON.stringify(updata)
+        }
+        try {
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            if (response.status != 200) {
+                throw data.error;
+            }
+            deleteUser();
+        } catch(error){
+            console.log(error)
+        }
+    });
+    */
+
+async function userDelete(id){
+
+        let url = "/users"
+        let token = localStorage.getItem('token');
+
+        let updata = {
+            id: id
+        }
+        console.log(updata)
+
+    let cfg = {
+        method: "DELETE",
+        headers:{"content-type":"application/json",
+                'authorization': token},
+        body: JSON.stringify(updata)
+    }
+
+    try{
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        if(response.status != 200){
+            throw data.error;
+        }
+        listUser();
+
+    }catch(error){
+        console.log(error)
+        }
+    }
+
+    listUser();
+  
+    logOutBtn.addEventListener("click", function(evt) {// logg ut funksjon
+          localStorage.setItem("token","");
+          location.href = "userlogin.html";
+      });
+
+</script>
+
+</body>
+</html>
