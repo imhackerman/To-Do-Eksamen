@@ -1,72 +1,60 @@
 * {
-   margin: 2px;
-   box-sizing: border-box;
+  margin: 2px;
+  box-sizing: border-box;
 }
-
-
 
 body {
-    background-image: linear-gradient( #888ea8 0%, #ee7fe6 46%, #888ea8 100%);
-    /*min-height: 200vh; /*farge blandingen i midten*/
-    height:1000px;
-    background-color: #4158D0;
-
-
+  background-image: linear-gradient(#888ea8 0%, #ee7fe6 46%, #888ea8 100%);
+  /*min-height: 200vh; /*farge blandingen i midten*/
+  height: 1000px;
+  background-color: #4158d0;
 }
-
 
 header {
-    font-size: 1.3rem;
-    color: rgb(0, 0, 0);
-    font-family: "Courgette"; 
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    
+  font-size: 1.3rem;
+  color: rgb(0, 0, 0);
+  font-family: "Courgette";
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
-header, form, .footer{
+header,
+form,
+.footer {
   min-height: 20vh;
   display: block;
   justify-content: center;
   align-items: center;
-
 }
 
-
-
-form input, form button {
-    color: rgb(88, 167, 88);
-    cursor: pointer;
-    font-size: 1.2rem;
+form input,
+form button {
+  color: rgb(88, 167, 88);
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
 input {
-    display: block;
-   
+  display: block;
 }
 
-.midtstill, .container {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    
+.midtstill,
+.container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
-
 
 .btnHome {
-    
-    font-size: large;
-
+  font-size: large;
 }
 
 .arrowBtn {
-
-    font-size:30px;
-    color: black;
-    cursor: pointer;
-    padding-left: 15px;
-
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+  padding-left: 15px;
 }
 
 .share-btn {
@@ -76,7 +64,6 @@ input {
   outline: none;
   text-align: center;
   font-size: 30px;
-  
 }
 
 .share-btn:focus,
@@ -89,205 +76,189 @@ input {
   color: #e2e2e2;
 }
 
-  
-  /* Create two equal columns that floats next to each other */
-  .div {
-    border-style: dotted;
-    color:rgb(0, 0, 0);
-    float: left;
-    width: 100%;
-    
-    overflow: scroll;
-    /*height: 300px;  Should be removed. Only for demonstration */
-  }
+/* Create two equal columns that floats next to each other */
+.div {
+  border-style: dotted;
+  color: rgb(0, 0, 0);
+  float: left;
+  width: 100%;
 
- 
+  overflow: scroll;
+  /*height: 300px;  Should be removed. Only for demonstration */
+}
 
-  .styleListDiv {
-    border-style: solid;
-    justify-content: space-evenly;
-    grid-template-columns:auto;
-    display: inline-block;
-    height: fit-content;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #000;
-    background-color: rgb(255, 255, 255);
-    
-    
-  }
+.styleListDiv {
+  border-style: solid;
+  justify-content: space-evenly;
+  grid-template-columns: auto;
+  display: inline-block;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background-color: rgb(255, 255, 255);
+}
 
 h2 {
-    color:rgb(54, 54, 54);
-    justify-items: center;
-    align-items: center;
-    font-size: large;
+  color: rgb(54, 54, 54);
+  justify-items: center;
+  align-items: center;
+  font-size: large;
 }
 
 p {
-    color: rgb(0, 0, 0);
-    justify-items: center;
-    align-items: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-style: italic;
-    font-size: large;
-  
+  color: rgb(0, 0, 0);
+  justify-items: center;
+  align-items: center;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: large;
 }
 
+body {
+  background-color: rgb(21, 211, 211);
+}
 
-        body {
-            background-color: rgb(21, 211, 211);
-        }
-    
-        
+.tasklistContainer {
+  padding-bottom: 50px;
 
-        .tasklistContainer {
-           padding-bottom: 50px;
-      
-            height: 100%;
-            display: grid;
-            grid-template-columns: 300px 300px 300px;
-            grid-template-rows: auto auto auto;
-            
-            
-            /*grid-template-areas: "hd hd hd"
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-template-rows: auto auto auto;
+
+  /*grid-template-areas: "hd hd hd"
                                  "mn ct ct"
                                  "ft ft ft"; */
-        }
+}
 
-/* ------------- DIFFERENT SCREENSIZES----------------*/ 
-        /* MOBILE OVERFLATER */ 
-        @media only screen and (max-width: 815px) {
-        
-            .tasklistContainer {
-            
-                height: 100%;
-                display: grid;
-                grid-template-columns: 300px;
-                grid-template-rows: auto auto auto;
-                
-                /*grid-template-areas: "hd hd hd"
+/* ------------- DIFFERENT SCREENSIZES----------------*/
+/* MOBILE OVERFLATER */
+@media only screen and (max-width: 815px) {
+  .tasklistContainer {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: auto auto auto;
+
+    /*grid-template-areas: "hd hd hd"
                                      "mn ct ct"
                                      "ft ft ft"; */
-            
-        }
-       
-    }
-
+  }
+}
 
 /* --------------- BUTTONS ---------------- */
-  .createList {
-    background-color: #ffffff; /* Green */
-    border-style: dotted;
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-style: italic;
-    border:rgb(0, 0, 0);
-  }
+.createList {
+  background-color: #ffffff; /* Green */
+  border-style: dotted;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-style: italic;
+  border: rgb(0, 0, 0);
+}
 
-  .createTaskButton {
-    background-color: rgb(255, 255, 255);
-    color: rgb(5, 187, 5);
-    font-size: large;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 30px;
-    justify-content: right;
-  }
+.createTaskButton {
+  background-color: rgb(255, 255, 255);
+  color: rgb(5, 187, 5);
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 30px;
+  justify-content: right;
+}
 
-  .settingButtons{
-    border-style: dotted;
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-style: italic;
-    border:rgb(0, 0, 0);
-  }
-.input { 
+.settingButtons {
+  border-style: dotted;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-style: italic;
+  border: rgb(0, 0, 0);
+}
+.input {
   border-radius: 10px;
 }
-  .deleteListButton {
+.deleteListButton {
+  background-color: rgb(255, 255, 255);
+  color: red;
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 30px;
+}
 
-    background-color: rgb(255, 255, 255);
-    color: red;
-    font-size: large;
-    cursor: pointer;
-    border: none; 
-    margin-bottom: 30px;
-  }
+.shareListButton {
+  background-color: rgb(255, 255, 255);
+  color: rgb(5, 187, 5);
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+  justify-self: right;
+}
 
-  .shareListButton {
-    background-color: rgb(255, 255, 255);
-    color: rgb(5, 187, 5);
-    font-size: large;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 10px;
-    justify-self: right;
-  }
+.checkTaskButton {
+  background-color: rgb(255, 255, 255);
+  color: rgb(5, 187, 5);
+  font-size: large;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
+  justify-self: right;
+}
 
-  .checkTaskButton {
-    background-color: rgb(255, 255, 255);
-    color: rgb(5, 187, 5);
-    font-size: large;
-    cursor: pointer;
-    border: none;
-    margin-bottom: 10px;
-    justify-self: right;
-
-
-  }
-
-  .fas fa-dot-circle {
-      size: small;
-  }
- /* ----------------- Divs inside tasklists --------------------------*/
-  .taskDiv {
-      border-bottom: solid 1px black;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-
-  }
+.fas fa-dot-circle {
+  size: small;
+}
+/* ----------------- Divs inside tasklists --------------------------*/
+.taskDiv {
+  border-bottom: solid 1px black;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
 
 .arrowBtn {
-    font-size: large;
-    color: black;
+  font-size: large;
+  color: black;
 }
 
 #placeHere {
-    
-    justify-content:center;
-    max-width: 400px;
-    margin: 0 auto;
-    padding-top: 30px;
-    height: 100%;
-                display: grid;
-                grid-template-columns: 300px;
-                grid-template-rows: auto auto auto;
-  }
-  
-  span {
-    width: 50px;
-    height: 50px;
-    background: black;
-  }
-
-.loginPage {
-    background-image: linear-gradient(43deg, #7f91ee 0%, #ee7fe6 46%, #FFCC70 100%);
-    /*min-height: 200vh; /*farge blandingen i midten*/
-    height:928px;
-    background-color: #4158D0;
-
-
-
-
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding-top: 30px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px;
+  grid-template-rows: auto auto auto;
 }
 
+span {
+  width: 50px;
+  height: 50px;
+  background: black;
+}
 
+.loginPage {
+  background-image: linear-gradient(
+    43deg,
+    #7f91ee 0%,
+    #ee7fe6 46%,
+    #ffcc70 100%
+  );
+  /*min-height: 200vh; /*farge blandingen i midten*/
+  height: 928px;
+  background-color: #4158d0;
+}
 
-
+.shareInput {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
