@@ -142,7 +142,7 @@ p {
         
 
         .tasklistContainer {
-           
+           padding-bottom: 50px;
             border-style: dotted;
             height: 100%;
             display: grid;

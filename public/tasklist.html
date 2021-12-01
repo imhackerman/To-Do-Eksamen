@@ -36,7 +36,6 @@
     <div class="createList">
         <button class = 'createList' id="createList">Legg til ny liste</button>
     </div><br>
-    <input id="shareInput" autocomplete="on">
     
         <div id="maincontainer" class = 'tasklistContainer'></div>
 
@@ -334,8 +333,8 @@ try{
             
               
             if(list.shared == id){
-                
                 let html = `<h2>${list.title}</h2>`
+                html += `<p>Delt av : ${await listUser(list.userid)}</p>`;
                 let div = document.createElement('div');
                 div.className = 'styleListDiv';
                 div.innerHTML = html;
