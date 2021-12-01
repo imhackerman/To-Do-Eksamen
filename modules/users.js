@@ -97,7 +97,7 @@ router.get('/users', async function(req, res, next){
 
 router.get('/user', protect, async function(req, res, next){
 
-    let username = req.locals.username;
+    let username = res.locals.username;
 
     try{
         let data = await db.getUser(username);
