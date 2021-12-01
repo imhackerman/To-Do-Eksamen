@@ -94,7 +94,7 @@ async function listUser(userid){
 /* CHANGE THE FUCKING PASSWORD */
 changePassword.addEventListener('click', async function(evt){
 let url = "/users/changePassword";
-let credString = createCredString(username.value(),
+let credentialString = createCredentialString(username.value(),
     inputPassword.value());
 
     let cfg = {
