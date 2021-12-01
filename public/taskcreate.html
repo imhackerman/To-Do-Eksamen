@@ -46,7 +46,7 @@
     <button id="btnCreate"type="submit"><i class="fa fa-plus"></i>
     </button><br />
 
-    <h3 id="txtResult">Result....</h3>
+    <h3 id="txtResult">Resultat....</h3>
 
 
     
@@ -62,6 +62,7 @@
 
         let listidFromLocalStorage = localStorage.getItem('list');
         let token = localStorage.getItem('token');
+        location.href="tasklist.html"
 
         let updata = {
           tasktext: inpTasktext.value,
