@@ -385,8 +385,7 @@ try{
             if (response.status != 200) {
                 throw data.error;
             }
-            
-            sharedlists.innerHTML = '';
+            owned()
             sharedWithMe(); // refreshes the lists
         }catch(error){
             console.log(error)
