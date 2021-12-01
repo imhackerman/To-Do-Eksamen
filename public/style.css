@@ -149,6 +149,7 @@ p {
             grid-template-columns: 300px 300px 300px;
             grid-template-rows: auto auto auto;
             
+            
             /*grid-template-areas: "hd hd hd"
                                  "mn ct ct"
                                  "ft ft ft"; */
