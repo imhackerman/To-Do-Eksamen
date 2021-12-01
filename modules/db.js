@@ -78,6 +78,12 @@ dbMethods.deleteUser = function (id) {
     return pool.query(sql, values);
 }
 
+dbMethods.changePassword = function (password, salt, username) {
+    let sql = "UPDATE users SET password = $1, salt = $2 WHERE username =$3 RETURNING *";
+    let values = [password, salt, username];
+    return pool.query(sql, values);
+}
+
 
 
 module.exports = dbMethods;
