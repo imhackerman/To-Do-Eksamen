@@ -23,8 +23,9 @@
     <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
     <p>OBS! Dersom du sletter din bruker vil alle lister laget med din bruker også bli slettet.</p>
     
-    
+    <input id="inpPassword" type= "text" placeholder="skriv inn nytt passord" />
     <button id="changePassword" class="settingButtons">Endre passord</button>
+    <p id = txtResult></p>
     <button id="logOut" class="settingButtons">Logg ut</button>
     <div id="container"></div></header>
 <script>
@@ -33,6 +34,8 @@
     let changePassword = document.getElementById('changePassword');
     let container = document.getElementById('container');
     let logOutBtn = document.getElementById("logOut");
+    let newPassword = document.getElementById('inpPassword');
+    let txtResult = document.getElementById('txtResult')
     
 
 async function listUser(userid){
@@ -63,6 +66,7 @@ async function listUser(userid){
             let div = document.createElement('div');
             div.innerHTML = html
         
+        
             let deleteUser = document.createElement('button');
             //let newDiv = document.createElement("div");
             deleteUser.innerHTML="slett";
@@ -92,10 +96,42 @@ async function listUser(userid){
 }
 
 /* CHANGE THE FUCKING PASSWORD */
+
+
+
+async function getUsername(){
+        let url = '/user'
+        let token = localStorage.getItem('token')
+
+        let cfg = {
+            method: "GET",
+            headers: {"content-type":"application/json",
+                          'authorization': token},
+            }
+
+        try{
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            if (response.status != 200) {
+                throw data.error;
+            }
+
+            for(let value of data){
+                    return value.username
+            }
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+
 changePassword.addEventListener('click', async function(evt){
-let url = "/users/changePassword";
-let credentialString = createCredentialString(username.value(),
-    inputPassword.value());
+    let username = await getUsername();
+    console.log(username)
+    let url = "/users/changePassword";
+
+    let credentialString = createCredentialString(username,
+        newPassword.value);
 
     let cfg = {
         method:"PUT",
@@ -182,7 +218,7 @@ async function userDelete(id){
           location.href = "userlogin.html";
       });
 
-      function createCredentialString(username, password) {
+    function createCredentialString(username, password) {
       let combinedStr = username + ":" + password;
       console.log(combinedStr)
       let b64Str = btoa(combinedStr);

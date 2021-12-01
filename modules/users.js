@@ -132,13 +132,13 @@ router.delete('/users', protect, async function(req, res, next){
     }
  })
 
- router.put("/users,changePassword", protect, async function(req, res, next){
+ router.put("/users/changePassword", async function(req, res, next){
      let credentialString = req.headers.authorization;
      let credentials = authUtils.decodeCred(credentialString);
      console.log(credentials);
 
-     if (credentials.password == "" || credentials.username =="") {
-         return;
+     if (credentials.password == "") {
+        throw 'ingen passord er skrevet inn'
      }
      let hash = authUtils.createHash(credentials.password);
 
