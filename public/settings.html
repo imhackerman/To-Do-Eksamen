@@ -91,7 +91,32 @@ async function listUser(userid){
     }
 }
 
+/* CHANGE THE FUCKING PASSWORD */
+changePassword.addEventListener('click', async function(evt){
+let url = "/users/changePassword";
+let credentialString = createCredentialString(username.value(),
+    inputPassword.value());
 
+    let cfg = {
+        method:"PUT",
+        headers: {"authorization": credentialString}
+    }
+    console.log(cfg.headers.credentialString);
+
+    try {
+        let response = await fetch(url, cfg);
+        let data = await response.json();
+
+        if (response.status != 200) {
+            throw data.error;
+        }
+        txtResult.innerHTML = data.msg;
+    }
+    catch (error) {
+        console.log(error);
+        txtResult.innerHTML = "something went horrific ??!?!?"
+    }
+});
 
     /*
 
