@@ -385,6 +385,9 @@ try{
             if (response.status != 200) {
                 throw data.error;
             }
+
+            maincontainer.innerHTML = '';
+            sharedlists.innerHTML = '';
             owned()
             sharedWithMe(); // refreshes the lists
         }catch(error){
@@ -416,6 +419,7 @@ try{
             }
 
             maincontainer.innerHTML = '';
+            sharedlists.innerHTML = '';
             
             owned()
             sharedWithMe(); // refreshes the lists
