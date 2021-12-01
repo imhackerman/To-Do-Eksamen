@@ -96,7 +96,7 @@ router.get('/users', async function(req, res, next){
 
 router.get('/user', protect, async function(req, res, next){
 
-    let username = req.locals.username;
+    let username = res.locals.username;
 
     try{
         let data = await db.getUser(username);
@@ -108,9 +108,28 @@ router.get('/user', protect, async function(req, res, next){
 
 
 
-router.delete('/users', async function(req, res, next){
-    res.status(200).send('DELETE /users').end();
-})
+router.delete('/users', protect, async function(req, res, next){
+
+    let updata = req.body;
+    let userid = res.locals.userid;
+    let username = res.locals.username;
+   
+    console.log(updata)
+    console.log(username)
+ 
+    try{
+        let data = await db.deleteUser(updata.id, username);
+ 
+        if(data.rows.length>0){
+            res.status(200).json({msg: 'Brukeren ble slettet'}).end();
+ 
+        }else{
+            throw 'Brukeren ble ikke slettet'
+        }
+    } catch(err){
+         next(err)
+    }
+ })
 
 
 module.exports = router;
