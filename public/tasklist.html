@@ -38,9 +38,9 @@
     </div><br>
     <input id="shareInput" autocomplete="on">
     
-        <div id="container" ></div>
+        <div id="maincontainer" ></div>
 
-        <div id = 'container2'></div>
+        <div id = 'sharedlists'></div>
 
         <div id = 'mylists'></div>
    
@@ -228,7 +228,7 @@
                 let div = document.createElement('div');
                 div.className = 'styleListDiv';
                 div.innerHTML = html;
-                mylists.appendChild(div)
+                maincontainer.appendChild(div)
 
                 let createNewTask = document.createElement('button');
                 createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
@@ -305,7 +305,7 @@
                 let div = document.createElement('div');
                 div.className = 'styleListDiv';
                 div.innerHTML = html;
-                container2.appendChild(div)
+                maincontainer.appendChild(div)
 
                 let deleteListButton = document.createElement('button')
                 deleteListButton.innerHTML = '<i class="fas fa-check"></i>';
