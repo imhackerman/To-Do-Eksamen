@@ -182,6 +182,14 @@ async function userDelete(id){
           location.href = "userlogin.html";
       });
 
+      function createCredentialString(username, password) {
+      let combinedStr = username + ":" + password;
+      console.log(combinedStr)
+      let b64Str = btoa(combinedStr);
+      return "basic" + b64Str;
+  }
+
+
 </script>
 
 </body>
