@@ -38,23 +38,6 @@
   <body>
 
 
-
-    
-    <form action="/action_page.php" method="get" >
-      <SELECT listid FROM tasks></SELECT>
-      <label for="browser">Velg hvilken kategori du vil sette to do oppgave inn i:</label>
-      <input list="browsers" name="browser" id="browser">
-      <datalist id="browsers">
-        <option value="Edge">
-        <option value="Firefox">
-        <option value="Chrome">
-        <option value="Opera">
-        <option value="Safari">
-      </datalist>
-      <input type="submit">
-    </form>
-    
-    <p><strong>NB!:</strong> The datalist tag is not supported in Safari 12.0 (or earlier).</p>
     
   
     <textarea id="inpTasktext" cols="80" rows="2" placeholder="Task"></textarea><br />
@@ -70,7 +53,6 @@
  </header>
 
     <script>
-      let kategori = document.getElementById("kategori");
       let inpTasktext = document.getElementById("inpTasktext");
       let btnCreate = document.getElementById("btnCreate");
       let txtResult = document.getElementById("txtResult");
