@@ -8,7 +8,7 @@ const pool = new pg.Pool({
 
 let dbMethods = {};
 
-//---------------------Tasklist-------------------------------------
+//Tasklist--------------------------------------------------------------
 
 /*
 
@@ -61,7 +61,7 @@ dbMethods.deleteList = function(id, userid){
     return pool.query(sql, values);
 }
 
-//-------------------Users-------------------------------------------
+//Users-----------------------------------------------------------------------
 
 dbMethods.getAllUsers = function() {
     let sql = "SELECT id, username, password, salt FROM users";
@@ -96,7 +96,7 @@ dbMethods.changePassword = function (password, salt, username) {
 }
 
 
-//--------------Sharing Lists------------------------------------------
+//Sharing Lists----------------------------------------------------------------------
 
 dbMethods.shareList = function(taskid, userid){
     let sql = "UPDATE tasklists SET shared = $2 WHERE id = $1 RETURNING *";
