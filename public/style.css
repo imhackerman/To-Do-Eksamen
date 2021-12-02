@@ -27,7 +27,7 @@ header {
 }
 
 .arrowBtn {
-  font-size: 30px;
+  font-size: 20px;
   color: black;
   cursor: pointer;
   padding-left: 15px;
@@ -111,9 +111,6 @@ p {
   font-style: italic;
   border: rgb(0, 0, 0);
 }
-.input {
-  border-radius: 10px;
-}
 
 .createTaskButton {
   background-color: rgb(255, 255, 255);
@@ -152,11 +149,6 @@ p {
   border-bottom: solid 1px black;
   display: grid;
   grid-template-columns: 2fr 1fr;
-}
-
-.arrowBtn {
-  font-size: large;
-  color: black;
 }
 
 #placeHere {
