@@ -48,9 +48,9 @@ router.post("/lists", protect, async function(req, res, next){
     
     try{
         let data = await db.createTasklist(updata.title, userid, updata.visibility);
-
+        
         if (data.rows.length > 0){
-            res.status(200).json({msg: "Listen er opprettet"}).end();
+            res.status(200).json({msg: 'test'}).end();
         } else{
             throw 'Kunne ikke opprette listen'
         }
@@ -126,16 +126,14 @@ router.post("/lists/share", async function(req, res, next) {
     
     let updata = req.body;
 
-    console.log(updata);
-
     let taskid = updata.taskid;
     let userid = updata.userid;
 
   try {
     let data = await db.shareList(taskid, userid);
 
-    if (data.rows.length > 0) {
-      res.status(200).json({ msg: "Listen ble delt!" }).end();
+    if (data.rows[0].shared > 0) {
+      res.status(200).json({ msg: "Listen ble delt!"}).end();
     } else {
       throw "Listen ble ikke delt";
     }
