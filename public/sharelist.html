@@ -8,17 +8,16 @@
 </head>
 <body>
 
-    <button class="buttonClass" href="tasklist.html">Tilbake til lister </button>
+    <button id = 'backwards' class="buttonClass">Tilbake til lister </button>
     <link rel = "stylesheet" href="./style.css">
-    
-    
     
      
     <header class = "midtstill">
         <h2><br>
             Skriv inn brukernavn til den du vil dele med. OBS: de du deler med kan ikke redigere dine lister 
         </h2>
-
+        <button id = 'allUsers' class = 'buttonClass'>Se alle brukere</button>
+        <br>
     <input id="inpUsername" type= "text" placeholder="Brukernavn" autocomplete="on" />
     <button id = 'shareButton' class="buttonClass">Del liste </button>
     <h3 id="txtResult"></h3>
@@ -28,9 +27,19 @@
  </header>
     <script>
 
-        let shareButton = document.getElementById('shareButton')
-        let inputUsername = document.getElementById('inpUsername')
-        let txtResult = document.getElementById('txtResult')
+        let shareButton = document.getElementById('shareButton');
+        let inputUsername = document.getElementById('inpUsername');
+        let txtResult = document.getElementById('txtResult');
+        let backwardsBtn = document.getElementById('backwards');
+        let allUsers = document.getElementById('allUsers')
+
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'tasklist.html'
+        })
+
+        allUsers.addEventListener('click', function(evt){
+            location.href = 'userlist.html'
+        })
 
     
         shareButton.addEventListener('click', async function(evt){

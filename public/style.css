@@ -5,7 +5,6 @@
 
 body {
   background-image: linear-gradient(#888ea8 0%, #ee7fe6 46%, #888ea8 100%);
-  /*min-height: 200vh; /*farge blandingen i midten*/
   height: 1000px;
   background-color: #4158d0;
 }
@@ -24,13 +23,6 @@ header {
   display: grid;
   justify-items: center;
   align-items: center;
-}
-
-.arrowBtn {
-  font-size: 20px;
-  color: black;
-  cursor: pointer;
-  padding-left: 15px;
 }
 
 
@@ -69,23 +61,22 @@ p {
   grid-template-columns: 300px 300px 300px;
   grid-template-rows: auto auto auto;
 
-  /*grid-template-areas: "hd hd hd"
-                                 "mn ct ct"
-                                 "ft ft ft"; */
+}
+
+.userInfo{
+    text-align: center;
 }
 
 /* ------------- DIFFERENT SCREENSIZES----------------*/
 /* MOBILE OVERFLATER */
 @media only screen and (max-width: 815px) {
+
   .tasklistContainer {
     height: 100%;
     display: grid;
     grid-template-columns: 300px;
     grid-template-rows: auto auto auto;
 
-    /*grid-template-areas: "hd hd hd"
-                                     "mn ct ct"
-                                     "ft ft ft"; */
   }
 }
 
@@ -117,51 +108,7 @@ p {
     font-size: 16px;
     border: rgb(0, 0, 0);
   }
-.settingButtons {
-  border-style: dotted;
-  border-radius: 10px;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-style: italic;
-  border: rgb(0, 0, 0);
-}
 
-.createTaskButton {
-    border-style: dotted;
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-style: italic;
-    border: rgb(0, 0, 0);
-  }
-.shareListButton {
-    border-style: dotted;
-    border-radius: 10px;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-style: italic;
-    border: rgb(0, 0, 0);
-  }
-
-.checkTaskButton {
-  background-color: rgb(255, 255, 255);
-  color: rgb(5, 187, 5);
-  font-size: large;
-  cursor: pointer;
-  border: none;
-  margin-bottom: 10px;
-  justify-self: right;
-}
-
-.fas fa-dot-circle {
-  size: small;
-}
 /* ----------------- Divs inside tasklists --------------------------*/
 .taskDiv {
   border-bottom: solid 1px black;

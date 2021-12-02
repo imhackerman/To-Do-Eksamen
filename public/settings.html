@@ -67,10 +67,12 @@
           container.innerHTML = "";
 
           for (let value of data) {
-              let html = `<h2> Username: ${value.username}</h2>`;
-              html += `<p> User ID: ${value.id} </p><hr>`;
+              let html = `<h1> Din bruker info</h1>`;
+              html += `<p> Username: ${value.username}</p>`;
+              html += `<p> User ID: ${value.id} </p>`;
               let div = document.createElement("div");
               div.innerHTML = html;
+              div.className = 'userInfo'
 
               let deleteUserBtn = document.createElement('button')
               deleteUserBtn.innerHTML = 'Slett bruker'

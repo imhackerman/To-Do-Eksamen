@@ -11,7 +11,9 @@
 </head>
 <body>
     <link rel= "stylesheet" href="style.css">
-    
+
+    <button id = 'backwards' class = 'buttonClass'>Tilbake</button>
+
     <header class="midtstill">
         <h1>Liste av alle brukere</h1>
         <br>
@@ -21,7 +23,12 @@
     </header>
     <script>
         let createUserListbtn = document.getElementById("createUserList");
-        let txtResult = document.getElementById("txtResult")
+        let txtResult = document.getElementById("txtResult");
+        let backwardsBtn = document.getElementById('backwards');
+
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'sharelist.html'
+        })
         
 
         let container = document.getElementById('container');
