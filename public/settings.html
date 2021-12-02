@@ -69,7 +69,8 @@ async function listUser(userid){
         
             let deleteUser = document.createElement('button');
             //let newDiv = document.createElement("div");
-            deleteUser.innerHTML="slett";
+            deleteUser.innerHTML="Slett";
+            deleteUser.className ="settingButtons";
             deleteUser.addEventListener("click", async function(evt) {
 
                 userDelete(value.id)

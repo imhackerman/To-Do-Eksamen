@@ -19,17 +19,11 @@ header {
   align-items: center;
 }
 
-
-
 .midtstill,
 .container {
   display: grid;
   justify-items: center;
   align-items: center;
-}
-
-.btnHome {
-  font-size: large;
 }
 
 .arrowBtn {
@@ -39,35 +33,6 @@ header {
   padding-left: 15px;
 }
 
-.share-btn {
-  display: inline-block;
-  color: black;
-  border: none;
-  outline: none;
-  text-align: center;
-  font-size: 30px;
-}
-
-.share-btn:focus,
-.share-btn:hover {
-  text-decoration: none;
-  opacity: 0.8;
-}
-
-.share-btn:active {
-  color: #e2e2e2;
-}
-
-/* Create two equal columns that floats next to each other */
-.div {
-  border-style: dotted;
-  color: rgb(0, 0, 0);
-  float: left;
-  width: 100%;
-
-  overflow: scroll;
-  /*height: 300px;  Should be removed. Only for demonstration */
-}
 
 .styleListDiv {
   border-style: solid;
@@ -97,13 +62,9 @@ p {
   font-size: large;
 }
 
-body {
-  background-color: rgb(21, 211, 211);
-}
 
 .tasklistContainer {
   padding-bottom: 50px;
-
   height: 100%;
   display: grid;
   grid-template-columns: 300px 300px 300px;
@@ -131,25 +92,13 @@ body {
 
 /* --------------- BUTTONS ---------------- */
 .createList {
-  background-color: #ffffff; /* Green */
-  border-style: dotted;
+  background-color: #ffffff; 
   border-radius: 10px;
   color: rgb(0, 0, 0);
   cursor: pointer;
-  display: inline-block;
   font-size: 16px;
   font-style: italic;
   border: rgb(0, 0, 0);
-}
-
-.createTaskButton {
-  background-color: rgb(255, 255, 255);
-  color: rgb(5, 187, 5);
-  font-size: large;
-  cursor: pointer;
-  border: none;
-  margin-bottom: 30px;
-  justify-content: right;
 }
 
 .settingButtons {
@@ -165,15 +114,16 @@ body {
 .input {
   border-radius: 10px;
 }
-.deleteListButton {
+
+.createTaskButton {
   background-color: rgb(255, 255, 255);
-  color: red;
+  color: rgb(5, 187, 5);
   font-size: large;
   cursor: pointer;
   border: none;
   margin-bottom: 30px;
+  justify-content: right;
 }
-
 .shareListButton {
   background-color: rgb(255, 255, 255);
   color: rgb(5, 187, 5);
