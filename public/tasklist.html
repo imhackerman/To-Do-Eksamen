@@ -238,7 +238,7 @@ try{
 
     async function owned(){
         // returnere listid på lister man har laget selv
-        let data = await fetchData('lists', 'GET')
+        let data = await fetchData('mylists', 'GET')
         let taskdata = await fetchData('task', 'GET');
 
         maincontainer.innerHTML = "";
@@ -336,12 +336,18 @@ try{
         let userdata = await fetchData('user', 'GET')
         let taskdata = await fetchData('task', 'GET')
 
+        /*
         if(userdata.error){
             console.log('ingen har delt lister med deg')
             return;
         }
+        */
+
+        
 
         id = userdata[0].id;
+        console.log(id)
+        console.log(data)
 
         for(let list of data){
             

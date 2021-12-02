@@ -10,13 +10,12 @@ let dbMethods = {};
 
 //Tasklist--------------------------------------------------------------
 
-/*
 
 dbMethods.getAllTasklists = function(){
     let sql = "SELECT id, title, userid, shared FROM tasklists"
     return pool.query(sql);
 }
-*/
+
 
 dbMethods.getMyLists = function(userid){
     let sql = 'SELECT id, title, userid, shared FROM tasklists WHERE userid = $1';
