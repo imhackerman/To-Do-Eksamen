@@ -24,17 +24,19 @@
         <i class="fas fa-arrow-left" id="arrow"></i>
     </a><br>
 
-    <header class="midtstill";
+    <header class="midtstill">
         <h1>Userlist</h1>
     
     <div class="createList">
         <button class = 'createList' id="createUserList">Generer brukerliste</button>
     </div><br>
         <div id="container" ></div>
+    </header>
 <script>
     let createUserListbtn = document.getElementById('createUserList');
 
     createUserListbtn.addEventListener('click', async function(evt) {
+        listUser(7)
 
     })
 
@@ -49,7 +51,7 @@
             let response = await fetch(url);
             let data = await response.json();
             if (response.status != 200) {
-                throw listdata.error;
+                throw data.error;
             }
 
             for(let value of data){
@@ -60,15 +62,6 @@
         } catch(err){
             console.log(err)
         }
-    }
-
-    for (let list of userid) {
-        
-        let html = `<h2>${list.userid}</h2>`
-        html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
-        let div = document.createElement("div");
-        container.appen(div);
-
     }
     
     
