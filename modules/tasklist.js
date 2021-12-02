@@ -125,7 +125,7 @@ router.delete("/task", protect, async function(req, res, next) {
 
 //lists/share/unshare-------------------------------------------------------------------------
 
-router.post("/lists/share", async function(req, res, next) {
+router.put("/lists/share", async function(req, res, next) {
   
     
     let updata = req.body;
@@ -146,7 +146,7 @@ router.post("/lists/share", async function(req, res, next) {
         }
     });
 
-router.post('/lists/unshare', async function(req, res, next){
+router.put('/lists/unshare', async function(req, res, next){
     let updata = req.body;
 
     try {
