@@ -4,19 +4,6 @@
 }
 
 body {
-    background-image: linear-gradient( #888ea8 0%, #ee7fe6 46%, #888ea8 100%);
-    /*min-height: 200vh; /*farge blandingen i midten*/
-    height:1000px;
-    background-color: #4158D0;
-}
-
-header {
-    font-size: 1.3rem;
-    color: rgb(0, 0, 0);
-    font-family: "Courgette"; 
-    display: grid;
-    justify-items: center;
-    align-items: center;
   background-image: linear-gradient(#888ea8 0%, #ee7fe6 46%, #888ea8 100%);
   /*min-height: 200vh; /*farge blandingen i midten*/
   height: 1000px;
