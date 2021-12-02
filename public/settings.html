@@ -24,9 +24,9 @@
     -->
   </script>
 
-    <a class="arrowBtn" href="tasklist.html">
-      <i class="fas fa-arrow-left" id="arrow"> Tilbake til lister</i> </a
-    ><br />
+    <button id = 'backwards'class="buttonClass">Tilbake til lister </button>
+      
+    <br />
     <header class="midtstill">
       <h1>Settings</h1>
       <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
@@ -40,12 +40,11 @@
         type="text"
         placeholder="Skriv inn nytt passord"
       />
-      <button id="changePassword" class="settingButtons">Endre passord</button>
+      <button id="changePassword" class="buttonClass">Endre passord</button>
       <p id="txtResult"></p>
-      <button id="logOut" class="settingButtons">Logg ut</button><br />
+      <button id="logOut" class="buttonClass">Logg ut</button><br />
       <div id="container"></div>
     </header>
-    <button id="deleteUserBtn" class="settingButtons"></button>
 
     <script>
       let changePassword = document.getElementById("changePassword");
@@ -54,6 +53,11 @@
       let newPassword = document.getElementById("inpPassword");
       let txtResult = document.getElementById("txtResult");
       let deleteUserBtn = document.getElementById("deleteUserBtn");
+      let backwardsBtn = document.getElementById('backwards');
+
+      backwardsBtn.addEventListener('click', function(evt){
+        location.href = "tasklist.html";
+      })
 
       async function listUser() {
         let url = "/user";
@@ -81,13 +85,12 @@
               let div = document.createElement("div");
               div.innerHTML = html;
 
-              let deleteUserBtn = document.getElementById("deleteUserBtn");
-
-              deleteUserBtn.innerHTML = "Slett bruker";
-
+              let deleteUserBtn = document.createElement('button')
+              deleteUserBtn.innerHTML = 'Slett bruker'
+              deleteUserBtn.className = "buttonClassDelete";
               deleteUserBtn.addEventListener("click", async function (evt) {
                 await deleteUser(value.id);
-                location.href = "userlogin.html";
+                location.href = "index.html";
             });
 
             div.appendChild(deleteUserBtn);
@@ -189,7 +192,7 @@
 
       logOutBtn.addEventListener("click", function (evt) {
           localStorage.setItem("token", "");
-          location.href = "userlogin.html";
+          location.href = "index.html";
       });
 
       function createCredentialString(username, password) {
