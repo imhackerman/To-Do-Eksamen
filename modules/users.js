@@ -17,6 +17,7 @@ router.post('/users/login', async function(req, res, next){
 
     try {
         let data = await db.getUser(cred.username);
+
         if(data.rows.length > 0){
 
             let userid = data.rows[0].id;
@@ -27,7 +28,7 @@ router.post('/users/login', async function(req, res, next){
             let passwordVeryfied = authUtils.verifyPassword(cred.password, hash, salt);
 
             if(!passwordVeryfied){
-                res.status(403).json({msg:'Feil passord'}).end();
+                res.status(403).json({error:'Feil passord'}).end();
                 return;
             }
 
@@ -38,7 +39,8 @@ router.post('/users/login', async function(req, res, next){
                 token: tok
             }).end();
             return;
-        } res.status(403).json({msg:'brukeren finnes ikke'}).end()
+
+        } else{ res.status(403).json({error:'brukeren finnes ikke'}).end()}
     } catch (error) {
         console.log(error)
     }
