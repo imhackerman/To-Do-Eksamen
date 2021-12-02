@@ -59,18 +59,18 @@
         btnLogin.addEventListener("click", async function (evt) {
             let url = "/users/login";
             let credString = createCredentialString(
-            inputUsername.value,
-            inputPassword.value
+                inputUsername.value,
+                inputPassword.value
             );
 
             let cfg = {
-            method: "POST",
-            headers: { authorization: credString },
+                method: "POST",
+                headers: {'authorization': credString },
             };
 
             try {
-            let response = await fetch(url, cfg);
-            let data = await response.json();
+                let response = await fetch(url, cfg);
+                let data = await response.json();
 
             if (response.status != 200) {
                 throw data.error;
@@ -78,11 +78,12 @@
 
             txtResult.innerHTML = data.msg;
             localStorage.setItem("token", data.token);
-            console.log(data);
+
             window.location.href = "/tasklist.html";
+
             } catch (error) {
-            console.log(error);
-            txtResult.innerHTML = "Feil brukernavn eller passord!";
+                console.log(error);
+                txtResult.innerHTML = "Feil brukernavn eller passord!";
             }
         });
 
@@ -93,6 +94,7 @@
         }
 
         btnCreate.addEventListener("click", async function (evt) {
+            
             if (inputUsername.value.includes(":")) {
                 txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
                 return;
@@ -106,15 +108,12 @@
 
             let cfg = {
                 method: "POST",
-                headers: { authorization: credString },
+                headers: {'authorization': credString },
             };
-
-            console.log(cfg.headers.authorization);
 
             try {
                 let response = await fetch(url, cfg);
                 let data = await response.json();
-                console.log(data);
 
             if (response.status != 200) {
                 throw data.error;
@@ -130,10 +129,10 @@
         //------------------------------------
         function createCredentialString(username, password) {
             let combinedStr = username + ":" + password;
-            console.log(combinedStr);
             let b64Str = btoa(combinedStr);
             return "basic" + b64Str;
         }
+        
     </script>
   </body>
 </html>
