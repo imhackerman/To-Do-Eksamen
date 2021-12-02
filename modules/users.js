@@ -113,6 +113,7 @@ router.delete('/users', async function(req, res, next){
     let updata = req.body;
     //let userid = res.locals.userid;
     //let username = res.locals.username;
+    console.log(updata.id)
 
  
     try{

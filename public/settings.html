@@ -50,7 +50,7 @@
       let txtResult = document.getElementById("txtResult");
       let deleteUserBtn = document.getElementById("deleteUserBtn");
 
-      async function listUser(userid) {
+      async function listUser() {
         let url = "/user";
         let token = localStorage.getItem("token");
 
@@ -81,16 +81,12 @@
               deleteUserBtn.innerHTML = "Slett bruker";
 
               deleteUserBtn.addEventListener("click", async function (evt) {
-                deleteUser(value.id);
+                await deleteUser(value.id);
                 location.href = "userlogin.html";
             });
 
             div.appendChild(deleteUserBtn);
             container.appendChild(div);
-
-            if (value.id == userid) {
-              return value.username;
-            }
           }
         } catch (err) {
           console.log(err);
@@ -186,7 +182,7 @@
 
       async function deleteUser(id) {
             let url = "/users";
-            let token = localStorage.getItem("token");
+            //let token = localStorage.getItem("token");
           
             let updata = {
                 id: id,
@@ -194,8 +190,7 @@
 
         let cfg = {
             method: "DELETE",
-            headers: { "content-type": "application/json", 
-            "authorization": token },
+            headers: { "content-type": "application/json"},
             body: JSON.stringify(updata),
         };
 
