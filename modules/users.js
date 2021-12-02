@@ -53,11 +53,6 @@ router.post("/users", async function(req, res, next){
     let credString = req.headers.authorization; 
     let cred = authUtils.decodeCred(credString);
 
-
-    //HER ER EN FEIL MED credString
-    // cannot read property 'replace' of undefined (auth_utils linje 12)
-
-
     if (cred.username == "" || cred.password == "") {
         res.status(401).json({error: "ingen brukernavn, eller passord"}).end();
         return;
@@ -113,11 +108,7 @@ router.get('/user', protect, async function(req, res, next){
 router.delete('/users', async function(req, res, next){
 
     let updata = req.body;
-    //let userid = res.locals.userid;
-    //let username = res.locals.username;
-    console.log(updata.id)
 
- 
     try{
         let data = await db.deleteUser(updata.id);
  
@@ -135,8 +126,6 @@ router.delete('/users', async function(req, res, next){
  router.put("/users/changePassword", async function(req, res, next){
      let credentialString = req.headers.authorization;
      let credentials = authUtils.decodeCred(credentialString);
-     console.log(credentials);
-
      let hash = authUtils.createHash(credentials.password);
 
      try {
