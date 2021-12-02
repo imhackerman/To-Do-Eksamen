@@ -25,11 +25,9 @@
     </a><br>
 
     <header class="midtstill">
-        <h1>Userlist</h1>
-    
-    <div class="createList">
-        <button class = 'createList' id="createUserList">Generer brukerliste</button>
-    </div><br>
+        <h1>Liste av alle brukere</h1>
+        <br>
+
         <div id="container" ></div>
 <script>
     let createUserListbtn = document.getElementById('createUserList');
@@ -57,55 +55,15 @@
             container.innerHTML = '';
 
             for(let value of data){
-                let html = `<p>${value.username}<p>`;
+                let html = `<p>Brukernavn: ${value.username}</p>`;
+                html += `<p>Id: ${value.id}</p>`
                 let div = document.createElement('div');
                 div.innerHTML = html;
-                console.log(value.id)
-                
-
-                let deleteButton = document.createElement('button');
-                deleteButton.innerHTML='Slett bruker';
-                deleteButton.addEventListener('click', async function(evt){
-                    deleteUser(value.id)
-                })
-                div.appendChild(deleteButton)
 
                 container.appendChild(div)
             }
         } catch(err){
             console.log(err)
-        }
-    }
-
-
-    async function deleteUser(id){
-
-        let url = "/users"
-        let token = localStorage.getItem('token');
-
-        let updata = {
-            id: id
-        }
-        console.log(updata.id)
-
-        let cfg = {
-            method: "DELETE",
-            headers:{"content-type":"application/json",
-                        'authorization': token},
-            body: JSON.stringify(updata)
-        }
-
-        try{
-            let response = await fetch(url, cfg);
-            let data = await response.json();
-
-            if(response.status != 200){
-                throw data.error;
-            }
-            listUsers();
-
-        }catch(error){
-           console.log(error)
         }
     }
 
