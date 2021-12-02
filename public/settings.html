@@ -40,7 +40,7 @@
       <button id="logOut" class="settingButtons">Logg ut</button><br />
       <div id="container"></div>
     </header>
-    <button id="deleteUser" class="settingButtons"></button>
+    <button id="deleteUserBtn" class="settingButtons"></button>
 
     <script>
       let changePassword = document.getElementById("changePassword");
@@ -48,7 +48,7 @@
       let logOutBtn = document.getElementById("logOut");
       let newPassword = document.getElementById("inpPassword");
       let txtResult = document.getElementById("txtResult");
-      let deleteUser = document.getElementById("deleteUser");
+      let deleteUserBtn = document.getElementById("deleteUserBtn");
 
       async function listUser(userid) {
         let url = "/user";
@@ -56,7 +56,8 @@
 
         let cfg = {
           method: "GET",
-          headers: { "content-type": "application/json", authorization: token },
+          headers: { "content-type": "application/json",
+                    "authorization": token },
         };
 
         try {
@@ -75,16 +76,16 @@
               let div = document.createElement("div");
               div.innerHTML = html;
 
-              let deleteUser = document.getElementById("deleteUser");
+              let deleteUserBtn = document.getElementById("deleteUserBtn");
 
-              deleteUser.innerHTML = "Slett bruker";
+              deleteUserBtn.innerHTML = "Slett bruker";
 
-              deleteUser.addEventListener("click", async function (evt) {
+              deleteUserBtn.addEventListener("click", async function (evt) {
                 deleteUser(value.id);
                 location.href = "userlogin.html";
             });
 
-            div.appendChild(deleteUser);
+            div.appendChild(deleteUserBtn);
             container.appendChild(div);
 
             if (value.id == userid) {
