@@ -91,7 +91,7 @@ router.post("/task", protect, async function(req, res, next) {
         let data = await db.createTask(userid, updata.tasktext, updata.listid);
 
         if (data.rows.length > 0) {
-            res.status(200).json({msg: "Gjøremålet er lagt til i to do listen!"}).end();
+            res.status(200).json({msg: "Gjøremålet er lagt til i listen!"}).end();
         }
         else {
             throw "Gjøremålet kunne ikke bli lagt til!";
