@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>create user</title>
-
-</head>
-<body>
-   <!--henter fonten-->
+  </head>
+  <body>
+    <!--henter fonten-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,34 +15,34 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./style.css" />
-   <!-- henter icons -->
+    <!-- henter icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
-    <header class= "midtstill">
-        <h1>Create new user</h1>
+    <header class="midtstill">
+      <h1>Create new user</h1>
 
-    <input id="inpUsername" type= "text" placeholder="User name" />
-    <input id="inpPassword" type= "text" placeholder="Password" /> <br><br>
+      <input id="inpUsername" type="text" placeholder="User name" />
+      <input id="inpPassword" type="text" placeholder="Password" /> <br /><br />
 
-    <button id="btnCreate">Create user</button><br>
-    <h3 id="txtResult">Resultat....</h3>
+      <button id="btnCreate">Create user</button><br />
+      <h3 id="txtResult">Resultat....</h3>
     </header>
 
     <!------------- JavaScript --------------->
-<script>
-    let inputUsername = document.getElementById("inpUsername");
-    let inputPassword = document.getElementById("inpPassword");
-    let btnCreate = document.getElementById("btnCreate");
-    let txtResult = document.getElementById("txtResult");
+    <script>
+      let inputUsername = document.getElementById("inpUsername");
+      let inputPassword = document.getElementById("inpPassword");
+      let btnCreate = document.getElementById("btnCreate");
+      let txtResult = document.getElementById("txtResult");
 
-    btnCreate.addEventListener("click", async function(evt) {
-
-        if(inputUsername.value.includes(':')){
-          txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
-          return;
+      btnCreate.addEventListener("click", async function (evt) {
+        
+        if (inputUsername.value.includes(":")) {
+            txtResult.innerHTML = "Brukernavn kan ikke inneholde ':'";
+            return;
         }
 
         let username = inputUsername.value;
@@ -52,44 +51,35 @@
         let url = "/users";
         let credString = createCredentialString(username, password);
 
-
-
         let cfg = {
-            method: "POST", 
-            headers: {"authorization":credString}
-        }   
-
-        console.log(cfg.headers.authorization)
+            method: "POST",
+            headers: {"authorization": credString },
+        };
 
         try {
-            let response = await fetch(url, cfg); 
+            let response = await fetch(url, cfg);
             let data = await response.json();
-            console.log(data)
+            console.log(data);
 
             if (response.status != 200) {
                 throw data.error;
             }
 
             txtResult.innerHTML = data.msg;
-
-        }
-        catch(error) {
+        } catch (error) {
             console.log(error);
             txtResult.innerHTML = "Somthing went wrong - check the console window";
+            }
+        });
+
+        //--------------------------------------------------------------------
+
+        function createCredentialString(username, password) {
+            let combinedStr = username + ":" + password;
+            console.log(combinedStr);
+            let b64Str = btoa(combinedStr);
+            return "basic" + b64Str;
         }
-
-    }); 
-
-  //------------------------------------
-  function createCredentialString(username, password) {
-      let combinedStr = username + ":" + password;
-      console.log(combinedStr)
-      let b64Str = btoa(combinedStr);
-      return "basic" + b64Str;
-  }
-
-
     </script>
   </body>
 </html>
-

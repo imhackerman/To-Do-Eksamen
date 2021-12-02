@@ -1,233 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>settings</title>
-</head>
-<body>
-    <link rel= "stylesheet" href="style.css">
+  </head>
+  <body>
+    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
-  rel="stylesheet"/>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <a class="arrowBtn" href="tasklist.html">
-    <i class="fas fa-arrow-left" id="arrow"> Tilbake til lister</i>
-</a><br>
-<header class= "midtstill">
-    <h1> Settings</h1>
-    <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
-    <p>OBS! Dersom du sletter din bruker vil alle lister laget med din bruker også bli slettet.</p>
-    
-    <input id="inpPassword" type= "text" placeholder="Skriv inn nytt passord" />
-    <button id="changePassword" class="settingButtons">Endre passord</button>
-    <p id = txtResult></p>
-    <button id="logOut" class="settingButtons">Logg ut</button>
-    <div id="container"></div></header>
-<script>
+    <a class="arrowBtn" href="tasklist.html">
+      <i class="fas fa-arrow-left" id="arrow"> Tilbake til lister</i> </a
+    ><br />
+    <header class="midtstill">
+      <h1>Settings</h1>
+      <p>Her har du mulighet til å endre passord og slette din egen bruker</p>
+      <p>
+        OBS! Dersom du sletter din bruker vil alle lister laget med din bruker
+        også bli slettet.
+      </p>
+      <br />
+      <input
+        id="inpPassword"
+        type="text"
+        placeholder="Skriv inn nytt passord"
+      />
+      <button id="changePassword" class="settingButtons">Endre passord</button>
+      <p id="txtResult"></p>
+      <button id="logOut" class="settingButtons">Logg ut</button><br />
+      <div id="container"></div>
+    </header>
+    <button id="deleteUserBtn" class="settingButtons"></button>
 
-   
-    let changePassword = document.getElementById('changePassword');
-    let container = document.getElementById('container');
-    let logOutBtn = document.getElementById("logOut");
-    let newPassword = document.getElementById('inpPassword');
-    let txtResult = document.getElementById('txtResult')
-    
+    <script>
+      let changePassword = document.getElementById("changePassword");
+      let container = document.getElementById("container");
+      let logOutBtn = document.getElementById("logOut");
+      let newPassword = document.getElementById("inpPassword");
+      let txtResult = document.getElementById("txtResult");
+      let deleteUserBtn = document.getElementById("deleteUserBtn");
 
-async function listUser(userid){
-    let url = '/user'
-    let token = localStorage.getItem('token')
+      async function listUser() {
+        let url = "/user";
+        let token = localStorage.getItem("token");
 
-            let cfg = {
-            method: "GET",
-            headers: {"content-type":"application/json",
-                          'authorization': token},
-            }
-                
+        let cfg = {
+          method: "GET",
+          headers: { "content-type": "application/json",
+                    "authorization": token },
+        };
 
-    try{
-        let response = await fetch(url, cfg);
-        let data = await response.json();
-        if (response.status != 200) {
+        try {
+          let response = await fetch(url, cfg);
+          let data = await response.json();
+
+          if (response.status != 200) {
             throw data.error;
-        
-        }
-        console.log(data);
+          }
 
-        container.innerHTML = "";
-         
-            for(let value of data){
-            let html = `<h2> Username: ${value.username}</h2>`;
-            html += `<p> User ID: ${value.id} </p><hr>`;
-            let div = document.createElement('div');
-            div.innerHTML = html
-        
-        
-            let deleteUser = document.createElement('button');
-            //let newDiv = document.createElement("div");
-            deleteUser.innerHTML="Slett";
-            deleteUser.className ="settingButtons";
-            deleteUser.addEventListener("click", async function(evt) {
+          container.innerHTML = "";
 
-                userDelete(value.id)
+          for (let value of data) {
+              let html = `<h2> Username: ${value.username}</h2>`;
+              html += `<p> User ID: ${value.id} </p><hr>`;
+              let div = document.createElement("div");
+              div.innerHTML = html;
+
+              let deleteUserBtn = document.getElementById("deleteUserBtn");
+
+              deleteUserBtn.innerHTML = "Slett bruker";
+
+              deleteUserBtn.addEventListener("click", async function (evt) {
+                await deleteUser(value.id);
                 location.href = "userlogin.html";
-            })
-            div.appendChild(deleteUser);
-            //newDiv.innerHTML = html;
-          
-           
+            });
+
+            div.appendChild(deleteUserBtn);
             container.appendChild(div);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
-
-
-        
-            if(value.id == userid){
-                return value.username
-            }
-        
-    }
-
-    } catch(err){
-        console.log(err)
-    }
-}
-
-/* CHANGE THE FUCKING PASSWORD */
-
-
-
-async function getUsername(){
-        let url = '/user'
-        let token = localStorage.getItem('token')
+      async function getUsername() {
+        let url = "/user";
+        let token = localStorage.getItem("token");
 
         let cfg = {
             method: "GET",
-            headers: {"content-type":"application/json",
-                          'authorization': token},
-            }
+            headers: { "content-type": "application/json",
+                        "authorization": token },
+        };
 
-        try{
-            let response = await fetch(url, cfg);
-            let data = await response.json();
-            if (response.status != 200) {
-                throw data.error;
-            }
-
-            for(let value of data){
-                    return value.username
-            }
-        } catch(err){
-            console.log(err)
-        }
-    }
-
-
-changePassword.addEventListener('click', async function(evt){
-    let username = await getUsername();
-    console.log(username)
-    let url = "/users/changePassword";
-
-    let credentialString = createCredentialString(username,
-        newPassword.value);
-
-    let cfg = {
-        method:"PUT",
-        headers: {"authorization": credentialString}
-    }
-    console.log(cfg.headers.credentialString);
-
-    try {
-        let response = await fetch(url, cfg);
-        let data = await response.json();
-
-        if (response.status != 200) {
+        try {
+          let response = await fetch(url, cfg);
+          let data = await response.json();
+          
+          if (response.status != 200) {
             throw data.error;
-        }
-        txtResult.innerHTML = data.msg;
-    }
-    catch (error) {
-        console.log(error);
-        txtResult.innerHTML = "something went horrific ??!?!?"
-    }
-});
+          }
 
-    /*
-    deleteUser.addEventListener('click', async function(evt){
-        let url = "/users";
-        let token = localStorage.getItem('token')
-        let updata = {
-            id:userid
+          for (let value of data) {
+            return value.username;
+          }
+        } catch (err) {
+          console.log(err);
         }
+      }
+
+    changePassword.addEventListener("click", async function (evt) {
+        let username = await getUsername();
+        let url = "/users/changePassword";
+
+        if(newPassword.value == ""){
+            txtResult.innerHTML = 'Du må skrive inn et nytt passord'
+            return;
+        }
+
+        let credentialString = createCredentialString(
+          username,
+          newPassword.value
+        );
+
+        let cfg = {
+          method: "PUT",
+          headers: { "authorization": credentialString },
+        };
+
+        try {
+          let response = await fetch(url, cfg);
+          let data = await response.json();
+
+          if (response.status != 200) {
+            throw data.error;
+          }
+
+          txtResult.innerHTML = data.msg;
+
+        } catch (error) {
+          console.log(error);
+          txtResult.innerHTML = "noe gikk galt - sjekk konsollen";
+        }
+      });
+
+      async function deleteUser(id) {
+            let url = "/users";
+          
+            let updata = {
+                id: id,
+            };
+
         let cfg = {
             method: "DELETE",
-            headers: {"content-type":"application/json",
-                          'authorization': token},
-                          body: JSON.stringify(updata)
-        }
+            headers: { "content-type": "application/json"},
+            body: JSON.stringify(updata),
+        };
+
         try {
             let response = await fetch(url, cfg);
             let data = await response.json();
+
             if (response.status != 200) {
                 throw data.error;
             }
-            deleteUser();
-        } catch(error){
-            console.log(error)
+
+        } catch (error) {
+            console.log(error);
         }
-    });
-    */
+      }
 
-async function userDelete(id){
+      listUser();
 
-        let url = "/users"
-        let token = localStorage.getItem('token');
-
-        let updata = {
-            id: id
-        }
-        console.log(updata)
-
-    let cfg = {
-        method: "DELETE",
-        headers:{"content-type":"application/json",
-                'authorization': token},
-        body: JSON.stringify(updata)
-    }
-
-    try{
-        let response = await fetch(url, cfg);
-        let data = await response.json();
-
-        if(response.status != 200){
-            throw data.error;
-        }
-        listUser();
-
-    }catch(error){
-        console.log(error)
-        }
-    }
-
-    listUser();
-  
-    logOutBtn.addEventListener("click", function(evt) {// logg ut funksjon
-          localStorage.setItem("token","");
+      logOutBtn.addEventListener("click", function (evt) {
+          localStorage.setItem("token", "");
           location.href = "userlogin.html";
       });
 
-    function createCredentialString(username, password) {
-      let combinedStr = username + ":" + password;
-      console.log(combinedStr)
-      let b64Str = btoa(combinedStr);
-      return "basic" + b64Str;
-  }
-
-
-</script>
-
-</body>
+      function createCredentialString(username, password) {
+        let combinedStr = username + ":" + password;
+        console.log(combinedStr);
+        let b64Str = btoa(combinedStr);
+        return "basic" + b64Str;
+      }
+    </script>
+  </body>
 </html>
