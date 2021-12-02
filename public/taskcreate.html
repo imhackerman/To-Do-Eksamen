@@ -9,18 +9,22 @@
 </head>
 <body>
   
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!--
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
       rel="stylesheet"
     />
+    -->
+    
     <link rel="stylesheet" href="./style.css" />
-    <!--henter fonten-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   
 
     <a class="arrowBtn" href="tasklist.html">
       <i class="fas fa-arrow-left" ></i>
@@ -32,8 +36,10 @@
   </head>
   <body>
 
+    <button id = 'backwards'>Tilbake</button>
+
     <input id="inpTasktext" placeholder="legg til gjøremål" type= "text" />
-    <button id="btnCreate"type="submit"><i class="fa fa-plus"></i>
+    <button id="btnCreate"type="submit">+
     </button><br />
     <h3 id="txtResult"></h3>
 
@@ -44,6 +50,11 @@
         let inpTasktext = document.getElementById("inpTasktext");
         let btnCreate = document.getElementById("btnCreate");
         let txtResult = document.getElementById("txtResult");
+        let backwardsBtn = document.getElementById('backwards');
+
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'tasklist.html';
+        })
 
         btnCreate.addEventListener("click", async function (evt) {
             let url = "/task";
