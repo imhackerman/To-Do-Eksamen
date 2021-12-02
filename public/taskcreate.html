@@ -37,13 +37,14 @@
   </head>
   <body>
 
-    <input id="inpTasktext" placeholder="legg til gjøremål" type= "text"/>
+    <input id="inpTasktext" placeholder="legg til gjøremål" type= "text" />
+   
   
       
 
     <button id="btnCreate"type="submit"><i class="fa fa-plus"></i>
     </button><br />
-
+    <h3 id="txtResult"></h3>
    <!--   <h3 id="txtResult">Resultat....</h3>  -->
 
 
@@ -60,7 +61,7 @@
 
         let listidFromLocalStorage = localStorage.getItem('list');
         let token = localStorage.getItem('token');
-        location.href="tasklist.html"
+        
 
         let updata = {
           tasktext: inpTasktext.value,

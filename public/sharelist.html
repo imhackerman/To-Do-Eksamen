@@ -31,20 +31,29 @@
 
     <input id="inpUsername" type= "text" placeholder="Brukernavn" autocomplete="on" />
     <button id = 'testbutton' class="settingButtons">Del liste </button>
+    <h3 id="txtResult"></h3>
+    
+
 
  </header>
     <script>
 
 let testbutton = document.getElementById('testbutton')
 let inputUsername = document.getElementById('inpUsername')
+let txtResult = document.getElementById('txtResult')
 
     
 testbutton.addEventListener('click', async function(evt){
     
     let id = localStorage.getItem('listid');
-
     let username = inputUsername.value;
     let userid = await getUserId(username);
+
+    if(inputUsername.value =="") {
+        txtResult.innerHTML = "Du må skrive inn ett brukernavn";
+         return;
+    }
+   
 
     let url = "/lists/share"
 
@@ -59,20 +68,19 @@ testbutton.addEventListener('click', async function(evt){
         body: JSON.stringify(updata),
     }
 
-    console.log(cfg)
-
     try{
         let response = await fetch(url, cfg);
         let data = await response.json();
-        console.log(data)
         if (response.status != 200) {
         throw data.error;
     }
+        
+    txtResult.innerHTML = data.msg;
 
-    window.location.href = '/tasklist.html'
 
     } catch(err){
         console.log(err)
+        txtResult.innerHTML = 'Noe gikk galt'
     }
 
 })
