@@ -22,10 +22,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-  
-        
-    <!--Henter pluss ikonet-->
-
     <a class="arrowBtn" href="tasklist.html">
       <i class="fas fa-arrow-left" ></i>
   </a>
@@ -33,64 +29,55 @@
   <header class= "midtstill">
         <h1> To Do App list</h1>
    
-
   </head>
   <body>
 
     <input id="inpTasktext" placeholder="legg til gjøremål" type= "text" />
-   
-  
-      
-
     <button id="btnCreate"type="submit"><i class="fa fa-plus"></i>
     </button><br />
     <h3 id="txtResult"></h3>
-   <!--   <h3 id="txtResult">Resultat....</h3>  -->
-
 
     
  </header>
 
     <script>
-      let inpTasktext = document.getElementById("inpTasktext");
-      let btnCreate = document.getElementById("btnCreate");
-      let txtResult = document.getElementById("txtResult");
+        let inpTasktext = document.getElementById("inpTasktext");
+        let btnCreate = document.getElementById("btnCreate");
+        let txtResult = document.getElementById("txtResult");
 
-      btnCreate.addEventListener("click", async function (evt) {
-        let url = "/task";
+        btnCreate.addEventListener("click", async function (evt) {
+            let url = "/task";
 
-        let listidFromLocalStorage = localStorage.getItem('list');
-        let token = localStorage.getItem('token');
+            let listidFromLocalStorage = localStorage.getItem('list');
+            let token = localStorage.getItem('token');
         
 
-        let updata = {
-          tasktext: inpTasktext.value,
-          listid: listidFromLocalStorage
-        };
+            let updata = {
+                tasktext: inpTasktext.value,
+                listid: listidFromLocalStorage
+            };
 
-        let cfg = {
-          method: "POST",
-          headers: { "content-type": "application/json",
-                    "authorization": token
-                  },
-          body: JSON.stringify(updata),
-        };
+            let cfg = {
+                method: "POST",
+                headers: { "content-type": "application/json",
+                    "authorization": token},
+                body: JSON.stringify(updata),
+            };
 
-        try {
-          let response = await fetch(url, cfg);
-          let data = await response.json();
+            try {
+                let response = await fetch(url, cfg);
+                let data = await response.json();
 
-          if (response.status != 200) {
-            throw data.error;
-          } else {
-            txtResult.innerHTML = data.msg;
-          }
-        } catch (error) {
-          console.log(error);
-          txtResult.innerHTML =
-            "something went wrong - check the console window";
-        }
-      });
+            if (response.status != 200) {
+                throw data.error;
+            } else {
+                txtResult.innerHTML = data.msg;
+            }
+            }catch (error) {
+                console.log(error);
+                txtResult.innerHTML = "Noe gikk galt";
+            }
+        });
     </script>
   </body>
 </html>
