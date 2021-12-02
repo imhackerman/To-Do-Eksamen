@@ -30,7 +30,7 @@
         </h2>
 
     <input id="inpUsername" type= "text" placeholder="Brukernavn" autocomplete="on" />
-    <button id = 'testbutton' class="settingButtons">Del liste </button>
+    <button id = 'shareButton' class="settingButtons">Del liste </button>
     <h3 id="txtResult"></h3>
     
 
@@ -38,12 +38,12 @@
  </header>
     <script>
 
-        let testbutton = document.getElementById('testbutton')
+        let shareButton = document.getElementById('shareButton')
         let inputUsername = document.getElementById('inpUsername')
         let txtResult = document.getElementById('txtResult')
 
     
-        testbutton.addEventListener('click', async function(evt){
+        shareButton.addEventListener('click', async function(evt){
             
             let id = localStorage.getItem('listid');
             let username = inputUsername.value;
