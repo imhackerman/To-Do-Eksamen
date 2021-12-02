@@ -25,50 +25,55 @@
     </a><br>
 
     <header class="midtstill">
-        <h1>Userlist</h1>
-    
-    <div class="createList">
-        <button class = 'createList' id="createUserList">Generer brukerliste</button>
-    </div><br>
+        <h1>Liste av alle brukere</h1>
+        <br>
+
         <div id="container" ></div>
+        <h3 id = "txtResult"></h3>
     </header>
-<script>
-    let createUserListbtn = document.getElementById('createUserList');
+    <script>
+        let createUserListbtn = document.getElementById("createUserList");
+        let txtResult = document.getElementById("txtResult")
+        
 
-    createUserListbtn.addEventListener('click', async function(evt) {
-        listUser(7)
+        let container = document.getElementById('container');
 
-    })
+            async function listUsers(){
+                let url = '/users'
 
-    let container = document.getElementById('container');
-
-    async function listUser(userid){
-        let url = '/users'
-
-        let users = [];
-
-        try{
-            let response = await fetch(url);
-            let data = await response.json();
-            if (response.status != 200) {
-                throw data.error;
-            }
-
-            for(let value of data){
-                if(value.id == userid){
-                    return value.username
+                let token = localStorage.getItem('token');
+                
+                let cfg = {
+                    method: 'GET',
+                    headers: {'authorization': token}
                 }
+
+            try{
+                let response = await fetch(url, cfg);
+                let data = await response.json();
+                if (response.status != 200) {
+                    throw data.error;
+                }
+
+                container.innerHTML = '';
+
+                for(let value of data){
+                    let html = `<p>Brukernavn: ${value.username}</p>`;
+                    html += `<p>Id: ${value.id}</p><br>`
+                    
+                    let div = document.createElement('div');
+                    div.innerHTML = html;
+
+                    container.appendChild(div)
+                }
+            } catch(err){
+                console.log(err)
+                txtResult.innerHTML = "Noe gikk galt, kan ikke liste brukere"
             }
-        } catch(err){
-            console.log(err)
         }
-    }
-    
-    
 
+        listUsers()
 
-            
-    
-</script>
-</body>
+        </script>
+    </body>
 </html>
