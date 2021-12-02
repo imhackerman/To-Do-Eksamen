@@ -47,10 +47,10 @@ router.post("/lists", protect, async function(req, res, next){
 
     
     try{
-        let data = await db.createTasklist(updata.title, userid, updata.visibility);
+        let data = await db.createTasklist(updata.title, userid);
         
         if (data.rows.length > 0){
-            res.status(200).json({msg: 'test'}).end();
+            res.status(200).json({msg:'Listen ble opprettet'}).end();
         } else{
             throw 'Kunne ikke opprette listen'
         }

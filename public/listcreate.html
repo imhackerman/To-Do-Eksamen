@@ -51,21 +51,12 @@
 
             btnCreate.addEventListener("click", async function(evt){
                 
-                /*
-                let visibility = 'public';
-                if(visibilityCheck.checked == true){
-                    visibility = 'private'
-                }
-                */
-
 
                 let url = "/lists";
                 let token = localStorage.getItem("token")
 
                 let updata = {
                     title: inpListTitle.value,
-                    visibility: visibility
-
                 }
 
                 let cfg = {

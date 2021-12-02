@@ -243,6 +243,11 @@ try{
 
         maincontainer.innerHTML = "";
 
+        if(data.error){
+            console.log('du har ingen lister')
+            return;
+        }
+
 
         for(let list of data){
             
@@ -330,8 +335,14 @@ try{
         let data = await fetchData('lists', 'GET')
         let userdata = await fetchData('user', 'GET')
         let taskdata = await fetchData('task', 'GET')
+
+        if(userdata.error){
+            console.log('ingen har delt lister med deg')
+            return;
+        }
+
         id = userdata[0].id;
-        
+
         for(let list of data){
             
               

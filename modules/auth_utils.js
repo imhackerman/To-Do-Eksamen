@@ -40,7 +40,7 @@ utils.createToken = function(username, userId){
 
     let openPart = `${b64Part1}.${b64Part2}`;
 
-    let secret = 'test';
+    let secret = 'thisisasecret';
     let sign = crypto.createHmac('SHA256', secret).update(openPart).digest('base64');
 
     return ` ${openPart}.${sign}`
