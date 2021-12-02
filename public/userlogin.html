@@ -26,18 +26,21 @@
         <br />
 
         <button id="btnLogin" class="createList">Logg inn</button>
-        <button id="btnCreate" class="createList">Opprett bruker</button>
+        <button id="btnCreateUser" class="createList">Opprett bruker</button>
         <h3 id="txtResult"></h3>
       </div>
     </header>
 
     <!------------- JavaScript --------------->
+
     <script>
         let inputUsername = document.getElementById("inputUsername");
         let inputPassword = document.getElementById("inputPassword");
         let btnLogin = document.getElementById("btnLogin");
         let btnShow = document.getElementById("btnShow");
         let txtResult = document.getElementById("txtResult");
+        let btnCreateUser = document.getElementById('btnCreateUser')
+
 
         window.onload = function () {
             let string = document.getElementById("inputPassword");
@@ -47,6 +50,7 @@
             string.type = "password";
             }
         };
+
         btnShow.addEventListener("click", function () {
             let string = document.getElementById("inputPassword");
             if (string.type === "text") {
@@ -55,6 +59,7 @@
                 string.type = "text";
             }
         });
+
 
 
         btnLogin.addEventListener("click", async function (evt) {
@@ -87,13 +92,8 @@
             }
         });
 
-        function createCredentialString(username, password) {
-            let combinedStr = username + ":" + password;
-            let b64Str = btoa(combinedStr);
-            return "basic" + b64Str;
-        }
 
-        btnCreate.addEventListener("click", async function (evt) {
+        btnCreateUser.addEventListener("click", async function (evt) {
             
             if (inputUsername.value.includes(":")) {
                 txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
@@ -114,7 +114,6 @@
             try {
                 let response = await fetch(url, cfg);
                 let data = await response.json();
-                console.log(data);
 
                 if (response.status != 200) {
                     throw data.error;
@@ -128,12 +127,13 @@
                 }
             });
 
-        //------------------------------------
+
         function createCredentialString(username, password) {
             let combinedStr = username + ":" + password;
             let b64Str = btoa(combinedStr);
             return "basic" + b64Str;
         }
+
     </script>
   </body>
 </html>
