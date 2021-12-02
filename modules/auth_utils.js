@@ -1,8 +1,5 @@
 const crypto = require('crypto');
 
-
-const secret = 'test';
-
 let utils = {};
 
 utils.decodeCred = function(credString){
@@ -25,6 +22,7 @@ utils.createHash = function(password){
     let hash = {};
 
     hash.salt = Math.random().toString();
+
     hash.value = crypto.scryptSync(password, hash.salt, 64).toString('hex');
 
     return hash;
@@ -54,7 +52,7 @@ utils.verifyToken = function(token){
     let openPart = `${tokenArr[0]}.${tokenArr[1]}`;
     let signToCheck = tokenArr[2];
 
-    let secret = 'test';
+    let secret = 'thisisasecret';
     let sign = crypto.createHmac('SHA256', secret).update(openPart).digest('base64');
 
     if(signToCheck != sign){
