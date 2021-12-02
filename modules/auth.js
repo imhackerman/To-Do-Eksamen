@@ -1,7 +1,5 @@
 const authUtils = require("./auth_utils.js");
 
-//----- the middleware function -------------------
-
 function protect(req, res, next) {
 
     let token = req.headers.authorization;
@@ -13,17 +11,16 @@ function protect(req, res, next) {
     }
 
 
-let payload = authUtils.verifyToken(token);
-if (!payload) {
-    res.status(403).json({error: "Not a valid token"}).end();
-    return;
-}
+    let payload = authUtils.verifyToken(token);
+    if (!payload) {
+        res.status(403).json({error: "Not a valid token"}).end();
+        return;
+    }
 
-res.locals.userid = payload.userid;
-res.locals.username = payload.user;
+    res.locals.userid = payload.userid;
+    res.locals.username = payload.user;
 
-next();
-
+    next();
 }
 
 module.exports = protect;
