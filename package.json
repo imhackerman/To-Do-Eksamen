@@ -2,7 +2,7 @@
   "name": "to-do-eksamen",
   "version": "1.0.0",
   "description": "Dette er To do app koden vår i apputvikling, MM200. Medemmer: Edvin, Marina, Elena og Ranin. \r Vi skal alle pushe inn kode, med tilhørende kommentar.",
-  "main": "server.js",
+  "main": "userlogin.html",
   "dependencies": {
     "express": "^4.17.1",
     "pg": "^8.7.1"
