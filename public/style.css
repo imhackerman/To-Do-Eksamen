@@ -19,21 +19,6 @@ header {
   align-items: center;
 }
 
-header,
-form,
-.footer {
-  min-height: 20vh;
-  display: block;
-  justify-content: center;
-  align-items: center;
-}
-
-form input,
-form button {
-  color: rgb(88, 167, 88);
-  cursor: pointer;
-  font-size: 1.2rem;
-}
 
 input {
   display: block;
