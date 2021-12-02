@@ -238,7 +238,7 @@ try{
 
     async function owned(){
         // returnere listid på lister man har laget selv
-        let data = await fetchData('mylists', 'GET')
+        let data = await fetchData('lists', 'GET')
         let taskdata = await fetchData('task', 'GET');
 
         maincontainer.innerHTML = "";

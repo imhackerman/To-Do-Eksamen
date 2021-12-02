@@ -6,7 +6,7 @@ const protect = require('./auth.js')
 
 // endpoints ----------------------
 
-
+/*
 router.get("/lists", async function(req, res, next){
     try {
         let data = await db.getAllTasklists();
@@ -15,8 +15,9 @@ router.get("/lists", async function(req, res, next){
         next(err);
     }
 });
+*/
 
-router.get('/mylists', protect, async function(req, res, next){
+router.get('/lists', protect, async function(req, res, next){
     
     let userid = res.locals.userid;
 
