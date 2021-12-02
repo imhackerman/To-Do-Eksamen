@@ -204,7 +204,7 @@ async function userDelete(id){
         if(response.status != 200){
             throw data.error;
         }
-        listUser();
+        userDelete();
 
     }catch(error){
         console.log(error)
