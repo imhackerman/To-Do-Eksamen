@@ -38,30 +38,29 @@
 
 <!------------- JavaScript --------------->
 <script>
-  
   let inputUsername = document.getElementById("inputUsername");
   let inputPassword = document.getElementById("inputPassword");
   let btnLogin = document.getElementById("btnLogin");
   let btnShow = document.getElementById('btnShow')
   let txtResult = document.getElementById("txtResult");
 
-window.onload=function(){
-  let string = document.getElementById("inputPassword");
-  if (string.type === "password") {
-    string.type = "text";
-  } else {
-    string.type = "password";
-  }
+  window.onload=function(){
+    let string = document.getElementById("inputPassword");
+    if (string.type === "password") {
+      string.type = "text";
+    } else {
+      string.type = "password";
+    }
+  };
 
-};
-btnShow.addEventListener("click", function (){
-  let string = document.getElementById("inputPassword");
-  if (string.type === "text") {
-    string.type = "password";
-  } else {
-    string.type = "text";
-  }
-})
+  btnShow.addEventListener("click", function (){
+    let string = document.getElementById("inputPassword");
+    if (string.type === "text") {
+      string.type = "password";
+    } else {
+      string.type = "text";
+    }
+  })
 
   btnLogin.addEventListener("click", async function (evt) {
     let url = "/users/login";
@@ -82,7 +81,6 @@ btnShow.addEventListener("click", function (){
 
       txtResult.innerHTML = data.msg;
       localStorage.setItem("token", data.token);
-      console.log(data)
       window.location.href = '/tasklist.html'
 
 
@@ -92,38 +90,32 @@ btnShow.addEventListener("click", function (){
     }
   });
 
-  function createCredentialString(username, password) {
-    let combinedStr = username + ":" + password;
-    let b64Str = btoa(combinedStr);
-    return "basic" + b64Str;
-  }
-
   btnCreate.addEventListener("click", async function(evt) {
 
-if(inputUsername.value.includes(':')){
-  txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
-  return;
-}
+    if(inputUsername.value.includes(':')){
+      txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
+      return;
+    }
 
-let username = inputUsername.value;
-let password = inputPassword.value;
+    let username = inputUsername.value;
+    let password = inputPassword.value;
 
-let url = "/users";
-let credString = createCredentialString(username, password);
+    let url = "/users";
+    let credString = createCredentialString(username, password);
 
 
 
-let cfg = {
-    method: "POST", 
-    headers: {"authorization":credString}
-}   
+    let cfg = {
+        method: "POST", 
+        headers: {"authorization":credString}
+    }   
 
-console.log(cfg.headers.authorization)
+    console.log(cfg.headers.authorization)
 
-try {
-    let response = await fetch(url, cfg); 
-    let data = await response.json();
-    console.log(data)
+    try {
+      let response = await fetch(url, cfg); 
+      let data = await response.json();
+      console.log(data)
 
     if (response.status != 200) {
         throw data.error;
@@ -131,18 +123,17 @@ try {
 
     txtResult.innerHTML = data.msg;
 
-}
-catch(error) {
+  }
+  catch(error) {
     console.log(error);
     txtResult.innerHTML = "Denne brukeren finnes allerede";
-}
+    }
 
-}); 
+  }); 
 
 //------------------------------------
 function createCredentialString(username, password) {
 let combinedStr = username + ":" + password;
-console.log(combinedStr)
 let b64Str = btoa(combinedStr);
 return "basic" + b64Str;
 }

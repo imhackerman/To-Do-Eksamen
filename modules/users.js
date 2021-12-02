@@ -38,7 +38,7 @@ router.post('/users/login', async function(req, res, next){
                 token: tok
             }).end();
             return;
-        }
+        } res.status(403).json({msg:'brukeren finnes ikke'}).end()
     } catch (error) {
         console.log(error)
     }
