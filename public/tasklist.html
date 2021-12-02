@@ -26,13 +26,10 @@
     <a class="arrowBtn" href="settings.html">
         <i class="fas fa-cog" id="arrow"> Settings</i>
     </a>
-
-   <!----  <a href="mailto:?subject=Del liste&body=http://localhost:8080/tasklist.html" class="share-btn email">Share</a> -->
   
 <header class= "midtstill">
 <h1> Tasklist</h1>
 
-    <!--<a href="/taskcreate.html">Opprett et gjøremål!</a>-->
     <div class="createList">
         <button class = 'createList' id="createList">Legg til ny liste</button>
     </div><br>
@@ -58,13 +55,11 @@
     let sharedlists = document.getElementById('sharedlists')
     let mylists = document.getElementById('mylists')
 
-/*
+    
     async function listUser(userid){
 
         let data = await fetch('/users')
         let url = '/users'
-
-        let users = [];
 
         try{
             let response = await fetch(url);
@@ -83,161 +78,7 @@
         }
     }
 
-
-    async function listTaskList(listid){
-        
-        let url = "/lists";
-        let taskurl = "/task";
-        let userURL = '/users';
-
-        let token = localStorage.getItem('token');
-
-        let cfg = {
-            method: 'GET',
-            headers: { "content-type": "application/json",
-                    "authorization": token
-                  },
-        }
-
-        console.log(cfg)
-
-        try {
-            let listresponse = await fetch(url, cfg);
-            let listdata = await listresponse.json();
-            
-
-            if (listresponse.status != 200) {
-                throw listdata.error;
-            }
-
-            let taskresponse = await fetch(taskurl, cfg)
-            let taskdata = await taskresponse.json();
-
-            if(taskresponse.status != 200){
-                throw taskresponse.error;
-            }
-
-        
-            container.innerHTML = "";
-
-            let id = localStorage.getItem('id')
-
-        for (let list of listdata) { 
-
-            // list alle lister brukeren selv har laget
-            //list alle offentlige lister
-            //list alle lister delt med brukeren
-        
-            if(list.visibility == 'public' || list.userid == id){
-            
-            let html = `<h2>${list.title}</h2>`;
-            let date = new Date(list.date);
-            html += "<p>" + date.toLocaleDateString() + "</p";
-            html += `<p>Forfatter: ${await listUser(list.userid)}</p>`;
-            let div = document.createElement("div");
-            div.className = 'styleListDiv'
-            div.innerHTML = html;
-            container.appendChild(div);
-
-
-                let deleteListButton = document.createElement('button');
-                deleteListButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-                deleteListButton.className = 'deleteListButton';
-                deleteListButton.addEventListener('click', function(evt){
-                    deleteList(list.id)
-                })
-
-                div.appendChild(deleteListButton)
-
-                let createNewTask = document.createElement('button');
-                createNewTask.innerHTML = '<i class="fas fa-plus"></i>';
-                createNewTask.className = 'createTaskButton';
-                createNewTask.addEventListener('click', async function(evt){
-
-                    localStorage.setItem('list', list.id)
-                    window.location.href = '/taskcreate.html'
-                })
-
-                div.appendChild(createNewTask)
-
-            let shareList = document.createElement('button');
-            let shareInput = document.createElement ('input');
-            shareList.innerHTML = '<i class="fas fa-share"></i>';
-            shareList.className ='shareListButton';
-
-            shareList.addEventListener('click', function(evt){
-                localStorage.setItem('listid', list.id)
-                window.location.href = '/sharelist.html'
-            })
-
-            div.appendChild(shareList)
-            div.appendChild(shareInput)
-
-
-                for(let task of taskdata){
-
-                    if(list.id == task.listid){
-                        let taskhtml = '<p>' +'<i class="fa fa-circle" style="font-size:10px"></i>&nbsp'+ task.task + '</p>'
-
-                        let taskdiv = document.createElement('div');
-                        taskdiv.classList.add("taskDiv");
-                        taskdiv.innerHTML = taskhtml;
-                        div.appendChild(taskdiv)
-
-
-                        let deleteTaskButton = document.createElement('button')
-                        deleteTaskButton.innerHTML = '<i class="fas fa-check"></i>';
-                        deleteTaskButton.className = 'checkTaskButton';
-                        deleteTaskButton.addEventListener('click', function(evt){
-                            deleteTask(task.id);
-                        })
-
-                        taskdiv.appendChild(deleteTaskButton)
-                    }
-                }
-
-            }
-            
-        }
-    }
-    
-    
-    catch(error) {
-        console.log(error);
-        }
-    }
-
-    // local storage get token 
-    // tre funksjoner som returnere objekter med listedata
-    // tre funksjoner som henter lister fra databasen, 
-    // men publiserer dem bare hvis noen bestemte kriterier er oppfylt. 
-*/
-async function listUser(userid){
-
-let data = await fetch('/users')
-let url = '/users'
-
-let users = [];
-
-try{
-    let response = await fetch(url);
-    let data = await response.json();
-    if (response.status != 200) {
-        throw data.error;
-    }
-
-    for(let value of data){
-        if(value.id == userid){
-            return value.username
-        }
-    }
-} catch(err){
-    console.log(err)
-}
-}
-
     async function owned(){
-        // returnere listid på lister man har laget selv
         let data = await fetchData('mylists', 'GET')
         let taskdata = await fetchData('task', 'GET');
 
@@ -290,10 +131,6 @@ try{
             
                 div.appendChild(deleteListButton)
 
-                
-
-                // hvis listen er delt med noen andre, legg til knapp for å slutte å dele listen
-
                 if(list.shared){
                     
                     let sharing = document.createElement('button');
@@ -331,23 +168,10 @@ try{
 
     
     async function sharedWithMe(){
-        // returnerer listid på lister som er delt med deg
         let data = await fetchData('lists', 'GET')
         let userdata = await fetchData('user', 'GET')
         let taskdata = await fetchData('task', 'GET')
-
-        /*
-        if(userdata.error){
-            console.log('ingen har delt lister med deg')
-            return;
-        }
-        */
-
-        
-
         id = userdata[0].id;
-        console.log(id)
-        console.log(data)
 
         for(let list of data){
             
