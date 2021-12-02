@@ -1,153 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Userlogin</title>
-  <link rel= "stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Userlogin</title>
+    <link rel="stylesheet" href="style.css" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
-  rel="stylesheet"
-/>
-</head>
-<body class="loginPage">
-  
-<header class= "midtstill">
-<h1> To Do App Login</h1>
-<br>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="loginPage">
+    <header class="midtstill">
+      <h1>To Do App Login</h1>
+      <br />
 
+      <div container id="placeHere" class="placeHere">
+        <input id="inputUsername" type="text" placeholder="Brukernavn" />
+        <input id="inputPassword" type="text" placeholder="Passord" />
+        <button id="btnShow" class="createList">Vis passord</button>
+        <br />
 
-<div container id="placeHere" class="placeHere">
-<input id="inputUsername" type="text" placeholder="Brukernavn" /> 
-<input id="inputPassword" type="text" placeholder="Passord" />
-<button id="btnShow" class='createList'>Vis passord</button>
-<br>
+        <button id="btnLogin" class="createList">Logg inn</button>
+        <button id="btnCreate" class="createList">Opprett bruker</button>
+        <h3 id="txtResult"></h3>
+      </div>
+    </header>
 
-<button id="btnLogin" class='createList'>Logg inn</button>
-<button id="btnCreate" class='createList'>Opprett bruker</button>
-<h3 id="txtResult"></h3>
-</div>
-</header> 
+    <!------------- JavaScript --------------->
+    <script>
+        let inputUsername = document.getElementById("inputUsername");
+        let inputPassword = document.getElementById("inputPassword");
+        let btnLogin = document.getElementById("btnLogin");
+        let btnShow = document.getElementById("btnShow");
+        let txtResult = document.getElementById("txtResult");
 
+        window.onload = function () {
+            let string = document.getElementById("inputPassword");
+            if (string.type === "password") {
+            string.type = "text";
+            } else {
+            string.type = "password";
+            }
+        };
+        btnShow.addEventListener("click", function () {
+            let string = document.getElementById("inputPassword");
+            if (string.type === "text") {
+            string.type = "password";
+            } else {
+                string.type = "text";
+            }
+        });
 
+        btnLogin.addEventListener("click", async function (evt) {
+            let url = "/users/login";
+            let credString = createCredentialString(
+            inputUsername.value,
+            inputPassword.value
+            );
 
+            let cfg = {
+            method: "POST",
+            headers: { authorization: credString },
+            };
 
-<!------------- JavaScript --------------->
-<script>
-  
-  let inputUsername = document.getElementById("inputUsername");
-  let inputPassword = document.getElementById("inputPassword");
-  let btnLogin = document.getElementById("btnLogin");
-  let btnShow = document.getElementById('btnShow')
-  let txtResult = document.getElementById("txtResult");
+            try {
+            let response = await fetch(url, cfg);
+            let data = await response.json();
 
-window.onload=function(){
-  let string = document.getElementById("inputPassword");
-  if (string.type === "password") {
-    string.type = "text";
-  } else {
-    string.type = "password";
-  }
+            if (response.status != 200) {
+                throw data.error;
+            }
 
-};
-btnShow.addEventListener("click", function (){
-  let x = document.getElementById("inputPassword");
-  if (x.type === "text") {
-    x.type = "password";
-  } else {
-    x.type = "text";
-  }
-})
+            txtResult.innerHTML = data.msg;
+            localStorage.setItem("token", data.token);
+            console.log(data);
+            window.location.href = "/tasklist.html";
+            } catch (error) {
+            console.log(error);
+            txtResult.innerHTML = "Feil brukernavn eller passord!";
+            }
+        });
 
-  btnLogin.addEventListener("click", async function (evt) {
-    let url = "/users/login";
-    let credString = createCredentialString(inputUsername.value, inputPassword.value);
+        function createCredentialString(username, password) {
+            let combinedStr = username + ":" + password;
+            let b64Str = btoa(combinedStr);
+            return "basic" + b64Str;
+        }
 
-    let cfg = {
-      method: "POST",
-      headers: {'authorization': credString}
-    };
+        btnCreate.addEventListener("click", async function (evt) {
+            if (inputUsername.value.includes(":")) {
+                txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
+                return;
+            }
 
-    try {
-      let response = await fetch(url, cfg);
-      let data = await response.json();
+            let username = inputUsername.value;
+            let password = inputPassword.value;
 
-      if (response.status != 200) {
-        throw data.error;
-      }
+            let url = "/users";
+            let credString = createCredentialString(username, password);
 
-      txtResult.innerHTML = data.msg;
-      localStorage.setItem("token", data.token);
-      console.log(data)
-      window.location.href = '/tasklist.html'
+            let cfg = {
+                method: "POST",
+                headers: { authorization: credString },
+            };
 
+            console.log(cfg.headers.authorization);
 
-    } catch (error) {
-      console.log(error);
-      txtResult.innerHTML = "Feil brukernavn eller passord!";
-    }
-  });
+            try {
+                let response = await fetch(url, cfg);
+                let data = await response.json();
+                console.log(data);
 
-  function createCredentialString(username, password) {
-    let combinedStr = username + ":" + password;
-    let b64Str = btoa(combinedStr);
-    return "basic" + b64Str;
-  }
+            if (response.status != 200) {
+                throw data.error;
+            }
 
-  btnCreate.addEventListener("click", async function(evt) {
+            txtResult.innerHTML = data.msg;
+            } catch (error) {
+                console.log(error);
+                txtResult.innerHTML = "Denne brukeren finnes allerede";
+                }
+            });
 
-if(inputUsername.value.includes(':')){
-  txtResult.innerHTML = 'Brukernavn kan ikke inneholde ":"';
-  return;
-}
-
-let username = inputUsername.value;
-let password = inputPassword.value;
-
-let url = "/users";
-let credString = createCredentialString(username, password);
-
-
-
-let cfg = {
-    method: "POST", 
-    headers: {"authorization":credString}
-}   
-
-console.log(cfg.headers.authorization)
-
-try {
-    let response = await fetch(url, cfg); 
-    let data = await response.json();
-    console.log(data)
-
-    if (response.status != 200) {
-        throw data.error;
-    }
-
-    txtResult.innerHTML = data.msg;
-
-}
-catch(error) {
-    console.log(error);
-    txtResult.innerHTML = "Denne brukeren finnes allerede";
-}
-
-}); 
-
-//------------------------------------
-function createCredentialString(username, password) {
-let combinedStr = username + ":" + password;
-console.log(combinedStr)
-let b64Str = btoa(combinedStr);
-return "basic" + b64Str;
-}
-
-
-</script>
-</body>
+        //------------------------------------
+        function createCredentialString(username, password) {
+            let combinedStr = username + ":" + password;
+            console.log(combinedStr);
+            let b64Str = btoa(combinedStr);
+            return "basic" + b64Str;
+        }
+    </script>
+  </body>
 </html>
