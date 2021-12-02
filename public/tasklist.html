@@ -22,16 +22,16 @@
 
 -->
 
-    <button id = 'changeUser'> Bytt bruker</button>
+    <button id = 'changeUser' class="buttonClass"> Bytt bruker</button>
     </a><br>
-    <button id = 'settings'> Innstillinger</button>
+    <button id = 'settings' class="buttonClass"> Innstillinger</button>
     </a>
   
 <header class= "midtstill">
 <h1> Dine lister</h1>
 
     <div class="createList">
-        <button class = 'createList' id="createList">Legg til ny liste</button>
+        <button class = 'buttonClass' id="createList">Legg til ny liste</button>
     </div><br>
     
         <div id="maincontainer" class = 'tasklistContainer'></div>
@@ -111,7 +111,7 @@
 
                 let createNewTask = document.createElement('button');
                 createNewTask.innerHTML = 'Ny oppgave';
-                createNewTask.className = 'createTaskButton';
+                createNewTask.className = 'buttonClass';
                 createNewTask.addEventListener('click', async function(evt){
 
                     localStorage.setItem('list', list.id)
@@ -123,7 +123,7 @@
                 let shareList = document.createElement('button');
                 let shareInput = document.createElement ('input');
                 shareList.innerHTML = 'Del';
-                shareList.className ='shareListButton';
+                shareList.className ='buttonClass';
 
                 shareList.addEventListener('click', function(evt){
                 localStorage.setItem('listid', list.id)
@@ -134,7 +134,7 @@
 
                 let deleteListButton = document.createElement('button')
                 deleteListButton.innerHTML = 'Slett';
-                deleteListButton.className = 'checkTaskButton';
+                deleteListButton.className = 'buttonClassDelete';
                 deleteListButton.addEventListener('click', function(evt){
                         deleteList(list.id)
             })
@@ -145,6 +145,7 @@
                     
                     let sharing = document.createElement('button');
                     sharing.innerHTML = 'Slutt å dele'
+                    sharing.className = "buttonClassDelete";
                     sharing.addEventListener('click', function(evt){
                         stopSharing(list.id)
                     })
@@ -163,7 +164,7 @@
 
                         let deleteTaskButton = document.createElement('button')
                         deleteTaskButton.innerHTML = 'Slett';
-                        deleteTaskButton.className = 'checkTaskButton';
+                        deleteTaskButton.className = 'buttonClassDelete';
                         deleteTaskButton.addEventListener('click', function(evt){
                             deleteTask(task.id);
                         })
