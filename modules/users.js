@@ -134,9 +134,6 @@ router.delete('/users', async function(req, res, next){
      let credentials = authUtils.decodeCred(credentialString);
      console.log(credentials);
 
-     if (credentials.password == "") {
-        throw 'ingen passord er skrevet inn'
-     }
      let hash = authUtils.createHash(credentials.password);
 
      try {

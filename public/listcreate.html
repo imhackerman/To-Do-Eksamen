@@ -8,77 +8,73 @@
 </head>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-<body>
-     <!--henter fonten-->
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-     <link
-       href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
-       rel="stylesheet"
-     />
-     <link rel="stylesheet" href="./style.css" />
-    <!-- henter icons -->
-     <a class="arrowBtn" href="tasklist.html">
-        <i class="fas fa-arrow-left" ></i>
-     </a><br>
-     <link 
-       rel="stylesheet"
-       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-     />
-    
-     <header class= "midtstill">
-         <h1>Lag en ny liste</h1>
-    
+    <body>
+        <!--henter fonten-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Courgette&display=swap"
+        rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./style.css" />
+        <!-- henter icons -->
+        <a class="arrowBtn" href="tasklist.html">
+            <i class="fas fa-arrow-left" ></i>
+        </a><br>
+        <link 
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         
-    </a><br><br>
-
-    <input id="inpListTitle" type="text" placeholder="Navn på ny liste"/>
-    <button id="btnCreate"type="submit">Opprett ny liste<i class="fa fa-plus"></i>
-    </button> <br>
-    <p>Huk av for å gjøre listen privat</p>
-    <input type="checkbox" id="visibility">
-    
-    <h3 id="txtResult"></h3>
-    
-    
-    <script>
-
-        let inpListTitle = document.getElementById("inpListTitle");
-        let btnCreate = document.getElementById("btnCreate");
-        let visibilityCheck = document.getElementById('visibility');
-        let txtResult = document.getElementById("txtResult");
-
-
-        btnCreate.addEventListener('click', async function(evt){
+        <header class= "midtstill">
+            <h1>Lag en ny liste</h1>
+        
             
-            let visibility = 'public';
-            if(visibilityCheck.checked == true){
-                visibility = 'private'
-            }
+        </a><br><br>
 
-            console.log(visibility)
+        <input id="inpListTitle" type="text" placeholder="Navn på ny liste"/>
+        <button id="btnCreate"type="submit">Opprett ny liste<i class="fa fa-plus"></i>
+        </button> <br>
+        <p>Huk av for å gjøre listen privat</p>
+        <input type="checkbox" id="visibility">
+        
+        <h3 id="txtResult"></h3>
+        
+    
+        <script>
+
+            let inpListTitle = document.getElementById("inpListTitle");
+            let btnCreate = document.getElementById("btnCreate");
+            let visibilityCheck = document.getElementById('visibility');
+            let txtResult = document.getElementById("txtResult");
 
 
-            let url = '/lists';
-            let token = localStorage.getItem('token')
+            btnCreate.addEventListener("click", async function(evt){
+                
+                /*
+                let visibility = 'public';
+                if(visibilityCheck.checked == true){
+                    visibility = 'private'
+                }
+                */
 
 
-            let updata = {
-                title: inpListTitle.value,
-                visibility: visibility
+                let url = "/lists";
+                let token = localStorage.getItem("token")
 
-            }
+                let updata = {
+                    title: inpListTitle.value,
+                    visibility: visibility
 
-            console.log(updata)
-            
+                }
 
-            let cfg = {
-                method: "POST",
-                headers: { "content-type": "application/json",
-                            'authorization': token
-                        },
-                body: JSON.stringify(updata),
-                };
+                let cfg = {
+                    method: "POST",
+                    headers: { "content-type": "application/json",
+                                'authorization': token
+                            },
+                    body: JSON.stringify(updata),
+                    };
 
                 try{
                     let response = await fetch(url, cfg);
@@ -88,14 +84,14 @@
                         throw data.error;
                     } else {
                         txtResult.innerHTML = data.msg;
+                        }
+                        
+                    } catch(error){
+                        txtResult.innerHTML = "something went wrong - check the console window"
                     }
-                } catch(error){
-                    txtResult.innerHTML = "something went wrong - check the console window"
-                }
-        })
+            })
       
 
-    </script>
-    
-</body>
+        </script>
+    </body>
 </html>
