@@ -38,77 +38,75 @@
  </header>
     <script>
 
-let testbutton = document.getElementById('testbutton')
-let inputUsername = document.getElementById('inpUsername')
-let txtResult = document.getElementById('txtResult')
+        let testbutton = document.getElementById('testbutton')
+        let inputUsername = document.getElementById('inpUsername')
+        let txtResult = document.getElementById('txtResult')
 
     
-testbutton.addEventListener('click', async function(evt){
-    
-    let id = localStorage.getItem('listid');
-    let username = inputUsername.value;
-    let userid = await getUserId(username);
+        testbutton.addEventListener('click', async function(evt){
+            
+            let id = localStorage.getItem('listid');
+            let username = inputUsername.value;
+            let userid = await getUserId(username);
 
-    if(inputUsername.value =="") {
-        txtResult.innerHTML = "Du må skrive inn ett brukernavn";
-         return;
-    }
-   
-
-    let url = "/lists/share"
-
-    let updata = {
-            taskid: id,
-            userid: userid 
-     }
-
-    let cfg = {
-        method: "POST",
-        headers: { "content-type": "application/json"},
-        body: JSON.stringify(updata),
-    }
-
-    try{
-        let response = await fetch(url, cfg);
-        let data = await response.json();
-        if (response.status != 200) {
-        throw data.error;
-    }
-        
-    txtResult.innerHTML = data.msg;
-
-
-    } catch(err){
-        console.log(err)
-        txtResult.innerHTML = 'Noe gikk galt'
-    }
-
-})
-
-    async function getUserId(username){
-
-        let url = '/users'
-
-        let cfg = {
-            method: 'GET',
-            headers: { "content-type": "application/json"},
-        }
-
-        try{
-            let response = await fetch(url, cfg)
-            let data = await response.json();
-
-            for(let value of data){
-                if(value.username == username){
-                    return value.id;
-                }
+            if(inputUsername.value =="") {
+                txtResult.innerHTML = "Du må skrive inn ett brukernavn";
+                return;
             }
-        }catch(err){
-            console.log(err)
-        }
-    }
+        
 
-    </script>
-    
+            let url = "/lists/share"
+
+            let updata = {
+                    taskid: id,
+                    userid: userid 
+            }
+
+            let cfg = {
+                method: "POST",
+                headers: { "content-type": "application/json"},
+                body: JSON.stringify(updata),
+            }
+
+            try{
+                let response = await fetch(url, cfg);
+                let data = await response.json();
+                if (response.status != 200) {
+                throw data.error;
+            }
+                
+            txtResult.innerHTML = data.msg;
+
+            } catch(err){
+                console.log(err)
+                txtResult.innerHTML = 'Noe gikk galt'
+            }
+
+        })
+
+        async function getUserId(username){
+
+            let url = '/users'
+
+            let cfg = {
+                method: 'GET',
+                headers: { "content-type": "application/json"},
+            }
+
+            try{
+                let response = await fetch(url, cfg)
+                let data = await response.json();
+
+                for(let value of data){
+                    if(value.username == username){
+                        return value.id;
+                    }
+                }
+            }catch(err){
+                console.log(err)
+            }
+        }
+
+    </script>    
 </body>
 </html>
