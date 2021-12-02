@@ -38,7 +38,7 @@ dbMethods.getAllTasks = function(){
 }
 
 dbMethods.createTask = function(userid, tasktext, listid){
-    let sql = "INSERT INTO tasks (id, date, userid, task, listid) VALUES(DEFAULT, DEFAULT, $1, $2, $3) RETURNING *";
+    let sql = "INSERT INTO tasks (id, userid, task, listid) VALUES(DEFAULT, $1, $2, $3) RETURNING *";
     let values = [userid, tasktext, listid];
     return pool.query(sql, values);
 }
@@ -96,7 +96,7 @@ dbMethods.changePassword = function (password, salt, username) {
 }
 
 
-//Sharing Lists----------------------------------------------------------------------
+//Sharing Lists------------------------------------------
 
 dbMethods.shareList = function(taskid, userid){
     let sql = "UPDATE tasklists SET shared = $2 WHERE id = $1 RETURNING *";
