@@ -154,35 +154,8 @@
         }
       });
 
-      /*
-    deleteUser.addEventListener('click', async function(evt){
-        let url = "/users";
-        let token = localStorage.getItem('token')
-        let updata = {
-            id:userid
-        }
-        let cfg = {
-            method: "DELETE",
-            headers: {"content-type":"application/json",
-                          'authorization': token},
-                          body: JSON.stringify(updata)
-        }
-        try {
-            let response = await fetch(url, cfg);
-            let data = await response.json();
-            if (response.status != 200) {
-                throw data.error;
-            }
-            deleteUser();
-        } catch(error){
-            console.log(error)
-        }
-    });
-    */
-
       async function deleteUser(id) {
             let url = "/users";
-            //let token = localStorage.getItem("token");
           
             let updata = {
                 id: id,
